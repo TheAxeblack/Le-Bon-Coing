@@ -1,102 +1,34 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <title>Site de petites annonces</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-<body>
-<!-- Barre de navigation -->
-<nav class="navbar navbar-expand-sm sticky-tops border-bottom">
-    <div class="container-fluid">
-        <p>Le bon Coing</p>
-        <ul class="navbar-nav">
-
-            <!-- Section du compte -->
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbardropaccount" data-toggle="dropdown">
-                    <img src="imgs/user.png" alt="icone de compte" width="30" height="30">
-                </a>
-                <!--Formulaire de connexion du menu déroulant-->
-                <div class="dropdown-menu">
-                    <form action="#">
-                        <div class="form-group">
-                            <label for="email">Adresse Email :
-                                <input type="email" class="form-control" id="email"
-                                       placeholder="email@example.com">
-                            </label>
-                            <label for="psw">Mot de passe :
-                                <input type="password" class="form-control" id="psw" placeholder="Motdepasse">
-                            </label>
-                            <label class="form-check-label" for="remember">
-                                <input type="checkbox" class="form-check-input" id="remember">Rester connecté
-                            </label>
-                        </div>
-                    </form>
-                </div>
-            </li>
-
-            <!-- Section de recherche (sur TFX) -->
-            <li class="nav-item">
-                <form class="form-inline" action="#">
-                    <label>
-                        <input class="form-control mr-sm-2" type="text" placeholder="Rechercher ...">
-                    </label>
-                    <button type="submit">
-                        <img src="imgs/transparency.png" alt="loupe" width="28" height="28">
-                    </button>
-                </form>
-            </li>
-        </ul>
-    </div>
-</nav>
-
-
-<div class="container-fluid">
-    <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
-        <p class="col-md-4 mb-0 text-muted">© 2021 Company, Inc</p>
-
-        <a href="/"
-           class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
-            <svg class="bi me-2" width="40" height="32">
-                <use xlink:href="#bootstrap"></use>
-            </svg>
-        </a>
-
-        <ul class="nav col-md-4 justify-content-end">
-            <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Accueil</a></li>
-            <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">A propos</a></li>
-            <li class="nav-item"><a href="sources.html" class="nav-link px-2 text-muted">Sources</a></li>
-        </ul>
-    </footer>
-</div>
-</body>
-</html>
-
-
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
     <title>Le bon coing</title>
     <link rel="stylesheet" href="css/accueil.css">
+    <link rel="stylesheet" href="css/commun.css">
+
+    <!-- Pour importer la police depuis Google Fonts -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
+    </style>
 </head>
 <body>
 
-
+<!-- Début de la barre de navigation -->
 <div class="navbar">
     <div class="dropdown">
-        <button class="dropbtn" onclick="deroulerMenu()">
+        <button class="dropbtn" onclick="deroulerMenu('myDropdown')">
             <img src="imgs/hamburger.png" alt="icone de menu" width="30" height="30">
         </button>
         <div class="dropdown-content" id="myDropdown">
-            <a href="#">Link 1</a>
+            <a href="#">Déposer une annonce</a>
             <a href="#">Link 2</a>
             <a href="#">Link 3</a>
         </div>
     </div>
-    <div class="dropdown" onclick="deroulerMenu()">
-        <button class="dropbtn">
-            <img class="nav-link" src="imgs/france.png" alt="icone du drapeau français" width="30">
+    <div class="dropdown">
+        <button class="dropbtn" onclick="deroulerMenu('myDropdown2')">
+            <img src="imgs/france.png" alt="icone du drapeau français" width="30">
         </button>
         <div class="dropdown-content" id="myDropdown2">
             <a href="#">Link 1</a>
@@ -104,17 +36,51 @@
             <a href="#">Link 3</a>
         </div>
     </div>
-    <button class="dropbtn">
-        <img class="nav-link" src="imgs/sun.png" alt="icone de soleil" width="50" height="50"
-             onclick="changerMode()">
+    <button class="nigthbtn" onclick="changerMode()">
+        <img src="imgs/sun.png" alt="icone de soleil" width="30" height="30">
     </button>
-    <a href="#home">Home</a>
-    <a href="#news">News</a>
-
+    <div class="nametag w7">
+        <a href="#home">Le bon Coing</a>
+    </div>
+    <a href="#logging"><img class="nav-link" src="imgs/user.png" alt="icone de compte" width="30"></a>
+    <form>
+        <label>
+            <input type="text" name="search" placeholder="Search..">
+        </label>
+    </form>
 </div>
+<!-- Fin de la barre de navigation -->
 
-<h3>Dropdown Menu inside a Navigation Bar</h3>
-<p>Click on the "Dropdown" link to see the dropdown menu.</p>
+<!-- Début section des annonces -->
+<section class="latest">
+    <h2>Dernières annonces</h2>
+    <br/>
+    <article>
+        <img src="imgs/renault-juvaquatre-gea6b628bd_1920.jpg" alt="photo renault juvaquatre" width="200">
+        <h3>Renault Juvaquatre à <br/>rénover</h3>
+        <p>125€</p>
+    </article>
+    <article>
+        <img src="imgs/rottweiler.jpg" alt="photo de chiot race Rottweiler" width="200">
+        <h3>Chiot Rottweiller</h3>
+        <p>350€</p>
+    </article>
+</section>
+
+<section class="recommand">
+    <h2>Recommandé pour vous</h2>
+</section>
+
+<!-- Fin section des annonces -->
+
+<!-- Pied de page -->
+<footer>
+    <p>2022 Le bon Coing Inc.</p>
+    <ul>
+        <li><a href="#news">informations</a></li>
+        <li><a href="sources.html">sources</a></li>
+    </ul>
+</footer>
 <script src="js/mesfonctions.js"></script>
 </body>
 </html>

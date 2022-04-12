@@ -1,0 +1,39 @@
+.nigthbtn {
+    cursor: pointer;
+    float: left;
+    border: none;
+    padding: 14px 16px;
+    background-color: inherit;
+    font-family: inherit;
+    margin: 0;
+}
+
+.dark-mode {
+    background-color: grey;
+    color: white;
+}
+
+section {
+    display: flex;
+    padding: 14px 16px;
+    background-color: burlywood;
+    margin-bottom: 10px;
+}
+
+article {
+    border: 1px solid black;
+    border-radius: 5px;
+    background-color: #dddddd;
+    padding: 12px 14px;
+    margin: 0px 10px;
+}
+
+footer {
+    border-top: rgb(222, 226, 230) 1px solid !important;
+    display: flex;
+    overflow: hidden;
+    font-family: 'Permanent Marker', cursive;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-between;
+}

@@ -1,18 +1,56 @@
+body {
+    background: #ffffff;
+    margin: auto;
+    width: 100%;
+}
+
 .navbar {
+    display: flex;
     overflow: hidden;
-    background-color: darkgrey;
-    font-family: Arial, Helvetica, sans-serif;
+    background-color: #ffffff;
+    font-family: 'Permanent Marker', cursive;
+    border-bottom: rgb(222, 226, 230) 1px solid !important;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .navbar a {
     float: left;
     font-size: 16px;
-    color: white;
+    color: black;
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
 }
 
+.sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
+/* Section des tailles des flex-elements */
+.w1 {
+    flex-shrink: 1;
+}
+
+.w7 {
+    flex-grow: 7;
+}
+
+/* Section du nom du site */
+.nametag {
+    align-self: center;
+}
+
+.nametag a {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+/* section des menus déroulant */
 .dropdown {
     float: left;
     overflow: hidden;
@@ -30,7 +68,7 @@
     margin: 0;
 }
 
-.navbar a:hover, .dropdown:hover .dropbtn, .dropbtn:focus {
+.navbar a:hover, .dropdown:hover .dropbtn, .dropbtn:focus, .nigthbtn:hover {
     background-color: red;
 }
 
@@ -58,4 +96,27 @@
 
 .show {
     display: block;
+}
+
+
+/* Section de la barre de recherche */
+
+form {
+    padding: 14px 16px;
+}
+
+input[type=text] {
+    width: 130px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: white;
+    background-image: url('../imgs/transparency.png');
+    background-size: 25px;
+    background-position: 10px 10px;
+    background-repeat: no-repeat;
+    padding: 12px 20px 12px 40px;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
 }
