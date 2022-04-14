@@ -53,7 +53,7 @@ if (isset($_SESSION['pseudo'])) {
         $news = $_POST['infos'];
 
         include('includes/connex.inc.php');
-        $pdo = connex('tp8');
+        $pdo = connex('le_bon_coing');
 
         try {
             $verifps = $pdo->prepare('SELECT (pseudo) FROM utilisateur WHERE pseudo = :ps');
@@ -69,10 +69,15 @@ if (isset($_SESSION['pseudo'])) {
             if ($ok == 0)
                 afficheFormulaire("Pseudo déjà utilisé");
             else {
-                $stmt = $pdo->prepare('INSERT INTO membres(pseudo, mdp, statut) VALUES (:pseudo, :pass, :statut)');
-                $stmt->bindParam(':pseudo', $ps);
+                $stmt = $pdo->prepare('INSERT INTO membres(genre, nom, prenom, pseudo, mdp, email, news) VALUES 
+                                                                          (:genre, :nom, :prenom, :pseudo, :pass, :mail, :news)');
+                $stmt->bindParam(':genre', $genre);
+                $stmt->bindParam(':nom', $nom);
+                $stmt->bindParam(':prenom', $prenom);
+                $stmt->bindParam(':pseudo', $pseudo);
                 $stmt->bindParam(':pass', $mdp);
-                $stmt->bindParam(':statut', $ok);
+                $stmt->bindParam(':mail', $email);
+                $stmt->bindParam(':news', $news);
                 $stmt->execute();
                 echo "<p>Vous avez bien été inscrit.<br><a href=\"connexion.php\">Se connecter</a></p>";
             }
