@@ -48,7 +48,7 @@ if (isset($_SESSION['pseudo'])) {
         $nom = trim($_POST['nom']);
         $prenom = trim($_POST['prenom']);
         $pseudo = trim($_POST['pseudo']);
-        $mdp = md5(trim($_POST['mdp']))
+        $mdp = md5(trim($_POST['mdp']));
         $email = trim($_POST['adresse']);
         $news = $_POST['infos'];
 
@@ -56,8 +56,30 @@ if (isset($_SESSION['pseudo'])) {
         $pdo = connex('tp8');
 
         try {
-
-        } catch (PDOException $exception)
+            $verifps = $pdo->prepare('SELECT (pseudo) FROM utilisateur WHERE pseudo = :ps');
+            $verifps->bindParam(':ps', $ps);
+            $verifps->execute();
+            $res = $verifps->fetchAll(PDO::FETCH_ASSOC);
+            if (count($res) == 0) {
+                foreach ($res as $pres) {
+                    if (strcmp($pres['pseudo'], $_POST['pseudo']) == 0)
+                        $ok = 0;
+                }
+            }
+            if ($ok == 0)
+                afficheFormulaire("Pseudo déjà utilisé");
+            else {
+                $stmt = $pdo->prepare('INSERT INTO membres(pseudo, mdp, statut) VALUES (:pseudo, :pass, :statut)');
+                $stmt->bindParam(':pseudo', $ps);
+                $stmt->bindParam(':pass', $mdp);
+                $stmt->bindParam(':statut', $ok);
+                $stmt->execute();
+                echo "<p>Vous avez bien été inscrit.<br><a href=\"connexion.php\">Se connecter</a></p>";
+            }
+        } catch (PDOException $exception) {
+            echo $exception->getMessage();
+            echo '<p>Problème avec la base</p>';
+        }
     }
     afficheFormulaire(null);
 }
