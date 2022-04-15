@@ -12,11 +12,14 @@ $pdo->exec("DROP TABLE user");
 
 $us = "CREATE TABLE IF NOT EXISTS user(
   id INTEGER PRIMARY KEY AUTOINCREMENT,
+  genre VARCHAR(255),
+  prenom VARCHAR(255),
   nom VARCHAR(255),
+  pseudo VARCHAR(255),
   mdp INTEGER,
+  email VARCHAR(255),
   statut INT DEFAULT 0
 )";
-
 
 $pdo->exec($us);
 
@@ -25,6 +28,7 @@ $pdo->exec("DROP TABLE annonce_p");
 
 $ann = "CREATE TABLE IF NOT EXISTS annonce_p(
   id INTEGER PRIMARY KEY AUTOINCREMENT,
+  id_u INTEGER,
   nom VARCHAR(255),
   type VARCHAR(255),
   date_post DATE,
@@ -33,7 +37,8 @@ $ann = "CREATE TABLE IF NOT EXISTS annonce_p(
   image3 VARCHAR(255),
   description VARCHAR(5000),
   prix INT,
-  c_postal INT
+  c_postal INT,
+  FOREIGN KEY (id_u) REFERENCES user(id) 
 )";
 
 $pdo->exec($ann);
