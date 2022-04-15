@@ -1,29 +1,29 @@
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors', '1');
-session_start();
-
-function afficheFormulaire($p)
-{
-    $champ = "<form action=\"" . $_SERVER['PHP_SELF'] . "\" method=\"post\">";
-    $champ .= "<p><label>Vous êtes :<input type=\"radio\" name=\"genre\" required=\"required\">un homme</label>";
-    $champ .= "<label><input type=\"radio\" name=\"genre\" required=\"required\">une femme</label>";
-                    $champ .= "<label><input type=\"radio\" name=\"genre\" required=\"required\">Non binaire</label><br/>";
-    $champ .= "<label>Vous vous appelez : <input type=\"text\" name=\"nom\" placeholder=\"Nom...\" required=\"required\"></label> ";
-    $champ .= "<label><input type=\"text\" name=\"prenom\" placeholder=\"Prenom...\" required=\"required\"></label><br/>";
-    $champ .= "<label>Vous souhaitez que les autres vous voient sous le nom de :
+  error_reporting(E_ALL);
+  ini_set('display_errors', '1');
+  session_start();
+  
+  function afficheFormulaire($p)
+  {
+      $champ = "<form action=\"" . $_SERVER['PHP_SELF'] . "\" method=\"post\">";
+      $champ .= "<p><label>Vous êtes :<input type=\"radio\" name=\"genre\" required=\"required\">un homme</label>";
+      $champ .= "<label><input type=\"radio\" name=\"genre\" required=\"required\">une femme</label>";
+      $champ .= "<label><input type=\"radio\" name=\"genre\" required=\"required\">Non binaire</label><br/>";
+      $champ .= "<label>Nom : <input type=\"text\" name=\"nom\" placeholder=\"Nom...\" required=\"required\"></label><br/>";
+      $champ .= "<label>Prénom :<input type=\"text\" name=\"prenom\" placeholder=\"Prenom...\" required=\"required\"></label><br/>";
+      $champ .= "<label>Pseudonyme :
   <input type=\"text\" name=\"pseudo\" value=\"".$p."\" placeholder=\"Pseudonyme...\" required=\"required\">
   </label><br/>";
-    $champ .= "<label>Votre mot de passe (promis vous serez le seul à le connaitre) :
+      $champ .= "<label>Mot de passe :
   <input type=\"password\" name=\"mdp\" placeholder=\"Mot_De_Passe...\" required=\"required\">
   </label><br/>";
-    $champ .= "<label>Nous pouvons vous joindre :<br/>Par mail 
+      $champ .= "<label>E-mail :
   <input type=\"email\" name=\"email\" placeholder=\"john.doe@mail.us\" required=\"required\">
   </label><br/>";
-    $champ .= "<label>Date de naissance <input type=\"text\" name=\"date_n\" maxlength=\"10\" placeholder=\"01/01/1990\" required=\"required\"><br/>";
-    $champ .= "<input type=\"submit\" value=\"Let's go !\" /></p>";
-    $champ .= "</form>";
-    echo $champ;
+      $champ .= "<label>Date de naissance <input type=\"text\" name=\"date_n\" maxlength=\"10\" placeholder=\"01/01/1990\" required=\"required\"><br/>";
+      $champ .= "<input type=\"submit\" value=\"S'inscrire\" /></p>";
+      $champ .= "</form>";
+      echo $champ;
   }
   
 ?>
@@ -79,29 +79,12 @@ function afficheFormulaire($p)
           }
           
           else {
-              echo "<p>Mauvais paramètres</p>";
+              echo "<p>Remplissez le formulaire d'inscription.</p>";
               
           }
           afficheFormulaire(NULL);
           
-          $req = $pdo->prepare('SELECT * FROM user');
-          $utilisateur = $req->fetchAll(PDO::FETCH_ASSOC);
           
-          echo "<table>";
-          foreach($utilisateur as $uti); {
-              
-              echo "<tr>";
-              echo "<td>".uti[‘id’]."</td>";
-              echo "<td>".uti[‘genre’]."</td>";
-              echo "<td>".uti[‘prenom’]."</td>";
-              echo "<td>".uti[‘nom’]."</td>";
-              echo "<td>".uti[‘pseudo’]."</td>";
-              echo "<td>".uti[‘date_n’]."</td>";
-              echo "<td>".uti[‘email’]."</td>";
-              echo "<td>".uti[‘mdp’]."</td>";
-              echo "<td>".uti[‘statut’]."</td>";
-              echo "</tr>";
-          }
       }
       
     ?>
