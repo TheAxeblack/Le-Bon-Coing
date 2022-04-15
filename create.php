@@ -44,3 +44,5 @@ $ann = "CREATE TABLE IF NOT EXISTS annonce_p(
 
 $pdo->exec($ann);
 
+      
+

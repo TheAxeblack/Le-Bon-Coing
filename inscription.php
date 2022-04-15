@@ -8,125 +8,102 @@ function afficheFormulaire($p)
     $champ = "<form action=\"" . $_SERVER['PHP_SELF'] . "\" method=\"post\">";
     $champ .= "<p><label>Vous êtes :<input type=\"radio\" name=\"genre\" required=\"required\">un homme</label>";
     $champ .= "<label><input type=\"radio\" name=\"genre\" required=\"required\">une femme</label>";
-    $champ .= "<label><input type=\"radio\" name=\"genre\" required=\"required\">Non binaire</label><br/>";
+                    $champ .= "<label><input type=\"radio\" name=\"genre\" required=\"required\">Non binaire</label><br/>";
     $champ .= "<label>Vous vous appelez : <input type=\"text\" name=\"nom\" placeholder=\"Nom...\" required=\"required\"></label> ";
     $champ .= "<label><input type=\"text\" name=\"prenom\" placeholder=\"Prenom...\" required=\"required\"></label><br/>";
     $champ .= "<label>Vous souhaitez que les autres vous voient sous le nom de :
-                <input type=\"text\" name=\"pseudo\" placeholder=\"Pseudonyme...\" required=\"required\">
-               </label><br/>";
+  <input type=\"text\" name=\"pseudo\" value=\"".$p."\" placeholder=\"Pseudonyme...\" required=\"required\">
+  </label><br/>";
     $champ .= "<label>Votre mot de passe (promis vous serez le seul à le connaitre) :
-                <input type=\"password\" name=\"mdp\" placeholder=\"Mot_De_Passe...\" required=\"required\">
-               </label><br/>";
+  <input type=\"password\" name=\"mdp\" placeholder=\"Mot_De_Passe...\" required=\"required\">
+  </label><br/>";
     $champ .= "<label>Nous pouvons vous joindre :<br/>Par mail 
-                <input type=\"email\" name=\"adresse\" placeholder=\"john.doe@mail.us\" required=\"required\">
-               </label><br/>";
-    $champ .= "<label>Par téléphone <input type=\"tel\" name=\"telephone\" maxlength=\"10\" placeholder=\"06.11.22.33.44\" required=\"required\"><br/>";
-    $champ .= "<label><input type=\"checkbox\" name=\"infos\">Souhaitez-vous être mis au courant des nouvelles annonces 
-               publiées ?</label><br/><br/>";
+  <input type=\"email\" name=\"email\" placeholder=\"john.doe@mail.us\" required=\"required\">
+  </label><br/>";
+    $champ .= "<label>Date de naissance <input type=\"text\" name=\"date_n\" maxlength=\"10\" placeholder=\"01/01/1990\" required=\"required\"><br/>";
     $champ .= "<input type=\"submit\" value=\"Let's go !\" /></p>";
     $champ .= "</form>";
     echo $champ;
-}
-
+  }
+  
 ?>
 
 <!DOCTYPE html>
 <html lang="fr">
-<head>
+  <head>
     <meta charset="UTF-8">
     <title>Inscription</title>
-    <link rel="stylesheet" href="css/accueil.css">
-    <link rel="stylesheet" href="css/commun.css">
-
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
-    </style>
-</head>
-<body>
-<div class="navbar">
-    <div class="dropdown">
-        <button class="dropbtn" onclick="deroulerMenu('myDropdown')">
-            <img src="imgs/hamburger.png" alt="icone de menu" width="30" height="30">
-        </button>
-        <div class="dropdown-content" id="myDropdown">
-            <a href="#">Gérer mes annonces</a>
-            <a href="#">Link 3</a>
-        </div>
-    </div>
-    <div class="dropdown">
-        <button class="dropbtn" onclick="deroulerMenu('myDropdown2')">
-            <img src="imgs/france.png" alt="icone du drapeau français" width="30">
-        </button>
-        <div class="dropdown-content" id="myDropdown2">
-            <a href="#">Link 1</a>
-            <a href="#">Link 2</a>
-            <a href="#">Link 3</a>
-        </div>
-    </div>
-    <button class="nigthbtn" onclick="changerMode()">
-        <img src="imgs/sun.png" alt="icone de soleil" width="30" height="30">
-    </button>
-    <div class="nametag w7">
-        <a href="#home">Le bon Coing</a>
-    </div>
-    <a href="#"><img src="imgs/more.png" alt="icone ajout" width="30"> Déposer une annonce</a>
-    <a href="#logging"><img src="imgs/user.png" alt="icone de compte" width="30"></a>
-    <form>
-        <label>
-            <input class="search-barre" type="text" name="search" placeholder="Search..">
-        </label>
-    </form>
-</div>
-<?php
-if (isset($_SESSION['pseudo'])) {
-    echo "<p>Vous ne pouvez pas vous inscrire si vous êtes connecté</p>";
-} else {
-    if (isset($_POST['genre']) && isset($_POST['nom']) && isset($_POST['prenom']) && isset($_POST['pseudo']) &&
-        isset($_POST['mdp']) && isset($_POST['adresse']) && isset($_POST['infos'])) {
-        $genre = $_POST['genre'];
-        $nom = trim($_POST['nom']);
-        $prenom = trim($_POST['prenom']);
-        $pseudo = trim($_POST['pseudo']);
-        $mdp = md5(trim($_POST['mdp']));
-        $email = trim($_POST['adresse']);
-        $news = $_POST['infos'];
-
-        include('includes/connex.inc.php');
-        $pdo = connex("le_bon_coin");
-
-        try {
-            $verifps = $pdo->prepare('SELECT (pseudo) FROM utilisateur WHERE pseudo = :ps');
-            $verifps->bindParam(':ps', $ps);
-            $verifps->execute();
-            $res = $verifps->fetchAll(PDO::FETCH_ASSOC);
-            if (count($res) == 0) {
-                foreach ($res as $pres) {
-                    if (strcmp($pres['pseudo'], $_POST['pseudo']) == 0)
-                        $ok = 0;
-                }
-            }
-            if ($ok == 0)
-                afficheFormulaire("Pseudo déjà utilisé");
-            else {
-                $stmt = $pdo->prepare('INSERT INTO utilisateur(genre, nom, prenom, pseudo, mdp, email, news) VALUES 
-                                                                          (:genre, :nom, :prenom, :pseudo, :pass, :mail, :news)');
-                $stmt->bindParam(':genre', $genre);
-                $stmt->bindParam(':nom', $nom);
-                $stmt->bindParam(':prenom', $prenom);
-                $stmt->bindParam(':pseudo', $pseudo);
-                $stmt->bindParam(':pass', $mdp);
-                $stmt->bindParam(':mail', $email);
-                $stmt->bindParam(':news', $news);
-                $stmt->execute();
-                echo "<p>Vous avez bien été inscrit.<br><a href=\"connexion.php\">Se connecter</a></p>";
-            }
-        } catch (PDOException $exception) {
-            echo $exception->getMessage();
-            echo '<p>Problème avec la base</p>';
-        }
-    }
-    afficheFormulaire(null);
-}
-?>
-</body>
+  </head>
+  <body>
+    <?php
+      if (isset($_SESSION['pseudo'])) {
+          echo "<p>Vous ne pouvez pas vous inscrire si vous êtes connecté</p>";
+      } else {
+          if (isset($_POST['genre']) && isset($_POST['nom']) && isset($_POST['prenom']) && isset($_POST['pseudo']) &&
+              isset($_POST['mdp']) && isset($_POST['date_n']) && isset($_POST['email'])) {
+              $genre = $_POST['genre'];
+              $nom = trim($_POST['nom']);
+              $prenom = trim($_POST['prenom']);
+              $date_n = trim($_POST['date_n']);
+              $pseudo = trim($_POST['pseudo']);
+              $mdp = md5(trim($_POST['mdp']));
+              $email = trim($_POST['email']);
+              
+              include('includes/connex.inc.php');
+              $pdo = connexion('bdd.db');
+              
+              try {
+                  $stmt = $pdo->prepare('INSERT INTO user (genre,prenom,nom,date_n,pseudo,mdp,email) VALUES(:genre, :prenom, :nom, :date_n, :pseudo, :mdp, :email)');
+                  $stmt->bindParam(':genre', $genre);
+                  $stmt->bindParam(':prenom', $prenom);
+                  $stmt->bindParam(':nom', $nom);
+                  $stmt->bindParam(':date_n', $date_n);
+                  $stmt->bindParam(':pseudo', $pseudo);
+                  $stmt->bindParam(':mdp', $mdp);
+                  $stmt->bindParam(':email', $email);
+                  
+                  $stmt->execute();
+                  
+                  if ($stmt->rowCount() == 1) {
+                      echo '<p>Ajout effectué</p>';
+                  } else {
+                      echo '<p>Erreur ajout</p>';
+                  }
+                  $stmt->closeCursor();
+                  $pdo = null;
+                  
+              } catch (PDOException $exception) {
+                  echo 'Erreur PDO';
+                  echo $e->getMessage();
+              }
+          }
+          
+          else {
+              echo "<p>Mauvais paramètres</p>";
+              
+          }
+          afficheFormulaire(NULL);
+          
+          $req = $pdo->prepare('SELECT * FROM user');
+          $utilisateur = $req->fetchAll(PDO::FETCH_ASSOC);
+          
+          echo "<table>";
+          foreach($utilisateur as $uti); {
+              
+              echo "<tr>";
+              echo "<td>".uti[‘id’]."</td>";
+              echo "<td>".uti[‘genre’]."</td>";
+              echo "<td>".uti[‘prenom’]."</td>";
+              echo "<td>".uti[‘nom’]."</td>";
+              echo "<td>".uti[‘pseudo’]."</td>";
+              echo "<td>".uti[‘date_n’]."</td>";
+              echo "<td>".uti[‘email’]."</td>";
+              echo "<td>".uti[‘mdp’]."</td>";
+              echo "<td>".uti[‘statut’]."</td>";
+              echo "</tr>";
+          }
+      }
+      
+    ?>
+  </body>
 </html>
