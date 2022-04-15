@@ -16,7 +16,7 @@ $us = "CREATE TABLE IF NOT EXISTS user(
   prenom VARCHAR(255),
   nom VARCHAR(255),
   pseudo VARCHAR(255),
-  mdp INTEGER,
+  mdp VARCHAR(255),
   email VARCHAR(255),
   statut INT DEFAULT 0
 )";
