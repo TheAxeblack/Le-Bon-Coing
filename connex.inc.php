@@ -1,9 +1,8 @@
 <?php
-function connex($base)
+function connexion($base)
 {
-    include_once("param.inc.php");
     try {
-        $pdo = new PDO('mysql:host=' . HOTE . ';dbname=' . $base, UTILISATEUR, PASSE);
+        $pdo = new PDO('sqlite:'.$base);
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     } catch (PDOException $e) {
         echo 'Problème à la connexion';
