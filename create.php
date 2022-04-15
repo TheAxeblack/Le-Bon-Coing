@@ -15,6 +15,7 @@ $us = "CREATE TABLE IF NOT EXISTS user(
   genre VARCHAR(255),
   prenom VARCHAR(255),
   nom VARCHAR(255),
+  date_n DATE,
   pseudo VARCHAR(255),
   mdp VARCHAR(255),
   email VARCHAR(255),
