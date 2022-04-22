@@ -1,3 +1,9 @@
+<?php
+error_reporting(E_ALL);
+ini_set('display_errors', '1');
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -43,7 +49,12 @@
         <a href="#home">Le bon Coing</a>
     </div>
     <a href="#"><img src="imgs/more.png" alt="icone ajout" width="30"> Déposer une annonce</a>
-    <a href="connexion.php"><img src="imgs/user.png" alt="icone de compte" width="30"></a>
+    <?php
+    if (isset($_SESSION['pseudo']))
+        echo "<a href=\"connexion.php\"><img src=\"imgs/user.png\" alt=\"icone de compte\" width=\"30\"></a>";
+    else
+        echo "<a href=\"inscription.php\"><img src=\"imgs/user.png\" alt=\"icone de compte\" width=\"30\"></a>";
+    ?>
     <form>
         <label>
             <input class="search-barre" type="text" name="search" placeholder="Search..">
