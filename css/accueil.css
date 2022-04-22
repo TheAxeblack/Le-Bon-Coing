@@ -9,7 +9,7 @@ body {
     overflow: hidden;
     background-color: #c2b845;
     font-family: 'Permanent Marker', cursive;
-    border-bottom: rgb(222, 226, 230) 1px solid !important;
+    border-bottom: rgb(222, 226, 230) 2px solid !important;
     flex-wrap: nowrap;
     align-items: center;
     justify-content: space-between;
