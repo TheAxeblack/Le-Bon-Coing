@@ -1,4 +1,4 @@
-/* Lors de l'appui sur le button révele le menu */
+/* Lors de l'appui sur le bouton révèle le menu */
 function deroulerMenu(identifiant) {
     document.getElementById(identifiant).classList.toggle("show");
 }

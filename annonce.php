@@ -1,3 +1,9 @@
+<?php
+error_reporting(E_ALL);
+ini_set('display_errors', '1');
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -41,7 +47,7 @@
     <div class="nametag w7">
         <a href="#home">Le bon Coing</a>
     </div>
-    <a href="#"><img src="imgs/more.png" alt="icone ajout" width="30">  Déposer une annonce</a>
+    <a href="#"><img src="imgs/more.png" alt="icone ajout" width="30"> Déposer une annonce</a>
     <a href="#logging"><img src="imgs/user.png" alt="icone de compte" width="30"></a>
     <form>
         <label>
@@ -52,26 +58,25 @@
 <?php
 function affichage($image1, $image2, $image3, $nom_annonce, $date_post, $description, $prix, $nom_vendeur, $prenom_vendeur, $email_vendeur)
 {
-    $annonce = '<img src='.$image1.'>';
+    $annonce = '<img src=' . $image1 . '>';
     $annonce .= '<div class="image_secondaire">';
-    $annonce .= '<img src='.$image2.'>';
-    $annonce .= '<img src='.$image3.'>';
+    $annonce .= '<img src=' . $image2 . '>';
+    $annonce .= '<img src=' . $image3 . '>';
     $annonce .= '</div>';
-    $annonce .= '<h1>'.$nom.'</h1>';
-    $annonce .= $date_post.' '.$prix;
-    $annonce .= '<p>'.$description.'</p>';
+    $annonce .= '<h1>' . $nom_annonce . '</h1>';
+    $annonce .= $date_post . ' ' . $prix;
+    $annonce .= '<p>' . $description . '</p>';
     echo $annonce;
 }
-if (isset($_POST['id_annonce']))
-{
+
+if (isset($_POST['id_annonce'])) {
     include("connex.inc.php");
     $pdo = connexion('bdd.db');
-    try
-    {
+    try {
         //Recuperation dans la bdd des info de l'annonce
         $req = $pdo->prepare("SELECT * FROM annonce_p WHERE id LIKE :id_annonce");
         $id_annonce = $_POST['id_annonce'];
-        $req->bindParam(':id_annonce',$id_annonce);
+        $req->bindParam(':id_annonce', $id_annonce);
         $req->execute();
         $info = $req->fetchAll(PDO::FETCH_ASSOC);
         $info_line = $info[0];
@@ -87,7 +92,7 @@ if (isset($_POST['id_annonce']))
         //Recuperation dans la bdd des infos de l'utilisateur associé à l'annonce
         $req2 = $pdo->prepare("SELECT * FROM user WHERE id LIKE :id_vendeur");
         $id_vendeur = $info_line['id_u'];
-        $req2->bindParam(':id_vendeur',$id_vendeur);
+        $req2->bindParam(':id_vendeur', $id_vendeur);
         $req2->execute();
         $info_v = $req2->fetchAll(PDO::FETCH_ASSOC);
         $info_vendeur = $info_v[0];
@@ -102,13 +107,12 @@ if (isset($_POST['id_annonce']))
         $req->closeCursor();
         $req2->closeCursor();
         $pdo = null;
-    }catch(PDOException $e) 
-    {
+    } catch (PDOException $e) {
         echo $e->getMessage();
         echo '<p>Problème avec la base</p>';
     }
-}else{
-    echo 'Annonce non existante';
+} else {
+    echo 'Annonce inexistante';
 }
 ?>
 </body>

@@ -7,7 +7,6 @@ include_once('connex.inc.php');
 $pdo = connexion('bdd.db');
 
 
-
 $pdo->exec("DROP TABLE user");
 
 $us = "CREATE TABLE IF NOT EXISTS user(
