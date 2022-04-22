@@ -46,14 +46,14 @@ session_start();
         <img src="imgs/sun.png" alt="icone de soleil" width="30" height="30">
     </button>
     <div class="nametag w7">
-        <a href="#home">Le bon Coing</a>
+        <a href="home.php">Le bon Coing</a>
     </div>
     <a href="#"><img src="imgs/more.png" alt="icone ajout" width="30"> Déposer une annonce</a>
     <?php
     if (isset($_SESSION['pseudo']))
-        echo "<a href=\"connexion.php\"><img src=\"imgs/user.png\" alt=\"icone de compte\" width=\"30\"></a>";
+        echo "<a href=\"gestion.php\"><img src=\"imgs/user.png\" alt=\"icone de compte\" width=\"30\"></a>";
     else
-        echo "<a href=\"inscription.php\"><img src=\"imgs/user.png\" alt=\"icone de compte\" width=\"30\"></a>";
+        echo "<a href=\"connexion.php\"><img src=\"imgs/user.png\" alt=\"icone de compte\" width=\"30\"></a>";
     ?>
     <form>
         <label>
@@ -63,15 +63,20 @@ session_start();
 </div>
 <!-- Fin de la barre de navigation -->
 
+<?php
+if (isset($_SESSION['pseudo']) && isset($_SESSION['statut'])) {
+    echo "<p>Bonjour, " . $_SESSION['pseudo'] . " <a href=\"deconnexion.php\">Se déconnecter</a></p>";
+}
+?>
+
 <!-- Début section des annonces -->
 <section class="latest">
     <h2>Dernières annonces</h2>
     <div>
-        <article>
-            <img src="imgs/renault-juvaquatre-gea6b628bd_1920.jpg" alt="photo renault juvaquatre" width="200">
-            <h3>Renault Juvaquatre à <br/>rénover</h3>
-            <p>125€</p>
-        </article>
+        <?php
+        echo "<a href='annonce.php'><article><img src=\"imgs/renault-juvaquatre-gea6b628bd_1920.jpg\" alt=\"photo renault juvaquatre\" width=\"200\">
+            <h3>Renault Juvaquatre à <br/>rénover</h3><p>125€</p></article></a>";
+        ?>
         <article>
             <img src="imgs/rottweiler.jpg" alt="photo de chiot race Rottweiler" width="200">
             <h3>Chiot Rottweiller</h3>

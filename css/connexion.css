@@ -23,6 +23,12 @@ form {
     padding-bottom: 10px;
 }
 
+#container a {
+    width: 38%;
+    margin: 0 auto;
+    padding-bottom: 10px;
+}
+
 /* Full-width inputs */
 input[type=text], input[type=password], input[type=email] {
     width: 100%;

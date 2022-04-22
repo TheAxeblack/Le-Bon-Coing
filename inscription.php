@@ -5,7 +5,8 @@ session_start();
 
 function afficheFormulaire($p)
 {
-    $champ = "<form action=\"" . $_SERVER['PHP_SELF'] . "\" method=\"post\">";
+    $champ = "<div id=\"container\">";
+    $champ .= "<form action=\"" . $_SERVER['PHP_SELF'] . "\" method=\"post\">";
     $champ .= "<h1>Inscription</h1>";
     $champ .= "<label>Vous êtes :<input type=\"radio\" name=\"genre\" required=\"required\">un homme</label>";
     $champ .= "<label><input type=\"radio\" name=\"genre\" required=\"required\">une femme</label>";
@@ -21,9 +22,10 @@ function afficheFormulaire($p)
     $champ .= "<label>Votre adresse mail :
   <input type=\"email\" name=\"email\" placeholder=\"john.doe@mail.us\" required=\"required\">
   </label><br/>";
-    $champ .= "<label>Date de naissance <input type=\"text\" name=\"date_n\" maxlength=\"10\" placeholder=\"01/01/1990\" required=\"required\"><br/>";
-    $champ .= "<input type=\"submit\" value=\"Let's go !\" />";
+    $champ .= "<label>Date de naissance <input type=\"text\" name=\"date_n\" maxlength=\"10\" placeholder=\"01/01/1990\" required=\"required\"></label><br/>";
+    $champ .= "<label><input type=\"submit\" value=\"Let's go !\"</label>";
     $champ .= "</form>";
+    $champ .= "</div>";
     echo $champ;
 }
 
@@ -44,11 +46,12 @@ function afficheFormulaire($p)
 </head>
 <body>
 <?php
-if (isset($_SESSION['pseudo'])) {
+if (isset($_SESSION['pseudo']) || isset($_SESSION['statut'])) {
     echo "<p>Vous ne pouvez pas vous inscrire si vous êtes connecté</p>";
 } else {
     if (isset($_POST['genre']) && isset($_POST['nom']) && isset($_POST['prenom']) && isset($_POST['pseudo']) &&
         isset($_POST['mdp']) && isset($_POST['date_n']) && isset($_POST['email'])) {
+        $ok = 1;
         $genre = $_POST['genre'];
         $nom = trim($_POST['nom']);
         $prenom = trim($_POST['prenom']);
@@ -61,39 +64,56 @@ if (isset($_SESSION['pseudo'])) {
         $pdo = connexion('bdd.db');
 
         try {
-            $stmt = $pdo->prepare('INSERT INTO user (genre,prenom,nom,date_n,pseudo,mdp,email) 
-                                         VALUES(:genre, :prenom, :nom, :date_n, :pseudo, :mdp, :email)');
-            $stmt->bindParam(':genre', $genre);
-            $stmt->bindParam(':prenom', $prenom);
-            $stmt->bindParam(':nom', $nom);
-            $stmt->bindParam(':date_n', $date_n);
-            $stmt->bindParam(':pseudo', $pseudo);
-            $stmt->bindParam(':mdp', $mdp);
-            $stmt->bindParam(':email', $email);
+            $verifpseudo = $pdo->prepare('SELECT (pseudo) FROM user WHERE pseudo = :pseudo');
+            $verifpseudo->bindParam(':pseudo', $pseudo);
+            $verifpseudo->execute();
+            $res = $verifpseudo->fetchAll(PDO::FETCH_ASSOC);
+            if (count($res) != 0)
+                foreach ($res as $re)
+                    if (strcmp($re['pseudo'], $_POST['pseudo']) == 0)
+                        $ok = 0;
 
-            $stmt->execute();
-
-            if ($stmt->rowCount() == 1) {
-                echo '<p>Ajout effectué</p>';
+            if ($ok == 0) {
+                echo "<script>";
+                echo "alert('Le pseudo est déjà utilisé')";
+                echo "</script>";
+                afficheFormulaire(NULL);
             } else {
-                echo '<p>Erreur ajout</p>';
-            }
-            $stmt->closeCursor();
-            $pdo = null;
+                $stmt = $pdo->prepare('INSERT INTO user (genre,prenom,nom,date_n,pseudo,mdp,email) 
+                                         VALUES(:genre, :prenom, :nom, :date_n, :pseudo, :mdp, :email)');
+                $stmt->bindParam(':genre', $genre);
+                $stmt->bindParam(':prenom', $prenom);
+                $stmt->bindParam(':nom', $nom);
+                $stmt->bindParam(':date_n', $date_n);
+                $stmt->bindParam(':pseudo', $pseudo);
+                $stmt->bindParam(':mdp', $mdp);
+                $stmt->bindParam(':email', $email);
 
+                $stmt->execute();
+
+                echo "<script>";
+                if ($stmt->rowCount() == 1) {
+                    echo "alert('Ajout effectué')";
+                    echo "</script>";
+                    header('Location : connexion.php');
+                } else {
+                    echo "alert('Erreur lors de l'ajout veuillez réessayer')";
+                    echo "</script>";
+                    afficheFormulaire(NULL);
+                }
+                $stmt->closeCursor();
+                $pdo = null;
+            }
         } catch (PDOException $exception) {
-            echo 'Erreur PDO';
             echo $exception->getMessage();
+            echo 'Erreur PDO';
         }
     } else {
-        echo "<p>Mauvais paramètres</p>";
+        echo "<div id=\"container\">";
+        afficheFormulaire(NULL);
+        echo "</div>";
     }
-    echo "<div id='container'>";
-    afficheFormulaire(NULL);
-    echo "</div>";
-
 }
-
 ?>
 </body>
 </html>
