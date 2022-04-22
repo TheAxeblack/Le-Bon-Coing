@@ -49,7 +49,7 @@ if (isset($_SESSION['pseudo'])) {
         $mdp = md5(trim($_POST['mdp']));
         $email = trim($_POST['email']);
 
-        include('connex.inc.php');
+        include('includes/connex.inc.php');
         $pdo = connexion('bdd.db');
 
         try {
@@ -75,11 +75,10 @@ if (isset($_SESSION['pseudo'])) {
 
         } catch (PDOException $exception) {
             echo 'Erreur PDO';
-            echo $e->getMessage();
+            echo $exception->getMessage();
         }
     } else {
         echo "<p>Mauvais paramètres</p>";
-
     }
     afficheFormulaire(NULL);
 
@@ -87,5 +86,4 @@ if (isset($_SESSION['pseudo'])) {
 
 ?>
 </body>
->>>>>>> Prod_Soheil
 </html>
