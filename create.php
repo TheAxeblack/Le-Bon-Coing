@@ -2,10 +2,9 @@
 error_reporting(E_ALL);
 ini_set("display_errors", "1");
 
-include_once('includes/connex.inc.php');
+include_once('connex.inc.php');
 
 $pdo = connexion('bdd.db');
-
 
 
 $pdo->exec("DROP TABLE user");
@@ -41,6 +40,7 @@ $ann = "CREATE TABLE IF NOT EXISTS annonce_p(
   c_postal INT,
   FOREIGN KEY (id_u) REFERENCES user(id) 
 )";
+
 
 $pdo->exec($ann);
 

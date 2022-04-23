@@ -7,9 +7,9 @@ body {
 .navbar {
     display: flex;
     overflow: hidden;
-    background-color: #ffffff;
+    background-color: #c2b845;
     font-family: 'Permanent Marker', cursive;
-    border-bottom: rgb(222, 226, 230) 1px solid !important;
+    border-bottom: rgb(222, 226, 230) 2px solid !important;
     flex-wrap: nowrap;
     align-items: center;
     justify-content: space-between;
@@ -69,7 +69,7 @@ body {
 }
 
 .navbar a:hover, .dropdown:hover .dropbtn, .dropbtn:focus, .nigthbtn:hover {
-    background-color: red;
+    background-color: #738438;
 }
 
 .dropdown-content {
@@ -105,7 +105,7 @@ form {
     padding: 14px 16px;
 }
 
-input[type=text] {
+.search-barre {
     width: 130px;
     box-sizing: border-box;
     border: 2px solid #ccc;
@@ -119,4 +119,5 @@ input[type=text] {
     padding: 12px 20px 12px 40px;
     -webkit-transition: width 0.4s ease-in-out;
     transition: width 0.4s ease-in-out;
+    font-family: 'Karla', sans-serif;
 }

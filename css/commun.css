@@ -14,10 +14,13 @@
 }
 
 section {
-    display: flex;
     padding: 14px 16px;
     background-color: burlywood;
     margin-bottom: 10px;
+}
+
+section > div {
+    display: flex;
 }
 
 article {

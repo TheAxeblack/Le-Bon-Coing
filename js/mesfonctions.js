@@ -1,9 +1,9 @@
-/* Lors de l'appui sur le button révele le menu */
+/* Lors de l'appui sur le bouton révèle le menu */
 function deroulerMenu(identifiant) {
     document.getElementById(identifiant).classList.toggle("show");
 }
 
-/* Ferme le menu déroulant approprié si on clique en dehors */
+/* Ferme le menu déroulant approprié si on clique en dehorns */
 window.onclick = function (e) {
     if (!e.target.matches('.dropbtn')) {
         var myDropdown = document.getElementById("myDropdown");
@@ -11,12 +11,13 @@ window.onclick = function (e) {
         var myDropdown3 = document.getElementById("myDropdown3");
         if (myDropdown.classList.contains('show'))
             myDropdown.classList.remove('show');
-        else if (myDropdown2.classList.contains('show'))
+        if (myDropdown2.classList.contains('show'))
             myDropdown2.classList.remove('show');
-        else if (myDropdown3.classList.contains('show'))
+        if (myDropdown3.classList.contains('show'))
             myDropdown3.classList.remove(('show'));
     }
 }
+
 
 function choisirLangue() {
     alert('Coucou');
