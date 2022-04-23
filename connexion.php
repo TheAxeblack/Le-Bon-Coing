@@ -25,7 +25,7 @@ function afficheFormulaire($p)
     <meta charset="utf-8">
     <meta name="viewport" content="width = device-width, initial-scale = 1">
     <title>Connexion Le bon Coing</title>
-    <link rel="stylesheet" href="css/connexion.css" media="screen" type="text/css"/>
+    <link rel="stylesheet" href="css/insc_conn.css" media="screen" type="text/css"/>
 
     <!-- Pour importer les polices depuis Google Fonts -->
     <style>

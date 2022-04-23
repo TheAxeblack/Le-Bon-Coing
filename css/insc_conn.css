@@ -8,22 +8,16 @@ body {
     margin: 10% auto 0;
 }
 
-/* Bordered form */
+/* Pour avoir un formulaire avec des bordures */
 form {
     width: 100%;
     padding: 30px;
     border: 1px solid #f1f1f1;
     background: #fff;
-    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24); /* rgba permet d'avoir la gestion de la transparence s*/
 }
 
-#container h1 {
-    width: 38%;
-    margin: 0 auto;
-    padding-bottom: 10px;
-}
-
-#container a {
+#container h1, #container a {
     width: 38%;
     margin: 0 auto;
     padding-bottom: 10px;

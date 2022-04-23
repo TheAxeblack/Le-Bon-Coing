@@ -85,7 +85,7 @@ if (isset($_SESSION['pseudo']) && isset($_SESSION['statut'])) {
     </div>
 </section>
 
-<section class="recommand">
+<section class="recommend">
     <h2>Recommandé pour vous</h2>
 </section>
 

@@ -36,7 +36,7 @@ function afficheFormulaire($p)
 <head>
     <meta charset="UTF-8">
     <title>Inscription</title>
-    <link rel="stylesheet" href="css/connexion.css">
+    <link rel="stylesheet" href="css/insc_conn.css">
 
     <!-- Pour importer les polices depuis Google Fonts -->
     <style>
@@ -74,7 +74,7 @@ if (isset($_SESSION['pseudo']) || isset($_SESSION['statut'])) {
                         $ok = 0;
 
             if ($ok == 0) {
-                echo "<script>";
+                echo "<script type=\"javascript\">";
                 echo "alert('Le pseudo est déjà utilisé')";
                 echo "</script>";
                 afficheFormulaire(NULL);
@@ -91,7 +91,7 @@ if (isset($_SESSION['pseudo']) || isset($_SESSION['statut'])) {
 
                 $stmt->execute();
 
-                echo "<script>";
+                echo "<script type=\"javascript\">";
                 if ($stmt->rowCount() == 1) {
                     echo "alert('Ajout effectué')";
                     echo "</script>";
@@ -99,7 +99,7 @@ if (isset($_SESSION['pseudo']) || isset($_SESSION['statut'])) {
                 } else {
                     echo "alert('Erreur lors de l'ajout veuillez réessayer')";
                     echo "</script>";
-                    afficheFormulaire(NULL);
+                    afficheFormulaire(null);
                 }
                 $stmt->closeCursor();
                 $pdo = null;
@@ -108,11 +108,7 @@ if (isset($_SESSION['pseudo']) || isset($_SESSION['statut'])) {
             echo $exception->getMessage();
             echo 'Erreur PDO';
         }
-    } else {
-        echo "<div id=\"container\">";
-        afficheFormulaire(NULL);
-        echo "</div>";
-    }
+    } else afficheFormulaire(null);
 }
 ?>
 </body>
