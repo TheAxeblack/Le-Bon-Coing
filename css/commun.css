@@ -13,26 +13,43 @@
     color: white;
 }
 
+
+/* Section de style des sections annonces*/
 section {
     padding: 14px 16px;
     background-color: burlywood;
     margin-bottom: 10px;
 }
 
+
 section > div {
     display: flex;
 }
+
+.latest h2, .recommend h2 {
+    width: 25%;
+    margin: 0 auto;
+    padding-bottom: 10px;
+    font-family: 'Permanent Marker', cursive;
+}
+
+section > div > a:link, section > div > a:visited {
+    color: black;
+    text-decoration: none;
+}
+
+/* Fin de section de style des sections */
 
 article {
     border: 1px solid black;
     border-radius: 5px;
     background-color: #dddddd;
     padding: 12px 14px;
-    margin: 0px 10px;
+    margin: 0 10px;
 }
 
 footer {
-    border-top: rgb(222, 226, 230) 1px solid !important;
+    border-top: rgb(222, 226, 230) 2px solid !important; /*Met une bordure de 2px en haut du footer*/
     display: flex;
     overflow: hidden;
     font-family: 'Permanent Marker', cursive;

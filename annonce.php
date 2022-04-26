@@ -116,6 +116,7 @@ if (isset($_POST['id_annonce'])) {
 }
 ?>
 </body>
+<script src="js/mesfonctions.js"></script>
 </html>
 <!--Fin barre navigation-->
 <!---Annonce du vendeur--->

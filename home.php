@@ -28,8 +28,12 @@ session_start();
             <img src="imgs/hamburger.png" alt="icone de menu" width="30" height="30">
         </button>
         <div class="dropdown-content" id="myDropdown">
-            <a href="#">Gérer mes annonces</a>
-            <a href="#">Link 3</a>
+            <?php
+            if (isset($_SESSION['pseudo']) && isset($_SESSION['statut'])) {
+                echo "<a href=\"gestion.php\">Gérer mes annonces</a>";
+                echo "<a href=\"deconnexion.php\">Se déconnecter</a>";
+            }
+            ?>
         </div>
     </div>
     <div class="dropdown">
@@ -63,11 +67,6 @@ session_start();
 </div>
 <!-- Fin de la barre de navigation -->
 
-<?php
-if (isset($_SESSION['pseudo']) && isset($_SESSION['statut'])) {
-    echo "<p>Bonjour, " . $_SESSION['pseudo'] . " <a href=\"deconnexion.php\">Se déconnecter</a></p>";
-}
-?>
 
 <!-- Début section des annonces -->
 <section class="latest">
