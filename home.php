@@ -10,6 +10,7 @@ session_start();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Le bon coing</title>
+    <link rel="icon" href="imgs/favicon.ico">
     <link rel="stylesheet" href="css/accueil.css">
     <link rel="stylesheet" href="css/commun.css">
 
@@ -51,7 +52,10 @@ session_start();
         <img id="mode" src="imgs/sun.png" alt="icone de soleil" width="30" height="30">
     </button>
     <div class="nametag w7">
-        <a href="home.php">Le bon Coing</a>
+        <a href="home.php">
+            <img src="imgs/coing_so.svg" alt="Logo du site" width="50">
+            <h1>Le bon Coing</h1>
+        </a>
     </div>
     <a href="#"><img src="imgs/more.png" alt="icone ajout" width="30"> Déposer une annonce</a>
     <?php
@@ -67,7 +71,6 @@ session_start();
     </form>
 </div>
 <!-- Fin de la barre de navigation -->
-
 
 <!-- Début section des annonces -->
 <section class="latest" id="latest">
@@ -98,12 +101,14 @@ session_start();
 
 <form action="annonce.php" method="post">
     <label><input name="id_annonce" type="number"></label>
+    <label><input type=""></label>
     <button type="submit">gogo</button>
 </form>
 
 <!-- Pied de page -->
 <footer>
-    <p>2022 Le bon Coing Inc.</p>
+    <img src="imgs/coing_so.svg" alt="Logo du site" width="90">
+    <p class="w7">2022 Le bon Coing Inc.</p>
     <ul>
         <li><a href="#news">informations</a></li>
         <li><a href="sources.html">sources</a></li>

@@ -24,6 +24,11 @@ body {
     text-decoration: none;
 }
 
+.navbar a > h1{
+    display: inline-block;
+    margin: 0 auto;
+}
+
 .sticky {
     position: fixed;
     top: 0;
