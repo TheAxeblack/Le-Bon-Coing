@@ -26,9 +26,10 @@ function choisirLangue() {
 function changerMode() {
     var element = document.body;
     element.classList.toggle("dark-mode");
+    document.getElementsByTagName('<article>').style.backgroundColor = "#3A4556";
 }
 
-
+/* Pour avoir une barre de navigation fixe*/
 window.onscroll = function () {
     fixerBarre()
 };

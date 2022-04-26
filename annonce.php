@@ -70,7 +70,7 @@ function affichage($image1, $image2, $image3, $nom_annonce, $date_post, $descrip
 }
 
 if (isset($_POST['id_annonce'])) {
-    include("connex.inc.php");
+    include("includes/connex.inc.php");
     $pdo = connexion('bdd.db');
     try {
         //Recuperation dans la bdd des info de l'annonce
@@ -115,8 +115,8 @@ if (isset($_POST['id_annonce'])) {
     echo 'Annonce inexistante';
 }
 ?>
-</body>
 <script src="js/mesfonctions.js"></script>
+</body>
 </html>
 <!--Fin barre navigation-->
 <!---Annonce du vendeur--->

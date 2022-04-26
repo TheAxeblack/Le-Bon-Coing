@@ -43,9 +43,8 @@ session_start();
             <img src="imgs/france.png" alt="icone du drapeau français" width="30">
         </button>
         <div class="dropdown-content" id="myDropdown2">
-            <a href="#">Link 1</a>
-            <a href="#">Link 2</a>
-            <a href="#">Link 3</a>
+            <img src="imgs/france.png" alt="icone du drapeau français" width="30" onclick="choisirLangue()">
+            <img src="imgs/uk.png" alt="icone du drapeau anglais" width="30" onclick="choisirLangue()">
         </div>
     </div>
     <button class="nigthbtn" onclick="changerMode()">
@@ -75,8 +74,13 @@ session_start();
     <h2>Dernières annonces</h2>
     <div>
         <?php
-        echo "<a href='annonce.php'><article><img src=\"imgs/renault-juvaquatre-gea6b628bd_1920.jpg\" alt=\"photo renault juvaquatre\" width=\"200\">
-            <h3>Renault Juvaquatre à <br/>rénover</h3><p>125€</p></article></a>";
+        echo "<a href='annonce.php'>
+                <article>
+                    <img src=\"imgs/renault-juvaquatre-gea6b628bd_1920.jpg\" alt=\"photo renault juvaquatre\" width=\"200\">
+                    <h3>Renault Juvaquatre à <br/>rénover</h3>
+                    <p>125€</p>
+                </article>
+              </a>";
         ?>
         <article>
             <img src="imgs/rottweiler.jpg" alt="photo de chiot race Rottweiler" width="200">
@@ -91,6 +95,11 @@ session_start();
 </section>
 
 <!-- Fin section des annonces -->
+
+<form action="annonce.php" method="post">
+    <label><input name="id_annonce" type="number"></label>
+    <button type="submit">gogo</button>
+</form>
 
 <!-- Pied de page -->
 <footer>

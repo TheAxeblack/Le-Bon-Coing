@@ -9,15 +9,20 @@
 }
 
 .dark-mode {
-    background-color: grey;
+    background-color: #2D3848;
     color: white;
+}
+
+.dark-mode-article {
+    background-color: #3A4556;
+    color: #FFF;
 }
 
 
 /* Section de style des sections annonces*/
 section {
     padding: 14px 16px;
-    background-color: burlywood;
+    /*    background-color: burlywood;*/
     margin-bottom: 10px;
 }
 
