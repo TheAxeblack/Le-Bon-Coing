@@ -28,6 +28,8 @@ session_start();
             <img src="imgs/hamburger.png" alt="icone de menu" width="30" height="30">
         </button>
         <div class="dropdown-content" id="myDropdown">
+            <a href="#latest">Dernières annonces</a>
+            <a href="#recommend">Les plus consultées</a>
             <?php
             if (isset($_SESSION['pseudo']) && isset($_SESSION['statut'])) {
                 echo "<a href=\"gestion.php\">Gérer mes annonces</a>";
@@ -47,7 +49,7 @@ session_start();
         </div>
     </div>
     <button class="nigthbtn" onclick="changerMode()">
-        <img src="imgs/sun.png" alt="icone de soleil" width="30" height="30">
+        <img id="mode" src="imgs/sun.png" alt="icone de soleil" width="30" height="30">
     </button>
     <div class="nametag w7">
         <a href="home.php">Le bon Coing</a>
@@ -69,7 +71,7 @@ session_start();
 
 
 <!-- Début section des annonces -->
-<section class="latest">
+<section class="latest" id="latest">
     <h2>Dernières annonces</h2>
     <div>
         <?php
@@ -84,7 +86,7 @@ session_start();
     </div>
 </section>
 
-<section class="recommend">
+<section class="recommend" id="recommend">
     <h2>Recommandé pour vous</h2>
 </section>
 
