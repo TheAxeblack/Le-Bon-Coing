@@ -21,6 +21,7 @@
 
 /* Section de style des sections annonces*/
 section {
+    width: 100%;
     padding: 14px 16px;
     /*    background-color: burlywood;*/
     margin-bottom: 10px;
@@ -30,8 +31,8 @@ section > div {
     display: flex;
 }
 
-.latest h2, .recommend h2 {
-    width: 25%;
+body h2 {
+    width: 26%;
     margin: 0 auto;
     padding-bottom: 10px;
     font-family: 'Permanent Marker', cursive;

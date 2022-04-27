@@ -4,6 +4,13 @@ body {
     width: 100%;
 }
 
+#header {
+    height: 30vh;
+    background: url("../imgs/coings.jpg") center;
+    background-size: cover;
+
+}
+
 .navbar {
     display: flex;
     overflow: hidden;
@@ -13,6 +20,8 @@ body {
     flex-wrap: nowrap;
     align-items: center;
     justify-content: space-between;
+    top: 0;
+    width: 100%;
 }
 
 .navbar a {
@@ -24,16 +33,15 @@ body {
     text-decoration: none;
 }
 
-.navbar a > h1{
+.navbar a > h1 {
     display: inline-block;
     margin: 0 auto;
 }
 
-.sticky {
+.navbar.sticky {
     position: fixed;
-    top: 0;
-    width: 100%;
 }
+
 
 /* Section des tailles des flex-elements */
 .w1 {
@@ -131,4 +139,44 @@ form {
     -webkit-transition: width 0.4s ease-in-out;
     transition: width 0.4s ease-in-out;
     font-family: 'Karla', sans-serif;
+}
+
+.rechercher {
+    width: 80%;
+    margin: 2% auto;
+    border: 2px solid rgb(222, 226, 230);
+    background: #fff;
+    font-family: 'Karla', sans-serif;
+}
+
+.rechercher input[type = text] {
+    width: 100%;
+    /*padding: 12px 20px;*/
+    margin: 8px auto;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+.rechercher div {
+    display: inline-block;
+    width: 100%;
+    margin: 0 auto;
+}
+
+
+.rechercher button[type = submit] {
+    background-color: #c2b845;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px auto;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+.rechercher button[type=submit]:hover {
+    background-color: white;
+    color: #c2b845;
+    border: 1px solid #c2b845;
 }

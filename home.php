@@ -21,7 +21,7 @@ session_start();
     </style>
 </head>
 <body>
-
+<header id="header"></header>
 <!-- Début de la barre de navigation -->
 <div class="navbar">
     <div class="dropdown">
@@ -73,47 +73,145 @@ session_start();
 <!-- Fin de la barre de navigation -->
 
 <!-- Début section des annonces -->
-<section class="latest" id="latest">
-    <h2>Dernières annonces</h2>
-    <div>
-        <?php
-        echo "<a href='annonce.php'>
-                <article>
+<div class="content">
+    <section class="latest" id="latest">
+        <h2>Dernières annonces</h2>
+        <div>
+            <?php
+            echo "<a href='annonce.php'>
+                <article class='article'>
                     <img src=\"imgs/renault-juvaquatre-gea6b628bd_1920.jpg\" alt=\"photo renault juvaquatre\" width=\"200\">
                     <h3>Renault Juvaquatre à <br/>rénover</h3>
                     <p>125€</p>
                 </article>
               </a>";
-        ?>
-        <article>
-            <img src="imgs/rottweiler.jpg" alt="photo de chiot race Rottweiler" width="200">
-            <h3>Chiot Rottweiller</h3>
-            <p>350€</p>
-        </article>
-    </div>
-</section>
+            ?>
+            <article class="article">
+                <img src="imgs/rottweiler.jpg" alt="photo de chiot race Rottweiler" width="200">
+                <h3>Chiot Rottweiler</h3>
+                <p>350€</p>
+            </article>
+        </div>
+    </section>
 
-<section class="recommend" id="recommend">
-    <h2>Recommandé pour vous</h2>
-</section>
+    <!-- Fin section des annonces -->
 
-<!-- Fin section des annonces -->
+    <form class="rechercher" action="home.php" method="POST">
+        <h2>Vous recherchez quelque chose ?</h2>
+        <label>
+            <input type="text" class="search-barre" name="nom">
+        </label>
+        <br/>
+        <div class="tri">Trié par :
+            <label>
+                date <input type="radio" name="tri" value="date" checked="checked">
+            </label>
+            <label>
+                prix <input type="radio" name="tri" value="prix">
+            </label>
+            et classé par ordre :
+            <label>
+                croissant: <input type="radio" name="ordre" value="ASC" checked="checked">
+            </label>
+            <label>
+                décroissant: <input type="radio" name="ordre" value="DESC">
+            </label>
+        </div>
+        <label>
+            <button type="submit">rechercher</button>
+        </label>
+    </form>
 
-<form action="annonce.php" method="post">
-    <label><input name="id_annonce" type="number"></label>
-    <label><input type=""></label>
-    <button type="submit">gogo</button>
-</form>
+    <!-- Fin section des annonces -->
 
-<!-- Pied de page -->
-<footer>
-    <img src="imgs/coing_so.svg" alt="Logo du site" width="90">
-    <p class="w7">2022 Le bon Coing Inc.</p>
-    <ul>
-        <li><a href="#news">informations</a></li>
-        <li><a href="sources.html">sources</a></li>
-    </ul>
-</footer>
+    <?php
+    function affiche_annonce($annonce, $nom_u, $prenom_u)
+    {
+        echo '<article>';
+        echo '<form method="POST" action="annonce.php">';
+        echo '<img src="' . $annonce['image1'] . '" width="200">';
+        if ($annonce['image2'] != null)
+            echo '<img src=' . $annonce['image2'] . ' width="200">';
+        if ($annonce['image2'] != null)
+            echo '<img src=' . $annonce['image3'] . ' width="200">';
+        echo '<br/>';
+        echo '<label>' . $annonce['nom'] . '</label>';
+        echo '<br/>';
+        echo '<label>' . $annonce['prix'] . ' €</label>';
+        echo '<br/>';
+        echo '<label>' . $prenom_u . ' ' . $nom_u . '</label>';
+        echo '</form>';
+        echo '</article>';
+        #Pour mathis
+    }
+
+
+    if (isset($_POST['ordre']) && isset($_POST['tri']) && isset($_POST['nom'])) {
+        include("includes/connex.inc.php");
+        $pdo = connexion('bdd.db');
+        try {
+            if ($_POST['tri'] === 'date')
+                $tri = 'date_post';
+            if ($_POST['tri'] === 'prix')
+                $tri = 'prix';
+            $ordre = 'ASC';
+            if ($_POST['ordre'] === 'DESC')
+                $ordre = 'DESC';
+
+            $req = $pdo->prepare("SELECT * FROM annonce_p WHERE nom LIKE :nom_rechercher ORDER BY $tri $ordre");
+            $nom_recherche = '%' . $_POST['nom'] . '%';
+            $req->bindParam(':nom_rechercher', $nom_recherche);
+            $req->execute();
+            $liste_annonce = $req->fetchAll(PDO::FETCH_ASSOC);
+            echo '<section class="result">';
+            if (count($liste_annonce) == 0)
+                echo '<h2>Aucune annonce ne correspond à votre recherche</h2>';
+            else if (count($liste_annonce) == 1)
+                echo '<h2>Résultat de votre recherche</h2>';
+            else
+                echo '<h2>Résultats de votre recherche</h2>';
+            echo '<p>' . count($liste_annonce) . ' annonce(s) correspondent. </p>';
+            echo '<div>';
+            foreach ($liste_annonce as $annonce) {
+                $req2 = $pdo->prepare("SELECT prenom, nom FROM user WHERE id LIKE :id_u");
+                $id_u = $annonce['id_u'];
+                $req2->bindParam(':id_u', $id_u);
+                $req2->execute();
+                $info_user = $req2->fetchAll(PDO::FETCH_ASSOC);
+                $user = $info_user[0];
+                $nom_u = $user['nom'];
+                $prenom_u = $user['prenom'];
+
+                affiche_annonce($annonce, $nom_u, $prenom_u);
+
+                $req2->closeCursor();
+            }
+            echo '</div>';
+            echo '</section>';
+            $req->closeCursor();
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            echo '<p>Problème avec la base</p>';
+        }
+
+    }
+    ?>
+
+
+    <section class="recommend" id="recommend">
+        <h2>Recommandé pour vous</h2>
+    </section>
+
+    <!-- Pied de page -->
+    <footer>
+        <img src="imgs/coing_so.svg" alt="Logo du site" width="90">
+        <p class="w7">2022 Le bon Coing Inc.</p>
+        <ul>
+            <li><a href="#news">informations</a></li>
+            <li><a href="sources.html">sources</a></li>
+        </ul>
+    </footer>
+</div>
 <script src="js/mesfonctions.js"></script>
 </body>
 </html>

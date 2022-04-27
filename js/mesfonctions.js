@@ -25,22 +25,20 @@ function choisirLangue() {
 
 function changerMode() {
     var element = document.body;
+    var article = document.getElementsByClassName('article');
     element.classList.toggle("dark-mode");
-    document.getElementsByTagName('article').backgroundColor = "#3A4556";
+    article.class = "dark-mode-article"
 }
 
 /* Pour avoir une barre de navigation fixe*/
-window.onscroll = function () {
-    fixerBarre();
-};
-
-var navbar = document.getElementById("navbar");
+var navbar = document.querySelector(".navbar");
 var sticky = navbar.offsetTop;
 
 function fixerBarre() {
-    if (window.pageYOffset >= sticky) {
-        navbar.classList.add("sticky")
-    } else {
+    if (window.scrollY >= sticky) {
+        navbar.classList.add("sticky");
+    } else
         navbar.classList.remove("sticky");
-    }
 }
+
+window.addEventListener('scroll', fixerBarre);
