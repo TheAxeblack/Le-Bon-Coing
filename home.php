@@ -57,7 +57,7 @@ session_start();
             <h1>Le bon Coing</h1>
         </a>
     </div>
-    <a href="#"><img src="imgs/more.png" alt="icone ajout" width="30"> Déposer une annonce</a>
+    <a href="deposer_annonce.php"><img src="imgs/more.png" alt="icone ajout" width="30"> Déposer une annonce</a>
     <?php
     if (isset($_SESSION['pseudo']))
         echo "<a href=\"gestion.php\"><img src=\"imgs/user.png\" alt=\"icone de compte\" width=\"30\"></a>";
