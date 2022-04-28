@@ -130,19 +130,18 @@ session_start();
         echo '<article>';
         echo '<form method="POST" action="annonce.php">';
         echo '<img src="' . $annonce['image1'] . '" width="200">';
-        if ($annonce['image2'] != null)
-            echo '<img src=' . $annonce['image2'] . ' width="200">';
-        if ($annonce['image2'] != null)
-            echo '<img src=' . $annonce['image3'] . ' width="200">';
         echo '<br/>';
         echo '<label>' . $annonce['nom'] . '</label>';
         echo '<br/>';
         echo '<label>' . $annonce['prix'] . ' €</label>';
         echo '<br/>';
         echo '<label>' . $prenom_u . ' ' . $nom_u . '</label>';
+        echo '<br/>';
+        echo '<label>' . date($annonce['date_post']) . '</label>';
+        echo '<br/>';
+        echo '<label><button type="submit" name="id_annonce" value="' . $annonce['id'] . '">Consulter</label>';
         echo '</form>';
         echo '</article>';
-        #Pour mathis
     }
 
 
@@ -166,11 +165,13 @@ session_start();
             echo '<section class="result">';
             if (count($liste_annonce) == 0)
                 echo '<h2>Aucune annonce ne correspond à votre recherche</h2>';
-            else if (count($liste_annonce) == 1)
+            else if (count($liste_annonce) == 1) {
                 echo '<h2>Résultat de votre recherche</h2>';
-            else
+                echo '<p>' . count($liste_annonce) . ' annonce correspond. </p>';
+            } else {
                 echo '<h2>Résultats de votre recherche</h2>';
-            echo '<p>' . count($liste_annonce) . ' annonce(s) correspondent. </p>';
+                echo '<p>' . count($liste_annonce) . ' annonces correspondent. </p>';
+            }
             echo '<div>';
             foreach ($liste_annonce as $annonce) {
                 $req2 = $pdo->prepare("SELECT prenom, nom FROM user WHERE id LIKE :id_u");
@@ -197,11 +198,13 @@ session_start();
     }
     ?>
 
-
-    <section class="recommend" id="recommend">
-        <h2>Recommandé pour vous</h2>
-    </section>
-
+    <?php
+    if (isset($_SESSION['pseudo']) && isset($_SESSION['statut'])) {
+        echo '<section class="recommend" id = "recommend">';
+        echo '<h2>Recommandé pour vous</h2>';
+        echo '</section >';
+    }
+    ?>
     <!-- Pied de page -->
     <footer>
         <img src="imgs/coing_so.svg" alt="Logo du site" width="90">

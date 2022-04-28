@@ -6,11 +6,11 @@ session_start();
 function afficheFormulaire($p)
 {
     $champ = "<div id=\"container\">";
-    $champ .= "<form action=\"" . $_SERVER['PHP_SELF'] . "\" method=\"post\">";
+    $champ .= "<form action=\"connexion.php\" method=\"post\">";
     $champ .= "<h1>Inscription</h1>";
-    $champ .= "<label>Vous êtes :<input type=\"radio\" name=\"genre\" required=\"required\">un homme</label>";
-    $champ .= "<label><input type=\"radio\" name=\"genre\" required=\"required\">une femme</label>";
-    $champ .= "<label><input type=\"radio\" name=\"genre\" required=\"required\">Non binaire</label><br/>";
+    $champ .= "<label>Vous êtes :<input type=\"radio\" name=\"genre\" required=\"required\" value=\"homme\">un homme</label>";
+    $champ .= "<label><input type=\"radio\" name=\"genre\" required=\"required\" value=\"femme\">une femme</label>";
+    $champ .= "<label><input type=\"radio\" name=\"genre\" required=\"required\" value=\"n-b\">Non binaire</label><br/>";
     $champ .= "<label>Vous vous appelez : <input type=\"text\" name=\"nom\" placeholder=\"Nom...\" required=\"required\"></label> ";
     $champ .= "<label><input type=\"text\" name=\"prenom\" placeholder=\"Prenom...\" required=\"required\"></label><br/>";
     $champ .= "<label>Vous souhaitez que les autres vous voient sous le nom de :
