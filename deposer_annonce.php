@@ -1,30 +1,61 @@
 <?php
-if (isset($_FILES['fichier'])){
+
+
+if(isset($_FILES['fichier'])){
     if ($_FILES['fichier']['error'] == 0){
         $path="images/";
         if(!is_dir($path)){
             mkdir($path);
         }
-        $tmp = 0;
-        $nom= $path.time().'.jpg';
-        if($tmp < 3){
-            $resultat = move_uploaded_file($_FILES['fichier']['tmp_name'], $nom);
-            $tmp ++;
-            
-            if($resultat){
-                $message = "Image ajoutée $tmp";
-            }
-            else{
-                $message = "Échec de l'ajout";
-            }
+        $nom= $path. basename($_FILES['fichier']["name"]);
+        $resultat = move_uploaded_file($_FILES['fichier']['tmp_name'], $nom);
+        if($resultat){
+            $message = "Image ajoutée";
         }
-        else {
-            $message = "Vous ne pouvez pas ajouté plus de trois images.";
+        else{
+            $message = "Échec de l'ajout";
         }
     }
+
     else{
         $message = "Erreur fichier";
     }
+}
+
+error_reporting(E_ALL);
+ini_set('display_errors', '1');
+session_start();
+
+function afficherFormulaire($p)
+{
+    $champ = "<form action=\"" . $_SERVER['PHP_SELF'] . "\" method=\"post\">";
+    
+    $champ .= "<p><label>Titre de l'annonce: <input type=\"text\" name=\"titre_annonce\" required=\"required\" /></label><br>";
+    
+    $champ .= "<label>Date de l'annonce : <input type=\"text\" placeholder=\"01/01/2020\" name=\"date_annonce\" required=\"required\" /></label><br>";
+
+    $champ .= "<label> Type: <input type=\"text\" name=\"type_annonce\"  required=\"required\" /></label><br>";
+
+    $champ .= "<label> Prix : <input type=\"text\" name=\"prix_annonce\" required=\"required\" /></label><br>";
+
+    $champ .= "<label> Code postal : <input type=\"text\" name=\"cd_annonce\" maxlength=\"5\" required=\"required\" /></label><br>";
+
+    $champ .= "<label> Description : </label><br>";
+
+    $champ .= "<textarea type=\"text\" name=\"description\" rows=\"10\" cols=\"50\" required=\"required\" /> </textarea>";
+
+    $champ .="</p></form>";
+
+    $champ .= "<form action=\"" . $_SERVER['PHP_SELF'] . "\" enctype=\"multipart/form-data\">";
+    $champ .= "<p><input type=\"hidden\" name=\"MAX_FILE_SIZE\" value=\"1000000\">";
+    $champ .= "<label>Ajouter une image : <input type=\"file\" name=\"fichier1\" accept=\"image/jpeg\"/ required=\"required\" /></label><br>";
+    $champ .= "<label>Ajouter une image : <input type=\"file\" name=\"fichier2\" accept=\"image/jpeg\"/> </label><br>";
+    $champ .= "<label>Ajouter une image : <input type=\"file\" name=\"fichier3\" accept=\"image/jpeg\"/> </label><br>";
+    $champ .= "<input type=\"submit\" value=\"Ajouter\" /></p>";
+    $champ .= "</form>";
+
+    echo $champ;
+
 }
 
 ?>
@@ -108,53 +139,63 @@ if (isset($_FILES['fichier'])){
         
         if(isset($_SESSION['pseudo'])) {
 
-            
-            
-	?>
-	    <form id="formulaire">
-		
-		<br/>
-		
-		<label>
-		    Titre de l'annonce: <input type="text" id="titre_annonce" required/>
-		</label>
-		
-		
-	    </form>
+	    echo "<p> Vous devez être connecter pour déposer une annonce. </p>";
 	    
-	    
-	    
-	<?php
         }
-        else
-            /* echo "<p> Vous devez être connecter pour déposer une annonce. </p>" */
-            
-            if ($message) { echo $message;} ?>
-	<form action="deposer_annonce.php" method="POST" enctype="multipart/form-data">
-	    <input type="hidden" name="MAX_FILE_SIZE" value="1000000">
-	    <label>Ajouter une image : <input type="file" name="fichier" accept="image/jpeg"/>
-	    </label>
-	    <br>
-	    <button type="submit">Ajouter</button>
-	</form>
-	<?php
-        if($tmp <3) {
-            if (is_dir($path)){
-                $handle = opendir($path);
-                if($handle){
-                    do{
-                        $file = readdir($handle);
-                        if ($file && !in_array($file, [false, '.', '..'])){
-                            echo '<img src="'.$path.$file.'" width="150">';
-                            /*var_dump($file);*/
-                        }
-                    }while($file !== false);
-                    closedir($handle);
-                }
-            } else{
-                echo "<p>Pas encore d'images</p>";
-            }
-        }
+        else{
+	    if (isset($_POST['date_annonce']) && isset($_POST['titre_annonce']) && isset($_POST['cd_annonce']) && isset($_POST['description']) && isset($_POST['prix_annonce']) && isset($_POST['type_annonce']) && isset($_POST['fichier1']) && isset($_POST['fichier2']) && isset($_POST['fichier3'])) {
+		
+		$date_annonce = trim($_POST['date_annonce']);
+		$type_annonce = trim($_POST['type_annonce']);
+		$titre_annonce = trim($_POST['titre_annonce']);
+		$cd_annonce = trim($_POST['cd_annonce']);
+		$fichier1 = trim($_POST['fichier1']);
+		$fichier2 = trim($_POST['fichier2']);
+		$fichier3 = trim($_POST['fichier3']);
+		$prix_annonce = trim($_POST['prix_annonce']);
+		$description = trim($_POST['description']);
+		
+		include('includes/connex.inc.php');
+		$pdo = connexion('bdd.db');
+
+		try {
+		    $stmt = $pdo->prepare('INSERT INTO annonce_p (id_u,nom,type,date_post,image1,image2,image3,description,prix,c_postal) VALUES(:pseudo, :titre_annonce, :date_annonce, :fichier1, :fichier2, :fichier3, :description, :prix_annonce, :cd_annonce)');
+		    $stmt->bindParam(':titre_annonce', $titre_annonce);
+		    $stmt->bindParam(':date_annonce', $date_annonce);
+		    $stmt->bindParam(':cd_annonce', $cd_annonce);
+		    $stmt->bindParam(':fichier1', $fichier1);
+		    $stmt->bindParam(':pseudo', $pseudo);
+		    $stmt->bindParam(':fichier2', $fichier2);
+		    $stmt->bindParam(':fichier3', $fichier3);
+		    $stmt->bindParam(':description', $description);
+		    $stmt->bindParam(':prix_annonce', $prix_annonce);
+		    $stmt->bindParam(':type_annonce', $type_annonce);
+		    
+		    $stmt->execute();
+		    
+		    if ($stmt->rowCount() == 1) {
+			echo '<p>Ajout effectué</p>';
+		    } else {
+			echo '<p>Erreur ajout</p>';
+		    }
+		    $stmt->closeCursor();
+		    $pdo = null;
+		    
+		    
+		} catch (PDOException $exception) {
+		    echo 'Erreur PDO';
+		    echo $e->getMessage();
+		}
+	    }
+	    else {
+		echo "<p>Remplissez le formulaire de l'annonce.</p>";
+		
+	    }
+	    
+	    afficherFormulaire(NULL);
+	    
+	}
+        
         
         
         
