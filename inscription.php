@@ -6,7 +6,7 @@ session_start();
 function afficheFormulaire($p)
 {
     $champ = "<div id=\"container\">";
-    $champ .= "<form action=\"connexion.php\" method=\"post\">";
+    $champ .= "<form action=\"" . $_SERVER['PHP_SELF'] . "\" method=\"post\">";
     $champ .= "<h1>Inscription</h1>";
     $champ .= "<label>Vous êtes :<input type=\"radio\" name=\"genre\" required=\"required\" value=\"homme\">un homme</label>";
     $champ .= "<label><input type=\"radio\" name=\"genre\" required=\"required\" value=\"femme\">une femme</label>";
@@ -95,7 +95,6 @@ if (isset($_SESSION['pseudo']) || isset($_SESSION['statut'])) {
                 if ($stmt->rowCount() == 1) {
                     echo "alert('Ajout effectué')";
                     echo "</script>";
-                    header('Location : connexion.php');
                 } else {
                     echo "alert('Erreur lors de l'ajout veuillez réessayer')";
                     echo "</script>";

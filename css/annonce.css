@@ -1,0 +1,109 @@
+body {
+    font-family: 'Permanent Marker', cursive;
+    overflow-anchor: none;
+}
+
+.slide {
+    display: none;
+}
+
+.carouselimgs {
+    max-width: 800px;
+    position: relative;
+    margin: auto;
+}
+
+.precedent, .suivant {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    color: #c2b845;
+    font-size: 30px;
+    background-color: rgba(0, 0, 0, 0);
+    transition: background-color 0.6s ease;
+}
+
+.precedent {
+    left: 15px;
+}
+
+.suivant {
+    right: 15px;
+}
+
+.precedent:hover, .suivant:hover {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.index {
+    color: #c2b845;
+    font-size: 13px;
+    padding: 15px;
+    position: absolute;
+    top: 0;
+}
+
+.slideimg {
+    width: 100%;
+    object-fit: scale-down;
+    object-position: center;
+}
+
+.point-slider {
+    text-align: center;
+}
+
+.pt {
+    cursor: pointer;
+    height: 10px;
+    width: 10px;
+    margin: 0 2px;
+    background-color: #999999;
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.6s ease;
+}
+
+.active, .pt:hover {
+    background-color: #738438;
+}
+
+.fondu {
+    animation-name: fondu;
+    animation-duration: 1s;
+}
+
+/* Créer une animation du nom de fondu */
+@keyframes fondu {
+    from {
+        opacity: 0
+    }
+    to {
+        opacity: 1
+    }
+}
+
+
+.donnees {
+    padding: 14px 16px;
+}
+
+.donnees h1 {
+    width: 40%;
+    margin: 0 auto;
+}
+
+.donnees b {
+    font-size: 25px;
+}
+
+.description {
+    font-family: 'Karla', sans-serif;
+}

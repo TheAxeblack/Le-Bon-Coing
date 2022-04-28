@@ -30,9 +30,9 @@ session_start();
         </button>
         <div class="dropdown-content" id="myDropdown">
             <a href="#latest">Dernières annonces</a>
-            <a href="#recommend">Les plus consultées</a>
             <?php
             if (isset($_SESSION['pseudo']) && isset($_SESSION['statut'])) {
+                echo '<a href="#recommend">Les plus consultées</a>';
                 echo "<a href=\"gestion.php\">Gérer mes annonces</a>";
                 echo "<a href=\"deconnexion.php\">Se déconnecter</a>";
             }
@@ -96,7 +96,8 @@ session_start();
 
     <!-- Fin section des annonces -->
 
-    <form class="rechercher" action="home.php" method="POST">
+    <!-- Formulaire de Recherche-->
+    <form name="research" class="rechercher" action="home.php" method="POST">
         <h2>Vous recherchez quelque chose ?</h2>
         <label>
             <input type="text" class="search-barre" name="nom">
@@ -121,6 +122,8 @@ session_start();
             <button type="submit">rechercher</button>
         </label>
     </form>
+    <!-- Fin du Formulaire de recherche -->
+
 
     <!-- Fin section des annonces -->
 
@@ -200,7 +203,7 @@ session_start();
 
     <?php
     if (isset($_SESSION['pseudo']) && isset($_SESSION['statut'])) {
-        echo '<section class="recommend" id = "recommend">';
+        echo '<section class="recommend" id="recommend">';
         echo '<h2>Recommandé pour vous</h2>';
         echo '</section >';
     }

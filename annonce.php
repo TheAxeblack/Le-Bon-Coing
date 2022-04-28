@@ -10,16 +10,18 @@ session_start();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Le bon coing</title>
+    <link rel="icon" href="imgs/favicon.ico">
     <link rel="stylesheet" href="css/accueil.css">
     <link rel="stylesheet" href="css/commun.css">
-
-    <!-- Pour importer la police depuis Google Fonts -->
+    <link rel="stylesheet" href="css/annonce.css">
+    <!-- Pour importer les polices depuis Google Fonts -->
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Karla:wght@500&display=swap');
     </style>
 </head>
 <body>
-
+<header id="header"></header>
 <!-- Début de la barre de navigation -->
 <div class="navbar">
     <div class="dropdown">
@@ -27,8 +29,14 @@ session_start();
             <img src="imgs/hamburger.png" alt="icone de menu" width="30" height="30">
         </button>
         <div class="dropdown-content" id="myDropdown">
-            <a href="#">Gérer mes annonces</a>
-            <a href="#">Link 3</a>
+            <a href="home.php#latest">Dernières annonces</a>
+            <a href="#recommend">Les plus consultées</a>
+            <?php
+            if (isset($_SESSION['pseudo']) && isset($_SESSION['statut'])) {
+                echo "<a href=\"gestion.php\">Gérer mes annonces</a>";
+                echo "<a href=\"deconnexion.php\">Se déconnecter</a>";
+            }
+            ?>
         </div>
     </div>
     <div class="dropdown">
@@ -36,36 +44,91 @@ session_start();
             <img src="imgs/france.png" alt="icone du drapeau français" width="30">
         </button>
         <div class="dropdown-content" id="myDropdown2">
-            <a href="#">Link 1</a>
-            <a href="#">Link 2</a>
-            <a href="#">Link 3</a>
+            <img src="imgs/france.png" alt="icone du drapeau français" width="30" onclick="choisirLangue()">
+            <img src="imgs/uk.png" alt="icone du drapeau anglais" width="30" onclick="choisirLangue()">
         </div>
     </div>
     <button class="nigthbtn" onclick="changerMode()">
-        <img src="imgs/sun.png" alt="icone de soleil" width="30" height="30">
+        <img id="mode" src="imgs/sun.png" alt="icone de soleil" width="30" height="30">
     </button>
     <div class="nametag w7">
-        <a href="#home">Le bon Coing</a>
+        <a href="home.php">
+            <img src="imgs/coing_so.svg" alt="Logo du site" width="50">
+            <h1>Le bon Coing</h1>
+        </a>
     </div>
     <a href="#"><img src="imgs/more.png" alt="icone ajout" width="30"> Déposer une annonce</a>
-    <a href="#logging"><img src="imgs/user.png" alt="icone de compte" width="30"></a>
+    <?php
+    if (isset($_SESSION['pseudo']))
+        echo "<a href=\"gestion.php\"><img src=\"imgs/user.png\" alt=\"icone de compte\" width=\"30\"></a>";
+    else
+        echo "<a href=\"connexion.php\"><img src=\"imgs/user.png\" alt=\"icone de compte\" width=\"30\"></a>";
+    ?>
     <form>
         <label>
-            <input type="text" name="search" placeholder="Search..">
+            <input class="search-barre" type="text" name="search" placeholder="Search..">
         </label>
     </form>
 </div>
+<!-- Fin de la barre de navigation -->
+
+
 <?php
 function affichage($image1, $image2, $image3, $nom_annonce, $date_post, $description, $prix, $nom_vendeur, $prenom_vendeur, $email_vendeur)
 {
-    $annonce = '<img src=' . $image1 . '>';
-    $annonce .= '<div class="image_secondaire">';
-    $annonce .= '<img src=' . $image2 . '>';
-    $annonce .= '<img src=' . $image3 . '>';
-    $annonce .= '</div>';
+    $annonce = '<div class="carouselimgs">';
+    $annonce .= '<div class="slide fondu">';
+    if ($image2 != null && $image3 != null) {
+        $annonce .= '<div class="index">1/3</div>';
+        $annonce .= '<img class="slideimg" src=' . $image1 . '>';
+        $annonce .= '</div>';
+        $annonce .= '<div class="slide fondu">';
+        $annonce .= '<div class="index">2/3</div>';
+        $annonce .= '<img class="slideimg" src=' . $image2 . '>';
+        $annonce .= '</div>';
+        $annonce .= '<div class="slide fondu">';
+        $annonce .= '<div class="index">3/3</div>';
+        $annonce .= '<img class="slideimg" src=' . $image3 . '>';
+        $annonce .= '</div>';
+        $annonce .= '<a class="precedent" onclick="slider(-1)">&#10094;</a>';
+        $annonce .= '<a class="suivant" onclick="slider(1)">&#10095;</a>';
+        $annonce .= '</div>'; /* Fin de la <div> carouselimgs */
+        $annonce .= '<br/>';
+        $annonce .= '<div class="point-slider">';
+        $annonce .= '<span class="pt" onclick="slideActuel(1)"></span>';
+        $annonce .= '<span class="pt" onclick="slideActuel(2)"></span>';
+        $annonce .= '<span class="pt" onclick="slideActuel(3)"></span>';
+        $annonce .= '</div>';
+    } else if ($image2 != null && $image3 == null) {
+        $annonce .= '<div class="index">1/2</div>';
+        $annonce .= '<img class="slideimg" src=' . $image1 . '>';
+        $annonce .= '</div>';
+        $annonce .= '<div class="slide fondu">';
+        $annonce .= '<div class="index">2/2</div>';
+        $annonce .= '<img class="slideimg" src=' . $image2 . '>';
+        $annonce .= '</div>';
+        $annonce .= '<a class="precedent" onclick="slider(-1)">&#10094;</a>';
+        $annonce .= '<a class="suivant" onclick="slider(1)">&#10095;</a>';
+        $annonce .= '</div>'; /* Fin de la <div> carouselimgs */
+        $annonce .= '<br/>';
+        $annonce .= '<div class="point-slider">';
+        $annonce .= '<span class="pt" onclick="slideActuel(1)"></span>';
+        $annonce .= '<span class="pt" onclick="slideActuel(2)"></span>';
+        $annonce .= '</div>';
+    } else {
+        $annonce .= '<div class="index">1/1</div>';
+        $annonce .= '<img class="slideimg" src=' . $image1 . '>';
+        $annonce .= '</div>';
+        $annonce .= '</div>'; /* Fin de la <div> carouselimgs */
+        $annonce .= '<div class="point-slider">';
+        $annonce .= '<span class="pt" onclick="slideActuel(1)"></span>';
+        $annonce .= '</div>';
+    }
+    $annonce .= '<div class="donnees">';
     $annonce .= '<h1>' . $nom_annonce . '</h1>';
-    $annonce .= $date_post . ' ' . $prix;
-    $annonce .= '<p>' . $description . '</p>';
+    $annonce .= '<p>Annonce mise en ligne le ' . $date_post . ' <b>' . $prix . '€</b></p>';
+    $annonce .= '<p class="description">' . $description . '</p>';
+    $annonce .= '</div>';
     echo $annonce;
 }
 
