@@ -16,7 +16,7 @@ window.onclick = function (e) {
 }
 
 function choisirLangue() {
-    alert('Coucou');
+    alert('Fonctionnalité en développement');
 }
 
 function changerMode() {
