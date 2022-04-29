@@ -21,7 +21,6 @@ session_start();
     </style>
 </head>
 <body>
-
 <header id="header"></header>
 <!-- Début de la barre de navigation -->
 <div id="navbar" class="navbar">
@@ -30,8 +29,10 @@ session_start();
             <img src="imgs/hamburger.png" alt="icone de menu" width="30" height="30">
         </button>
         <div class="dropdown-content" id="myDropdown">
+            <a href="#latest">Dernières annonces</a>
             <?php
             if (isset($_SESSION['pseudo']) && isset($_SESSION['statut'])) {
+                echo '<a href="#recommend">Les plus consultées</a>';
                 echo "<a href=\"gestion.php\">Gérer mes annonces</a>";
                 echo "<a href=\"deconnexion.php\">Se déconnecter</a>";
             }
@@ -69,11 +70,10 @@ session_start();
         </label>
     </form>
 </div>
-<!-- Fin de la barre de navigation -->
-
 <div class="content">
     <section>
         <h1>Mes annonces</h1>
+
         <?php
 
         function affiche_annonce($annonce)
@@ -89,18 +89,21 @@ session_start();
             echo '<br/>';
             echo '<label><button type="submit" name="id_annonce" value="' . $annonce['id'] . '">Consulter</button></label>';
             echo '</form>';
+            echo '<form method="POST" action="supprimer.php">';
+            echo '<label><button type="submit" name="supprimer" value="' . $annonce['id'] . '">Supprimer</label>';
+            echo '</form>';
             echo '</article>';
             echo '<article class="modif">
-            <form method="POST" action="modifier.php" >
-                <label>Modifier titre<input type="text" name="nom_annonce"></label>
-                <br/>
-                <label>Modifier Prix<input type="text" name="prix"></label>
-                <br/>
-                <label>Modifier desciption<textarea name="description"></textarea></label>
-                <br>
-                <label><button type="submit" name="id_annonce" value="' . $annonce['id'] . '">Appliquer modification</button></label>
-            </form>
-            </article>';
+        <form method="POST" action="modifier.php" >
+            <label>Modifier titre<input type="text" name="nom_annonce"></label>
+            <br/>
+            <label>Modifier Prix<input type="text" name="prix"></label>
+            <br/>
+            <label>Modifier desciption<textarea name="description"></textarea></label>
+            <br>
+            <label><button type="submit" name="id_annonce" value="' . $annonce['id'] . '">Appliquer modification</button></label>
+        </form>
+        </article>';
             echo '</div>';
         }
 
@@ -109,13 +112,14 @@ session_start();
             echo '<div>';
             echo '<article>';
             echo '<form>';
-            echo '<img src="imgs/user.png" alt="logo d\'utilisateur" width="200">';
+            echo '<img src="imgs/user.png" width="200">';
             echo '<br/>';
             echo '<label>' . $user_tmp['nom'] . '</label>';
             echo '<br/>';
             echo '<label>' . $user_tmp['prenom'] . '</label>';
             echo '<br/>';
             echo '<label>' . $user_tmp['email'] . '</label>';
+            echo '<br/>';
             echo '</form>';
             echo '</article>';
             echo '<article>
@@ -132,6 +136,7 @@ session_start();
             <label><button type="submit" name="id_user" value="' . $user_tmp['id'] . '">Appliquer modification</button></label>
             </form>
             </article>';
+            echo '</article>';
             echo '</div>';
         }
 
@@ -164,6 +169,7 @@ session_start();
         ?>
     </section>
 </div>
+
 <script src="js/mesfonctions.js"></script>
 </body>
 </html>
