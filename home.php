@@ -117,6 +117,17 @@ session_start();
             <label>
                 décroissant: <input type="radio" name="ordre" value="DESC">
             </label>
+            <label>Categorie :
+                <select name="type">
+                <option value="all">Tout</option>
+                <option value="electromenage">Electroménagé</option>
+                <option value="informatique">Informatique</option>
+                <option value="mobilier">Mobilier</option>
+                <option value="immobilier">Immobilier</option>
+                <option value="vacance">Vacance</option>
+                <option value="multimedia">Multimédia</option>
+                </select>
+            </label>
         </div>
         <label>
             <button type="submit">rechercher</button>
@@ -148,7 +159,7 @@ session_start();
     }
 
 
-    if (isset($_POST['ordre']) && isset($_POST['tri']) && isset($_POST['nom'])) {
+    if (isset($_POST['ordre']) && isset($_POST['tri']) && isset($_POST['nom']) && isset($_POST['type'])) {
         include("includes/connex.inc.php");
         $pdo = connexion('bdd.db');
         try {
@@ -159,9 +170,11 @@ session_start();
             $ordre = 'ASC';
             if ($_POST['ordre'] === 'DESC')
                 $ordre = 'DESC';
-
-            $req = $pdo->prepare("SELECT * FROM annonce_p WHERE nom LIKE :nom_rechercher ORDER BY $tri $ordre");
+            if ($_POST['type'] === 'all')
+                $type = '%';
+            $req = $pdo->prepare("SELECT * FROM annonce_p WHERE nom LIKE :nom_rechercher AND type LIKE :type ORDER BY $tri $ordre");
             $nom_recherche = '%' . $_POST['nom'] . '%';
+            $req->bindParam(':type',$type);
             $req->bindParam(':nom_rechercher', $nom_recherche);
             $req->execute();
             $liste_annonce = $req->fetchAll(PDO::FETCH_ASSOC);
