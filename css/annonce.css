@@ -98,9 +98,10 @@ body {
     margin: 0 auto;
 }
 
-.vendeur h2
 .donnees b {
     font-size: 25px;
+    color: #c2b845;
+    text-decoration-line: underline;
 }
 
 .description {

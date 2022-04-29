@@ -166,8 +166,11 @@ form {
 
 
 /* Section de style des sections annonces*/
-section {
+.content{
     width: 100%;
+}
+
+section {
     padding: 14px 16px;
     margin-bottom: 10px;
 }
