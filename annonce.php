@@ -132,18 +132,16 @@ function affichage($image1, $image2, $image3, $nom_annonce, $date_post, $descrip
     $vendeur .= '<h2>' . $nom_vendeur . ' ' . $prenom_vendeur . '</h2>';
     $vendeur .= '<button id="button_contact" type="button" onclick="montrerFormulaire()">Contacter le vendeur</button>';
     $vendeur .= '<div id="contact">';
-    $vendeur .= '<form action="/action.php">';
+    $vendeur .= '<form action="mailto:' . $email_vendeur . '" method="post" enctype="multipart/form-data" name="formcontact">';
     $vendeur .= '<label>Pseudo<input type="text" name="pseudo" id="pseudo" placeholder="Pseudo"></label>';
     $vendeur .= '<br/>';
     $vendeur .= '<label>Sujet<input type="text" name="sujet" id="sujet" value="' . $nom_annonce . '"></label>';
     $vendeur .= '<br/>';
-    if (isset($_SESSION['pseudo']) && isset($_SESSION['statut']))
-        $vendeur .= '<label>Email<input type="email" name="email" value="' . $_SESSION['email'] . '"></label>';
-    else
-        $vendeur .= '<label>Email<input type="email" name="email" placeholder="Votre email"></label>';
+    $vendeur .= '<label>Email<input type="email" name="email" placeholder="Votre email"></label>';
     $vendeur .= '<br/>';
     $vendeur .= '<label>Message<textarea name="msg" placeholder="Votre message"></textarea></label>';
     $vendeur .= '<label><input type="submit" value="envoyer"></label>';
+    $vendeur .= '</form>';
     $vendeur .= '</div>';
     echo $vendeur;
 }
@@ -181,7 +179,7 @@ if (isset($_POST['id_annonce'])) {
 
 
         //AFFICHAGE DE L'ANNONCE
-        echo '<img class="rollback" src="imgs/retour.png" alt="icone de retour arrière" width="40px">';
+        echo '<a><img class="rollback" src="imgs/retour.png" alt="icone de retour arrière" width="40px"></a>';
         affichage($image1, $image2, $image3, $nom_annonce, $date_post, $description, $prix, $nom_vendeur, $prenom_vendeur, $email_vendeur);
         //FERMETURE DES CURSEUR
         $req->closeCursor();

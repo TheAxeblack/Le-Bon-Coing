@@ -29,17 +29,3 @@ function montrerFormulaire() {
     form.style.display = "block";
 }
 
-/* Pour avoir une barre de navigation fixe*/
-var navbar = document.getElementById("navbar");
-var sticky = navbar.offsetTop;
-
-function fixerBarre() {
-    if (window.scrollY > sticky) {
-        navbar.classList.add("sticky");
-    } else
-        navbar.classList.remove("sticky");
-}
-
-window.addEventListener('scroll', fixerBarre);
-
-

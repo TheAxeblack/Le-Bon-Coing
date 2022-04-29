@@ -94,11 +94,12 @@ body {
     padding: 14px 16px;
 }
 
-.donnees h1, .vendeur h2 {
+.donnees h1 {
     width: 40%;
     margin: 0 auto;
 }
 
+.vendeur h2
 .donnees b {
     font-size: 25px;
 }
@@ -129,7 +130,7 @@ textarea {
     height: 150px;
 }
 
-#contact input[type=submit] {
+#contact input[type=submit], #button_contact {
     background-color: #c2b845;
     color: white;
     padding: 14px 20px;
@@ -137,4 +138,10 @@ textarea {
     border: none;
     cursor: pointer;
     width: 100%;
+}
+
+#contact input[type=submit]:hover, #button_contact:hover {
+    background-color: white;
+    color: #c2b845;
+    border: 1px solid #c2b845;
 }
