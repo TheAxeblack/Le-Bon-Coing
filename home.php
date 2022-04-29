@@ -23,7 +23,7 @@ session_start();
 <body>
 <header id="header"></header>
 <!-- Début de la barre de navigation -->
-<div class="navbar">
+<div id="navbar" class="navbar">
     <div class="dropdown">
         <button class="dropbtn" onclick="deroulerMenu('myDropdown')">
             <img src="imgs/hamburger.png" alt="icone de menu" width="30" height="30">

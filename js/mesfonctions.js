@@ -21,9 +21,7 @@ function choisirLangue() {
 
 function changerMode() {
     var element = document.body;
-    var form = document.forms.research;
     element.classList.toggle("dark-mode");
-    form.classList.toggle("dark-mode-article");
 }
 
 function montrerFormulaire() {
@@ -32,7 +30,7 @@ function montrerFormulaire() {
 }
 
 /* Pour avoir une barre de navigation fixe*/
-var navbar = document.querySelector(".navbar");
+var navbar = document.getElementById("navbar");
 var sticky = navbar.offsetTop;
 
 function fixerBarre() {

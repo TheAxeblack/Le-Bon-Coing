@@ -23,7 +23,7 @@ session_start();
 <body>
 <header id="header"></header>
 <!-- Début de la barre de navigation -->
-<div class="navbar">
+<div id="navbar" class="navbar">
     <div class="dropdown">
         <button class="dropbtn" onclick="deroulerMenu('myDropdown')">
             <img src="imgs/hamburger.png" alt="icone de menu" width="30" height="30">
@@ -137,14 +137,14 @@ function affichage($image1, $image2, $image3, $nom_annonce, $date_post, $descrip
     $vendeur .= '<br/>';
     $vendeur .= '<label>Sujet<input type="text" name="sujet" id="sujet" value="' . $nom_annonce . '"></label>';
     $vendeur .= '<br/>';
-    $vendeur .= '<label></label>';
-    $vendeur .= '<label></label>';
-    $vendeur .= '<label></label>';
-    $vendeur .= '<label></label>';
-    $vendeur .= '<label></label>';
-    $vendeur .= '<label></label>';
-    $vendeur .= '<label></label>';
-    $vendeur .= '<label></label>';
+    if (isset($_SESSION['pseudo']) && isset($_SESSION['statut']))
+        $vendeur .= '<label>Email<input type="email" name="email" value="' . $_SESSION['email'] . '"></label>';
+    else
+        $vendeur .= '<label>Email<input type="email" name="email" placeholder="Votre email"></label>';
+    $vendeur .= '<br/>';
+    $vendeur .= '<label>Message<textarea name="msg" placeholder="Votre message"></textarea></label>';
+    $vendeur .= '<label><input type="submit" value="envoyer"></label>';
+    $vendeur .= '</div>';
     echo $vendeur;
 }
 
@@ -195,8 +195,8 @@ if (isset($_POST['id_annonce'])) {
     echo 'Annonce inexistante';
 }
 ?>
-<script type="javascript" src="js/carousel.js"></script>
-<script type="javascript" src="js/mesfonctions.js"></script>
+<script src="js/carousel.js"></script>
+<script src="js/mesfonctions.js"></script>
 
 </body>
 </html>

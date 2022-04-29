@@ -7,6 +7,12 @@ function changerSlide(n) {
 
 function slideActuel(n) {
     montrerSlides(index_slide = n);
+}function changerSlide(n) {
+    montrerSlides(index_slide += n);
+}
+
+function slideActuel(n) {
+    montrerSlides(index_slide = n);
 }
 
 function montrerSlides(n) {

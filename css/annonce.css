@@ -9,7 +9,6 @@ body {
 
 .carouselimgs {
     max-width: 800px;
-    position: relative;
     margin: auto;
 }
 
@@ -91,11 +90,11 @@ body {
 }
 
 
-.donnees {
+.donnees, .vendeur {
     padding: 14px 16px;
 }
 
-.donnees h1 {
+.donnees h1, .vendeur h2 {
     width: 40%;
     margin: 0 auto;
 }
@@ -106,4 +105,36 @@ body {
 
 .description {
     font-family: 'Karla', sans-serif;
+}
+
+#contact {
+    display: none;
+    width: 100%;
+    border: 1px solid #f1f1f1;
+    background: #fff;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24); /* rgba permet d'avoir la gestion de la transparence */
+}
+
+input[type=text], input[type=email], textarea {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    font-family: 'Karla', sans-serif;
+}
+
+textarea {
+    height: 150px;
+}
+
+#contact input[type=submit] {
+    background-color: #c2b845;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
 }
