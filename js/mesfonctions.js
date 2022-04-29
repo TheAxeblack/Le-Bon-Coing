@@ -15,7 +15,6 @@ window.onclick = function (e) {
     }
 }
 
-
 function choisirLangue() {
     alert('Coucou');
 }
@@ -27,12 +26,17 @@ function changerMode() {
     form.classList.toggle("dark-mode-article");
 }
 
+function montrerFormulaire() {
+    var form = document.getElementById('contact');
+    form.style.display = "block";
+}
+
 /* Pour avoir une barre de navigation fixe*/
 var navbar = document.querySelector(".navbar");
 var sticky = navbar.offsetTop;
 
 function fixerBarre() {
-    if (window.scrollY >= sticky) {
+    if (window.scrollY > sticky) {
         navbar.classList.add("sticky");
     } else
         navbar.classList.remove("sticky");
@@ -41,30 +45,3 @@ function fixerBarre() {
 window.addEventListener('scroll', fixerBarre);
 
 
-/* Section du carousel d'images */
-var index_slide = 1;
-montrerSlides(index_slide);
-
-function slider(n) {
-    montrerSlides(index_slide += n);
-}
-
-function slideActuel(n) {
-    montrerSlides(index_slide = n);
-}
-
-function montrerSlides(n) {
-    var i;
-    var slides = document.getElementsByClassName("slide");
-    var points = document.getElementsByClassName("pt");
-    if (n > slides.length)
-        index_slide = 1;
-    if (n < 1)
-        index_slide = slides.length;
-    for (i = 0; i < slides.length; i++)
-        slides[i].style.display = "none";
-    for (i = 0; i < points.length; i++)
-        points[i].className = points[i].className.replace(" active", "");
-    slides[index_slide - 1].style.display = "block";
-    points[index_slide - 1].className += " active";
-}

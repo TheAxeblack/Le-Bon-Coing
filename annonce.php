@@ -29,8 +29,6 @@ session_start();
             <img src="imgs/hamburger.png" alt="icone de menu" width="30" height="30">
         </button>
         <div class="dropdown-content" id="myDropdown">
-            <a href="home.php#latest">Dernières annonces</a>
-            <a href="#recommend">Les plus consultées</a>
             <?php
             if (isset($_SESSION['pseudo']) && isset($_SESSION['statut'])) {
                 echo "<a href=\"gestion.php\">Gérer mes annonces</a>";
@@ -57,7 +55,7 @@ session_start();
             <h1>Le bon Coing</h1>
         </a>
     </div>
-    <a href="#"><img src="imgs/more.png" alt="icone ajout" width="30"> Déposer une annonce</a>
+    <a href="deposer_annonce.php"><img src="imgs/more.png" alt="icone ajout" width="30"> Déposer une annonce</a>
     <?php
     if (isset($_SESSION['pseudo']))
         echo "<a href=\"gestion.php\"><img src=\"imgs/user.png\" alt=\"icone de compte\" width=\"30\"></a>";
@@ -90,8 +88,8 @@ function affichage($image1, $image2, $image3, $nom_annonce, $date_post, $descrip
         $annonce .= '<div class="index">3/3</div>';
         $annonce .= '<img class="slideimg" src=' . $image3 . '>';
         $annonce .= '</div>';
-        $annonce .= '<a class="precedent" onclick="slider(-1)">&#10094;</a>';
-        $annonce .= '<a class="suivant" onclick="slider(1)">&#10095;</a>';
+        $annonce .= '<a class="precedent" onclick="changerSlide(-1)">&#10094;</a>';
+        $annonce .= '<a class="suivant" onclick="changerSlide(1)">&#10095;</a>';
         $annonce .= '</div>'; /* Fin de la <div> carouselimgs */
         $annonce .= '<br/>';
         $annonce .= '<div class="point-slider">';
@@ -107,8 +105,8 @@ function affichage($image1, $image2, $image3, $nom_annonce, $date_post, $descrip
         $annonce .= '<div class="index">2/2</div>';
         $annonce .= '<img class="slideimg" src=' . $image2 . '>';
         $annonce .= '</div>';
-        $annonce .= '<a class="precedent" onclick="slider(-1)">&#10094;</a>';
-        $annonce .= '<a class="suivant" onclick="slider(1)">&#10095;</a>';
+        $annonce .= '<a class="precedent" onclick="changerSlide(-1)">&#10094;</a>';
+        $annonce .= '<a class="suivant" onclick="changerSlide(1)">&#10095;</a>';
         $annonce .= '</div>'; /* Fin de la <div> carouselimgs */
         $annonce .= '<br/>';
         $annonce .= '<div class="point-slider">';
@@ -130,6 +128,24 @@ function affichage($image1, $image2, $image3, $nom_annonce, $date_post, $descrip
     $annonce .= '<p class="description">' . $description . '</p>';
     $annonce .= '</div>';
     echo $annonce;
+    $vendeur = '<div class="vendeur">';
+    $vendeur .= '<h2>' . $nom_vendeur . ' ' . $prenom_vendeur . '</h2>';
+    $vendeur .= '<button id="button_contact" type="button" onclick="montrerFormulaire()">Contacter le vendeur</button>';
+    $vendeur .= '<div id="contact">';
+    $vendeur .= '<form action="/action.php">';
+    $vendeur .= '<label>Pseudo<input type="text" name="pseudo" id="pseudo" placeholder="Pseudo"></label>';
+    $vendeur .= '<br/>';
+    $vendeur .= '<label>Sujet<input type="text" name="sujet" id="sujet" value="' . $nom_annonce . '"></label>';
+    $vendeur .= '<br/>';
+    $vendeur .= '<label></label>';
+    $vendeur .= '<label></label>';
+    $vendeur .= '<label></label>';
+    $vendeur .= '<label></label>';
+    $vendeur .= '<label></label>';
+    $vendeur .= '<label></label>';
+    $vendeur .= '<label></label>';
+    $vendeur .= '<label></label>';
+    echo $vendeur;
 }
 
 if (isset($_POST['id_annonce'])) {
@@ -165,6 +181,7 @@ if (isset($_POST['id_annonce'])) {
 
 
         //AFFICHAGE DE L'ANNONCE
+        echo '<img class="rollback" src="imgs/retour.png" alt="icone de retour arrière" width="40px">';
         affichage($image1, $image2, $image3, $nom_annonce, $date_post, $description, $prix, $nom_vendeur, $prenom_vendeur, $email_vendeur);
         //FERMETURE DES CURSEUR
         $req->closeCursor();
@@ -178,7 +195,9 @@ if (isset($_POST['id_annonce'])) {
     echo 'Annonce inexistante';
 }
 ?>
-<script src="js/mesfonctions.js"></script>
+<script type="javascript" src="js/carousel.js"></script>
+<script type="javascript" src="js/mesfonctions.js"></script>
+
 </body>
 </html>
 <!--Fin barre navigation-->
