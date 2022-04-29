@@ -1,44 +1,48 @@
 <?php
 
-
-if(isset($_FILES['fichier'])){
-    if ($_FILES['fichier']['error'] == 0){
-        $path="images/";
-        if(!is_dir($path)){
-            mkdir($path);
-        }
-        $nom= $path. basename($_FILES['fichier']["name"]);
-        $resultat = move_uploaded_file($_FILES['fichier']['tmp_name'], $nom);
-        if($resultat){
-            $message = "Image ajoutée";
-        }
-        else{
-            $message = "Échec de l'ajout";
-        }
-    }
-
-    else{
-        $message = "Erreur fichier";
-    }
-}
-
 error_reporting(E_ALL);
 ini_set('display_errors', '1');
 session_start();
+
+if(isset($_FILES['fichier'])){
+    if($_FILES['fichier']['error'] == 0){
+	$path="images/";
+	if(!is_dir($path)){
+	    mkdir($path);
+	}
+	$nom = $path. basename($_FILES['fichier']["name"]);
+	if(file_exists($nom)){
+	    $message = "Erreur d'insertion, veuillez renommer l'image.";
+	}
+	else{
+	    $resultat = move_uploaded_file($_FILES['fichier']['tmp_name'],$nom);
+	    if($resultat){
+		$message = "Image ajoutée";
+	    }
+	    else{
+		$message = "Echec de l'ajout.";
+	    }
+	}
+    }
+    else{
+	$message = "Erreur fichier";
+    }
+}
+
 
 function afficherFormulaire($p)
 {
     $champ = "<form action=\"" . $_SERVER['PHP_SELF'] . "\" method=\"post\">";
     
-    $champ .= "<p><label>Titre de l'annonce: <input type=\"text\" name=\"titre_annonce\" required=\"required\" /></label><br>";
+    $champ .= "<p><label>Titre de l'annonce: <input type=\"text\" name=\"nom\" required=\"required\" /></label><br>";
     
-    $champ .= "<label>Date de l'annonce : <input type=\"text\" placeholder=\"01/01/2020\" name=\"date_annonce\" required=\"required\" /></label><br>";
+    $champ .= "<label>Date de l'annonce : <input type=\"text\" placeholder=\"01/01/2020\" name=\"date_post\" required=\"required\" /></label><br>";
 
-    $champ .= "<label> Type: <input type=\"text\" name=\"type_annonce\"  required=\"required\" /></label><br>";
+    $champ .= "<label> Type: <input type=\"text\" name=\"type\"  required=\"required\" /></label><br>";
 
-    $champ .= "<label> Prix : <input type=\"text\" name=\"prix_annonce\" required=\"required\" /></label><br>";
+    $champ .= "<label> Prix : <input type=\"text\" name=\"prix\" required=\"required\" /></label><br>";
 
-    $champ .= "<label> Code postal : <input type=\"text\" name=\"cd_annonce\" maxlength=\"5\" required=\"required\" /></label><br>";
+    $champ .= "<label> Code postal : <input type=\"text\" name=\"c_postal\" maxlength=\"5\" required=\"required\" /></label><br>";
 
     $champ .= "<label> Description : </label><br>";
 
@@ -48,10 +52,13 @@ function afficherFormulaire($p)
 
     $champ .= "<form action=\"" . $_SERVER['PHP_SELF'] . "\" enctype=\"multipart/form-data\">";
     $champ .= "<p><input type=\"hidden\" name=\"MAX_FILE_SIZE\" value=\"1000000\">";
-    $champ .= "<label>Ajouter une image : <input type=\"file\" name=\"fichier1\" accept=\"image/jpeg\"/ required=\"required\" /></label><br>";
-    $champ .= "<label>Ajouter une image : <input type=\"file\" name=\"fichier2\" accept=\"image/jpeg\"/> </label><br>";
-    $champ .= "<label>Ajouter une image : <input type=\"file\" name=\"fichier3\" accept=\"image/jpeg\"/> </label><br>";
-    $champ .= "<input type=\"submit\" value=\"Ajouter\" /></p>";
+    $champ .= "<label>Ajouter une image : <input type=\"file\" name=\"image1\" accept=\"image/jpeg\"/ required=\"required\" /></label><br>";
+    $champ .= "<label>Ajouter une image : <input type=\"file\" name=\"image2\" accept=\"image/jpeg\"/> </label><br>";
+    $champ .= "<label>Ajouter une image : <input type=\"file\" name=\"image3\" accept=\"image/jpeg\"/> </label><br>";
+    $champ .= "<label><input type=\"submit\" value=\"Ajouter\" /></label><br><br>";
+
+    $champ .="<label><input type=\"submit\" value=\"Ajouter l'annonce\"</label>";
+    
     $champ .= "</form>";
 
     echo $champ;
@@ -139,11 +146,9 @@ function afficherFormulaire($p)
         
         if(isset($_SESSION['pseudo'])) {
 
-	    echo "<p> Vous devez être connecter pour déposer une annonce. </p>";
-	    
-        }
-        else{
-	    if (isset($_POST['date_annonce']) && isset($_POST['titre_annonce']) && isset($_POST['cd_annonce']) && isset($_POST['description']) && isset($_POST['prix_annonce']) && isset($_POST['type_annonce']) && isset($_POST['fichier1']) && isset($_POST['fichier2']) && isset($_POST['fichier3'])) {
+	    if($message) { echo $message; }
+
+	    if (isset($_POST['date_post']) && isset($_POST['nom']) && isset($_POST['c_postal']) && isset($_POST['description']) && isset($_POST['prix']) && isset($_POST['type']) && isset($_POST['image1']) && isset($_POST['image2']) && isset($_POST['image3'])) {
 		
 		$date_annonce = trim($_POST['date_annonce']);
 		$type_annonce = trim($_POST['type_annonce']);
@@ -189,10 +194,14 @@ function afficherFormulaire($p)
 	    }
 	    else {
 		echo "<p>Remplissez le formulaire de l'annonce.</p>";
+
+		afficherFormulaire(NULL);
 		
 	    }
 	    
-	    afficherFormulaire(NULL);
+        }
+        else{
+	    echo "<p> Vous devez être connecter pour déposer une annonce. </p>";
 	    
 	}
         
