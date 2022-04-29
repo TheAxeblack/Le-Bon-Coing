@@ -45,6 +45,7 @@ function afficheFormulaire($p)
     </style>
 </head>
 <body>
+<a class="rollback" href="connexion.php"><img src="imgs/retour.png" alt="icone de retour arrière" width="40px"></a>
 <?php
 if (isset($_SESSION['pseudo']) || isset($_SESSION['statut'])) {
     echo "<p>Vous ne pouvez pas vous inscrire si vous êtes connecté</p>";

@@ -5,8 +5,13 @@ body {
 
 #container {
     width: 400px;
-    margin: 10% auto 0;
+    margin: 8% auto 0;
 }
+
+.rollback {
+    position: relative;
+}
+
 
 /* Pour avoir un formulaire avec des bordures */
 form {

@@ -179,7 +179,7 @@ if (isset($_POST['id_annonce'])) {
 
 
         //AFFICHAGE DE L'ANNONCE
-        echo '<a><img class="rollback" src="imgs/retour.png" alt="icone de retour arrière" width="40px"></a>';
+        echo '<a href="home.php"><img class="rollback" src="imgs/retour.png" alt="icone de retour arrière" width="40px"></a>';
         affichage($image1, $image2, $image3, $nom_annonce, $date_post, $description, $prix, $nom_vendeur, $prenom_vendeur, $email_vendeur);
         //FERMETURE DES CURSEUR
         $req->closeCursor();

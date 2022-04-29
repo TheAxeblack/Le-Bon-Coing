@@ -2,6 +2,7 @@ body {
     background: #ffffff;
     margin: auto;
     width: 100%;
+    font-family: 'Permanent Marker', cursive;
 }
 
 #header {
@@ -195,6 +196,7 @@ article {
     padding: 12px 14px;
     margin: 0 10px;
 }
+
 
 footer {
     border-top: rgb(222, 226, 230) 2px solid !important; /*Met une bordure de 2px en haut du footer*/

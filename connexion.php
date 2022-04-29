@@ -34,6 +34,7 @@ function afficheFormulaire($p)
     </style>
 </head>
 <body>
+<a class="rollback" href="home.php"><img src="imgs/retour.png" alt="icone de retour arrière" width="40px"></a>
 <div id="container">
     <?php
     if (isset($_SESSION['pseudo']) || isset($_SESSION['statut'])) {
@@ -68,7 +69,9 @@ function afficheFormulaire($p)
                     }
                 }
                 if ($ok == 1) {
-                    afficheFormulaire("erreur de pseudo ou de mdp");
+                    echo '<script type="javascript">';
+                    echo 'alert(erreur de pseudo ou de mdp !)';
+                    echo '</script>';
                 }
             } catch (PDOException $exception) {
                 echo $exception->getMessage();
