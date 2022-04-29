@@ -130,7 +130,7 @@ function affichage($image1, $image2, $image3, $nom_annonce, $date_post, $descrip
     echo $annonce;
     $vendeur = '<div class="vendeur">';
     $vendeur .= '<h2>' . $nom_vendeur . ' ' . $prenom_vendeur . '</h2>';
-    $vendeur .= '<button id="button_contact" type="button" onclick="montrerFormulaire()">Contacter le vendeur</button>';
+    $vendeur .= '<button id="button_contact" type="button" onclick="montrerFormulaire(\'contact\')">Contacter le vendeur</button>';
     $vendeur .= '<div id="contact">';
     $vendeur .= '<form action="mailto:' . $email_vendeur . '" method="post" enctype="multipart/form-data" name="formcontact">';
     $vendeur .= '<label>Pseudo<input type="text" name="pseudo" id="pseudo" placeholder="Pseudo"></label>';

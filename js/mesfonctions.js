@@ -24,8 +24,8 @@ function changerMode() {
     element.classList.toggle("dark-mode");
 }
 
-function montrerFormulaire() {
-    var form = document.getElementById('contact');
+function montrerFormulaire(identifiant) {
+    var form = document.getElementById(identifiant);
     form.style.display = "block";
 }
 

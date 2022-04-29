@@ -152,6 +152,8 @@ form {
     margin: 0;
 }
 
+
+/* Style du mode nuit*/
 .dark-mode {
     background-color: #2D3848;
     color: white;
@@ -167,7 +169,6 @@ form {
 section {
     width: 100%;
     padding: 14px 16px;
-    /*    background-color: burlywood;*/
     margin-bottom: 10px;
 }
 
@@ -195,8 +196,26 @@ article {
     background-color: #dddddd;
     padding: 12px 14px;
     margin: 0 10px;
+    width: 250px;
 }
 
+article img {
+    margin: 0 auto;
+}
+
+article input[type=text], article textarea {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    font-family: 'Karla', sans-serif;
+}
+
+article textarea {
+    height: 200px;
+}
 
 footer {
     border-top: rgb(222, 226, 230) 2px solid !important; /*Met une bordure de 2px en haut du footer*/

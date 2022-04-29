@@ -30,10 +30,8 @@ session_start();
             <img src="imgs/hamburger.png" alt="icone de menu" width="30" height="30">
         </button>
         <div class="dropdown-content" id="myDropdown">
-            <a href="#latest">Dernières annonces</a>
             <?php
             if (isset($_SESSION['pseudo']) && isset($_SESSION['statut'])) {
-                echo '<a href="#recommend">Les plus consultées</a>';
                 echo "<a href=\"gestion.php\">Gérer mes annonces</a>";
                 echo "<a href=\"deconnexion.php\">Se déconnecter</a>";
             }
@@ -73,81 +71,99 @@ session_start();
 </div>
 <!-- Fin de la barre de navigation -->
 
-<h1>Mes annonces</h1>
-<?php
+<div class="content">
+    <section>
+        <h1>Mes annonces</h1>
+        <?php
 
-function affiche_annonce($annonce)
-{
-    echo '<article>';
-    echo '<form method="POST" action="annonce.php">';
-    echo '<img src="' . $annonce['image1'] . '" width="200">';
-    echo '<br/>';
-    echo '<label>' . $annonce['nom'] . '</label>';
-    echo '<br/>';
-    echo '<label>' . $annonce['prix'] . ' €</label>';
-    echo '<br/>';
-    echo '<label><button type="submit" name="id_annonce" value="' . $annonce['id'] . '">Consulter</label>';
-    echo '</form>';
-    echo '</article>';
-    echo '<article>
+        function affiche_annonce($annonce)
+        {
+            echo '<div>';
+            echo '<article>';
+            echo '<form method="POST" action="annonce.php">';
+            echo '<img src="' . $annonce['image1'] . '" width="200">';
+            echo '<br/>';
+            echo '<label>' . $annonce['nom'] . '</label>';
+            echo '<br/>';
+            echo '<label>' . $annonce['prix'] . ' €</label>';
+            echo '<br/>';
+            echo '<label><button type="submit" name="id_annonce" value="' . $annonce['id'] . '">Consulter</button></label>';
+            echo '</form>';
+            echo '</article>';
+            echo '<article class="modif">
             <form method="POST" action="modifier.php" >
-                <label>Modifier titre<br><input type="text" name="nom_annonce"></label>
-                <br>
-                <label>Modifier Prix<br><input type="text" name="prix"></label>
-                <br>
-                <label>Modifier desciption<br><input type="text" name="description" style="width: 300px; height: 150px; "></label>
+                <label>Modifier titre<input type="text" name="nom_annonce"></label>
+                <br/>
+                <label>Modifier Prix<input type="text" name="prix"></label>
+                <br/>
+                <label>Modifier desciption<textarea name="description"></textarea></label>
                 <br>
                 <label><button type="submit" name="id_annonce" value="' . $annonce['id'] . '">Appliquer modification</button></label>
             </form>
             </article>';
-}
-
-function afficher_user($user_tmp)
-{
-    echo '<article>';
-    echo '<form>';
-    echo '<img src="imgs/user.png" width="200">';
-    echo '<br/>';
-    echo '<label>' . $user_tmp['nom'] . '</label>';
-    echo '<br/>';
-    echo '<label>' . $user_tmp['prenom'] . '</label>';
-    echo '<br/>';
-    echo '<label>' . $user_tmp['email'] . '</label>';
-    echo '<br/>';
-    echo '<label><button type="submit" name="modifier_profil" value="' . $user_tmp['id'] . '">Modifier</label>';
-    echo '</form>';
-    echo '</article>';
-}
-
-if (isset($_SESSION['pseudo']) && isset($_SESSION['statut'])) {
-    include("includes/connex.inc.php");
-    $pdo = connexion('bdd.db');
-    try {
-        $req = $pdo->prepare("SELECT * FROM user WHERE pseudo LIKE :pseudo");
-        $pseudo = $_SESSION['pseudo'];
-        $req->bindParam(":pseudo", $pseudo);
-        $req->execute();
-        $user_info = $req->fetchAll(PDO::FETCH_ASSOC);
-        $user_tmp = $user_info[0];
-        $user_id = $user_tmp['id'];
-        $req2 = $pdo->prepare("SELECT * FROM annonce_p WHERE id_u LIKE :user_id");
-        $req2->bindParam(":user_id", $user_id);
-        $req2->execute();
-        $liste_annonce = $req2->fetchAll(PDO::FETCH_ASSOC);
-        foreach ($liste_annonce as $annonce) {
-            affiche_annonce($annonce);
+            echo '</div>';
         }
-        $req->closeCursor();
-        $req2->closeCursor();
-    } catch (PDOException $e) {
-        echo $e->getMessage();
-        echo '<p>Problème avec la base</p>';
-    }
-}
-afficher_user($user_tmp);
-?>
 
+        function afficher_user($user_tmp)
+        {
+            echo '<div>';
+            echo '<article>';
+            echo '<form>';
+            echo '<img src="imgs/user.png" alt="logo d\'utilisateur" width="200">';
+            echo '<br/>';
+            echo '<label>' . $user_tmp['nom'] . '</label>';
+            echo '<br/>';
+            echo '<label>' . $user_tmp['prenom'] . '</label>';
+            echo '<br/>';
+            echo '<label>' . $user_tmp['email'] . '</label>';
+            echo '</form>';
+            echo '</article>';
+            echo '<article>
+            <form method="POST" action="modifier_profil.php" >
+            <label>Tout les champs sont obligatoires !</label>
+            <br>
+            <label>Changer pseudo<br><input type="text" name="pseudo"></label>
+            <br>
+            <label>Changer e-mail:<br><input type="text" name="email"></label>
+            <br>
+            <label>Changer mot de passe:<br><input type="password" name="mdp" placeholder="Mot_De_Passe..." required="required">
+            </label><br/>
+            <br>
+            <label><button type="submit" name="id_user" value="' . $user_tmp['id'] . '">Appliquer modification</button></label>
+            </form>
+            </article>';
+            echo '</div>';
+        }
 
+        if (isset($_SESSION['pseudo']) && isset($_SESSION['statut'])) {
+            include("includes/connex.inc.php");
+            $pdo = connexion('bdd.db');
+            try {
+                $req = $pdo->prepare("SELECT * FROM user WHERE pseudo LIKE :pseudo");
+                $pseudo = $_SESSION['pseudo'];
+                $req->bindParam(":pseudo", $pseudo);
+                $req->execute();
+                $user_info = $req->fetchAll(PDO::FETCH_ASSOC);
+                $user_tmp = $user_info[0];
+                $user_id = $user_tmp['id'];
+                $req2 = $pdo->prepare("SELECT * FROM annonce_p WHERE id_u LIKE :user_id");
+                $req2->bindParam(":user_id", $user_id);
+                $req2->execute();
+                $liste_annonce = $req2->fetchAll(PDO::FETCH_ASSOC);
+                foreach ($liste_annonce as $annonce) {
+                    affiche_annonce($annonce);
+                }
+                $req->closeCursor();
+                $req2->closeCursor();
+            } catch (PDOException $e) {
+                echo $e->getMessage();
+                echo '<p>Problème avec la base</p>';
+            }
+        }
+        afficher_user($user_tmp);
+        ?>
+    </section>
+</div>
 <script src="js/mesfonctions.js"></script>
 </body>
 </html>

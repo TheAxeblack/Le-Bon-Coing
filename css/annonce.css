@@ -115,7 +115,7 @@ body {
     box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24); /* rgba permet d'avoir la gestion de la transparence */
 }
 
-input[type=text], input[type=email], textarea {
+.modif input[type=text], .modif textarea {
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
@@ -125,7 +125,8 @@ input[type=text], input[type=email], textarea {
     font-family: 'Karla', sans-serif;
 }
 
-textarea {
+
+.vendeur textarea {
     height: 150px;
 }
 

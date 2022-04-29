@@ -70,26 +70,25 @@ session_start();
         </label>
     </form>
 </div>
-
-
+        
 </body>
 <?php
-    if(isset($_POST['nom_annonce']) && isset($_POST['prix']) && isset($_POST['description']) && isset($_POST['id_annonce']))
+    if(isset($_POST['pseudo']) && isset($_POST['email']) && isset($_POST['mdp']) && isset($_POST['id_user']))
     {
         include("includes/connex.inc.php");
         $pdo = connexion('bdd.db');
         try{
-            $req = $pdo->prepare("UPDATE annonce_p
-            SET nom = :nom_annonce, prix = :prix, description = :description
-            WHERE id LIKE :id_annonce");
-            $nom_annonce = $_POST['nom_annonce'];
-            $prix = $_POST['prix'];
-            $id_annonce = $_POST['id_annonce'];
-            $description = $_POST['description'];
-            $req->bindParam(":nom_annonce", $nom_annonce);
-            $req->bindParam(":prix", $prix);
-            $req->bindParam(":description", $description);
-            $req->bindParam(":id_annonce", $id_annonce);
+            $req = $pdo->prepare("UPDATE user
+            SET pseudo = :pseudo, email = :email, mdp = :mdp
+            WHERE id LIKE :id_user");
+            $pseudo = $_POST['pseudo'];
+            $email = $_POST['email'];
+            $mdp = md5(trim($_POST['mdp']));
+            $id_user = $_POST['id_user'];
+            $req->bindParam(":pseudo", $pseudo);
+            $req->bindParam(":email", $email);
+            $req->bindParam(":mdp", $mdp);
+            $req->bindParam(":id_user", $id_user);
             $req->execute();
             $req->closeCursor();
             echo 'Annonce modifier avec succès !'; 
@@ -99,9 +98,4 @@ session_start();
             echo '<p>Problème avec la base</p>';
         }
     }
-
-
-
-
 ?>
-</html>

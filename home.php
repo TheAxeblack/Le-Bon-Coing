@@ -74,26 +74,38 @@ session_start();
 
 <!-- Début section des annonces -->
 <div class="content">
-    <section class="latest" id="latest">
-        <h2>Dernières annonces</h2>
-        <div>
-            <?php
-            echo "<a href='annonce.php'>
-                <article class='article'>
-                    <img src=\"imgs/renault-juvaquatre-gea6b628bd_1920.jpg\" alt=\"photo renault juvaquatre\" width=\"200\">
-                    <h3>Renault Juvaquatre à <br/>rénover</h3>
-                    <p>125€</p>
-                </article>
-              </a>";
-            ?>
-            <article class="article">
-                <img src="imgs/rottweiler.jpg" alt="photo de chiot race Rottweiler" width="200">
-                <h3>Chiot Rottweiler</h3>
-                <p>350€</p>
-            </article>
-        </div>
-    </section>
-
+<section class="latest" id="latest">
+    <h2>Dernières Annonces</h2>
+<div>
+<?php
+    include("includes/connex.inc.php");
+    $pdo = connexion('bdd.db');
+    try{
+        $req = $pdo->prepare("SELECT * FROM annonce_p ORDER BY date_post DESC");
+        $req->execute();
+        $derniere_annonce = $req->fetchAll(PDO::FETCH_ASSOC);
+        $i = 0;
+        for($i=0; $i < 5; $i++)
+        {
+            $annonce = $derniere_annonce[$i];
+            $req2 = $pdo->prepare("SELECT prenom, nom FROM user WHERE id LIKE :id_u");
+            $id_u = $annonce['id_u'];
+            $req2->bindParam(':id_u', $id_u);
+            $req2->execute();
+            $info_user = $req2->fetchAll(PDO::FETCH_ASSOC);
+            $user = $info_user[0];
+            $nom_u = $user['nom'];
+            $prenom_u = $user['prenom'];
+            affiche_annonce($derniere_annonce[$i], $nom_u, $prenom_u);
+        }
+    }catch(PDOException $e){
+        echo $e->getMessage();
+        echo '<p>Problème avec la base</p>';
+    }
+?>
+</div>
+</section>
+</div>
     <!-- Fin section des annonces -->
 
     <!-- Formulaire de Recherche-->
@@ -160,7 +172,7 @@ session_start();
 
 
     if (isset($_POST['ordre']) && isset($_POST['tri']) && isset($_POST['nom']) && isset($_POST['type'])) {
-        include("includes/connex.inc.php");
+        /*include("includes/connex.inc.php");*/
         $pdo = connexion('bdd.db');
         try {
             if ($_POST['tri'] === 'date')
