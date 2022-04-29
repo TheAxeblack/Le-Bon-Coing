@@ -3,22 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <title>Sources</title>
+    <link rel="icon" href="imgs/favicon.ico">
+    <link rel="stylesheet" href="css/accueil.css">
+    <link rel="stylesheet" href="css/commun.css">
+    <link rel="stylesheet" href="css/source.css">
+    <!-- Pour importer les polices depuis Google Fonts -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Karla:wght@500&display=swap');
+    </style>
 </head>
 <body>
-<a href="https://www.flaticon.com/free-icons/menu" title="menu icons">Menu icons created by firzuals - Flaticon</a><br/>
-<a href="https://www.flaticon.com/free-icons/france" title="france icons">France icons created by Freepik -
+<header id="header"></header>
+<!-- Début de la barre de navigation -->
+<div id="navbar" class="navbar">
+    <div class="dropdown">
+        <button class="dropbtn" onclick="deroulerMenu('myDropdown')">
+            <img src="imgs/hamburger.png" alt="icone de menu" width="30" height="30">
+        </button>
+        <div class="dropdown-content" id="myDropdown">
+
+        </div>
+    </div>
+    <div class="dropdown">
+        <button class="dropbtn" onclick="deroulerMenu('myDropdown2')">
+            <img src="imgs/france.png" alt="icone du drapeau français" width="30">
+        </button>
+        <div class="dropdown-content" id="myDropdown2">
+            <img src="imgs/france.png" alt="icone du drapeau français" width="30" onclick="choisirLangue()">
+            <img src="imgs/uk.png" alt="icone du drapeau anglais" width="30" onclick="choisirLangue()">
+        </div>
+    </div>
+    <button class="nigthbtn" onclick="changerMode()">
+        <img id="mode" src="imgs/sun.png" alt="icone de soleil" width="30" height="30">
+    </button>
+    <div class="nametag w7">
+        <a href="home.php">
+            <img src="imgs/coing_so.svg" alt="Logo du site" width="50">
+            <h1>Le bon Coing</h1>
+        </a>
+    </div>
+</div>
+<!-- Fin de la barre de navigation -->
+
+<div class="ressource">
+    <h1>Les images</h1>
+    <a href="https://www.flaticon.com/free-icons/menu" title="menu icons">Menu icons
+    created by firzuals -
     Flaticon</a><br/>
-<a href="https://www.flaticon.com/free-icons/uk" title="uk icons">Uk icons created by Freepik - Flaticon</a><br/>
-<a href="https://www.flaticon.com/free-icons/sun" title="sun icons">Sun icons created by Good Ware - Flaticon</a><br/>
-<a href="https://www.flaticon.com/free-icons/moon" title="moon icons">Moon icons created by Freepik - Flaticon</a><br/>
-<a href="https://www.flaticon.com/free-icons/user" title="user icons">User icons created by Freepik - Flaticon</a><br/>
-<a href="https://www.flaticon.com/free-icons/search" title="search icons">Search icons created by Freepik - Flaticon</a><br/>
-<a href="https://www.flaticon.com/free-icons/add" title="add icons">Add icons created by riajulislam - Flaticon</a><br/>
-<a href="https://www.flaticon.com/free-icons/add" title="add icons">Add icons created by reussy - Flaticon</a><br/>
-<a href="https://pixabay.com/images/id-1661009/" title="renault juvaquatre">Tama66 - Renault Juvaquatre car
-    rusty</a><br/>
-<a href="https://www.flaticon.com/fr/icones-gratuites/symbole-de-la-fleche" title="symbole de la flèche icônes">Symbole
-    de la flèche icônes créées par Kharisma - Flaticon</a>
-</body>
+    <a href="https://www.flaticon.com/free-icons/france" title="france icons">France icons created by Freepik -
+        Flaticon</a><br/>
+    <a href="https://www.flaticon.com/free-icons/uk" title="uk icons">Uk icons created by Freepik - Flaticon</a><br/>
+    <a href="https://www.flaticon.com/free-icons/sun" title="sun icons">Sun icons created by Good Ware -
+        Flaticon</a><br/>
+    <a href="https://www.flaticon.com/free-icons/moon" title="moon icons">Moon icons created by Freepik -
+        Flaticon</a><br/>
+    <a href="https://www.flaticon.com/free-icons/user" title="user icons">User icons created by Freepik -
+        Flaticon</a><br/>
+    <a href="https://www.flaticon.com/free-icons/search" title="search icons">Search icons created by Freepik -
+        Flaticon</a><br/>
+    <a href="https://www.flaticon.com/free-icons/add" title="add icons">Add icons created by riajulislam -
+        Flaticon</a><br/>
+    <a href="https://www.flaticon.com/free-icons/add" title="add icons">Add icons created by reussy - Flaticon</a><br/>
+    <a href="https://pixabay.com/images/id-1661009/" title="renault juvaquatre">Tama66 - Renault Juvaquatre car
+        rusty</a><br/>
+    <a href="https://www.flaticon.com/fr/icones-gratuites/symbole-de-la-fleche" title="symbole de la flèche icônes">Symbole
+        de la flèche icônes créées par Kharisma - Flaticon</a>
+</div>
 <script src="js/mesfonctions.js"></script>
+</body>
+
 </html>
