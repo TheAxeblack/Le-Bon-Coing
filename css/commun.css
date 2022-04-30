@@ -164,9 +164,52 @@ form {
     color: #FFF;
 }
 
+.form-depot {
+    width: 80%;
+    margin: 2% auto;
+}
+
+.depos_annonce {
+    width: 100%;
+    padding: 30px;
+    border: 1px solid #f1f1f1;
+    background: #fff;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24); /* rgba permet d'avoir la gestion de la transparence s*/
+}
+
+.depos_annonce input[type=text], .depos_annonce textarea, .depos_annonce select, article input[type=text], article textarea {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    font-family: 'Karla', sans-serif;
+}
+
+.depos_annonce input[type=file]::file-selector-button, .depos_annonce input[type=submit] {
+    background-color: #c2b845;
+    color: black;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+}
+
+.depos_annonce input[type=submit] {
+    width: 100%;
+}
+
+/*.depos_annonce input[type = file]::file-selector-button:hover,*/
+.depos_annonce input[type=submit]:hover {
+    background-color: white;
+    color: #c2b845;
+    border: 1px solid #c2b845;
+}
+
 
 /* Section de style des sections annonces*/
-.content{
+.content {
     width: 100%;
 }
 
@@ -204,16 +247,6 @@ article {
 
 article img {
     margin: 0 auto;
-}
-
-article input[type=text], article textarea {
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
-    font-family: 'Karla', sans-serif;
 }
 
 article textarea {

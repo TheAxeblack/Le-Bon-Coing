@@ -224,9 +224,7 @@ if (isset($_POST['ordre']) && isset($_POST['tri']) && isset($_POST['nom']) && is
     }
 
 }
-?>
 
-<?php
 if (isset($_SESSION['pseudo']) && isset($_SESSION['statut'])) {
     echo '<section class="recommend" id="recommend">';
     echo '<h2>Recommandé pour vous</h2>';
@@ -238,11 +236,9 @@ if (isset($_SESSION['pseudo']) && isset($_SESSION['statut'])) {
     <img src="imgs/coing_so.svg" alt="Logo du site" width="90">
     <p class="w7">2022 Le bon Coing Inc.</p>
     <ul>
-        <li><a href="#news">informations</a></li>
         <li><a href="sources.html">sources</a></li>
     </ul>
 </footer>
-</div>
 <script src="js/mesfonctions.js"></script>
 </body>
 </html>
