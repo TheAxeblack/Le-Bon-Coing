@@ -2,7 +2,7 @@
 error_reporting(E_ALL);
 ini_set("display_errors", "1");
 
-include_once('connex.inc.php');
+include_once('includes/connex.inc.php');
 
 $pdo = connexion('bdd.db');
 
