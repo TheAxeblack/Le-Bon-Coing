@@ -3,7 +3,7 @@
 Projet de l'Unité d'Enseignement (UE) de Développement Web de la deuxième année de licence informatique de l'université
 Jean Monnet de Saint-Étienne. Il doit être réalisé en groupe de deux ou trois personnes et le choix du sujet est libre.
 
-Nous étions trois étudiants sur ce projets et mettions en application les notions apprises durant le cours.
+Nous étions trois étudiants sur ce projet et mettions en application les notions apprises durant le cours.
 
 ## Table des matières
 
