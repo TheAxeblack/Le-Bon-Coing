@@ -38,7 +38,16 @@ function afficherFormulaire($p)
     
     $champ .= "<label>Date de l'annonce : <input type=\"text\" placeholder=\"01/01/2020\" name=\"date_post\" required=\"required\" /></label><br>";
 
-    $champ .= "<label> Type: <input type=\"text\" name=\"type\"  required=\"required\" /></label><br>";
+    $champ .= '<label>Categorie :
+                <select name="type">
+                <option value="electromenage">Electroménagé</option>
+                <option value="informatique">Informatique</option>
+                <option value="mobilier">Mobilier</option>
+                <option value="immobilier">Immobilier</option>
+                <option value="vacance">Vacance</option>
+                <option value="multimedia">Multimédia</option>
+                </select>
+            </label';
 
     $champ .= "<label> Prix : <input type=\"text\" name=\"prix\" required=\"required\" /></label><br>";
 
