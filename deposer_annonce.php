@@ -164,12 +164,19 @@ function afficherFormulaire($p)
 		$pdo = connexion('bdd.db');
 
 		try {
-		    $stmt = $pdo->prepare('INSERT INTO annonce_p (id_u,nom,type,date_post,image1,image2,image3,description,prix,c_postal) VALUES(:pseudo, :titre_annonce, :date_annonce, :fichier1, :fichier2, :fichier3, :description, :prix_annonce, :cd_annonce)');
+		    $req = $pdo->prepare("SELECT id FROM user WHERE pseudo LIKE :pseudo");
+		    $pseudo = $_SESSION['pseudo'];
+		    $req->bindParam(':pseudo', $pseudo);
+		    $req->execute();
+		    $list = $req->fetchAll(PDO::FETCH_ASSOC);
+		    $user = $list[0];
+		    $id = $user['id'];
+		    $stmt = $pdo->prepare('INSERT INTO annonce_p (id_u,nom,type,date_post,image1,image2,image3,description,prix,c_postal) VALUES(:id, :titre_annonce, :date_annonce, :fichier1, :fichier2, :fichier3, :description, :prix_annonce, :cd_annonce)');
 		    $stmt->bindParam(':titre_annonce', $titre_annonce);
+		    $stmt->bindParam(':id', $id);	
 		    $stmt->bindParam(':date_annonce', $date_annonce);
 		    $stmt->bindParam(':cd_annonce', $cd_annonce);
 		    $stmt->bindParam(':fichier1', $fichier1);
-		    $stmt->bindParam(':pseudo', $pseudo);
 		    $stmt->bindParam(':fichier2', $fichier2);
 		    $stmt->bindParam(':fichier3', $fichier3);
 		    $stmt->bindParam(':description', $description);
