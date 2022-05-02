@@ -32,7 +32,6 @@ session_start();
             <a href="#latest">Dernières annonces</a>
             <?php
             if (isset($_SESSION['pseudo']) && isset($_SESSION['statut'])) {
-                echo '<a href="#recommend">Les plus consultées</a>';
                 echo "<a href=\"gestion.php\">Gérer mes annonces</a>";
                 echo "<a href=\"deconnexion.php\">Se déconnecter</a>";
             }

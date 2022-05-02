@@ -63,11 +63,4 @@ $stmt4->closeCursor();
 $stmt5=$pdo->prepare("INSERT INTO annonce_p (id_u, nom, type, date_post, image1, image2, image3, description, prix, c_postal) VALUES ('2', 'Collection manga demon slayer', 'multimedia', DATE(), 'images/demon-slayer-kimetsu-no-yaiba-wallpaper-04.jpg', NULL, NULL, 'collection de manga que je ne lis plus', '340', '42000');");
 $stmt5->execute();
 
-
-
-
-
-
-
-
-
+header("Location:home.php");
