@@ -177,7 +177,8 @@ form {
     box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24); /* rgba permet d'avoir la gestion de la transparence s*/
 }
 
-.depos_annonce input[type=text], .depos_annonce textarea, .depos_annonce select, article input[type=text], article textarea {
+.depos_annonce input[type=text], .depos_annonce textarea, .depos_annonce select, article input[type=text],
+article textarea, article input[type=password] {
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
@@ -241,7 +242,7 @@ article {
     border-radius: 5px;
     background-color: #dddddd;
     padding: 12px 14px;
-    margin: 0 10px;
+    margin: 0 10px 10px 10px;
     width: 250px;
 }
 

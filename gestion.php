@@ -72,8 +72,6 @@ session_start();
 </div>
 <div class="content">
     <section>
-        <h1>Mes annonces</h1>
-
         <?php
 
         function affiche_annonce($annonce)
@@ -154,6 +152,9 @@ session_start();
                 $req2 = $pdo->prepare("SELECT * FROM annonce_p WHERE id_u LIKE :user_id");
                 $req2->bindParam(":user_id", $user_id);
                 $req2->execute();
+                echo '<h1>Mon profil</h1>';
+                afficher_user($user_tmp);
+                echo '<h1>Mes annonces</h1>';
                 $liste_annonce = $req2->fetchAll(PDO::FETCH_ASSOC);
                 foreach ($liste_annonce as $annonce) {
                     affiche_annonce($annonce);
@@ -165,7 +166,7 @@ session_start();
                 echo '<p>Problème avec la base</p>';
             }
         }
-        afficher_user($user_tmp);
+
         ?>
     </section>
 </div>
