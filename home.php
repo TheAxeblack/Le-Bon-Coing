@@ -227,13 +227,6 @@ session_start();
     }
     ?>
     </div>
-    <?php
-    if (isset($_SESSION['pseudo']) && isset($_SESSION['statut'])) {
-        echo '<section class="recommend" id="recommend">';
-        echo '<h2>Recommandé pour vous</h2>';
-        echo '</section >';
-    }
-    ?>
     <!-- Pied de page -->
     <footer>
         <img src="imgs/coing_so.svg" alt="Logo du site" width="90">
