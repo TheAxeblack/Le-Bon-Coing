@@ -124,12 +124,12 @@ function affichage($image1, $image2, $image3, $nom_annonce, $date_post, $descrip
     }
     $annonce .= '<div class="donnees">';
     $annonce .= '<h1>' . $nom_annonce . '</h1>';
-    $annonce .= '<p>Annonce mise en ligne le ' . $date_post . ' <b>' . $prix . '€</b></p>';
+    $annonce .= '<p>Prix : <b>' . $prix . '€</b><br/>Annonce mise en ligne le ' . $date_post . '</p>';
     $annonce .= '<p class="description">' . $description . '</p>';
     $annonce .= '</div>';
     echo $annonce;
     $vendeur = '<div class="vendeur">';
-    $vendeur .= '<h2>' . $nom_vendeur . ' ' . $prenom_vendeur . '</h2>';
+    $vendeur .= '<h2> Posté par : ' . $nom_vendeur . ' ' . $prenom_vendeur . '</h2>';
     $vendeur .= '<button id="button_contact" type="button" onclick="montrerFormulaire(\'contact\')">Contacter le vendeur</button>';
     $vendeur .= '<div id="contact">';
     $vendeur .= '<form action="mailto:' . $email_vendeur . '" method="post" enctype="multipart/form-data" name="formcontact">';

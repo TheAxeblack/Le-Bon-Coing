@@ -164,7 +164,7 @@ function affiche_annonce($annonce, $nom_u, $prenom_u)
     echo '<br/>';
     echo '<label>' . date($annonce['date_post']) . '</label>';
     echo '<br/>';
-    echo '<label><button type="submit" name="id_annonce" value="' . $annonce['id'] . '">Consulter</label>';
+    echo '<label><button type="submit" name="id_annonce" value="' . $annonce['id'] . '">Consulter</button></label>';
     echo '</form>';
     echo '</article>';
 }

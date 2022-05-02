@@ -96,6 +96,7 @@ if (isset($_SESSION['pseudo']) || isset($_SESSION['statut'])) {
                 if ($stmt->rowCount() == 1) {
                     echo "alert('Ajout effectué')";
                     echo "</script>";
+                    header("Location:connexion.php");
                 } else {
                     echo "alert('Erreur lors de l'ajout veuillez réessayer')";
                     echo "</script>";
