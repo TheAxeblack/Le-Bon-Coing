@@ -1,0 +1,8 @@
+\babel@toc {french}{}
+\contentsline {section}{\numberline {1}Pr\IeC {\'e}sentation du projet}{3}{section.1}% 
+\contentsline {section}{\numberline {2}R\IeC {\'e}partition des t\IeC {\^a}ches}{3}{section.2}% 
+\contentsline {section}{\numberline {3}Structure du site}{3}{section.3}% 
+\contentsline {subsection}{\numberline {3.1}Les pages}{3}{subsection.3.1}% 
+\contentsline {subsection}{\numberline {3.2}Les fonctionnalit\IeC {\'e}es mises en place}{4}{subsection.3.2}% 
+\contentsline {subsection}{\numberline {3.3}La base de donn\IeC {\'e}es}{4}{subsection.3.3}% 
+\contentsline {section}{\numberline {4}}{5}{section.4}% 
