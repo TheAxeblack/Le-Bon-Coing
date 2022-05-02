@@ -109,7 +109,7 @@ session_start();
         {
             echo '<div>';
             echo '<article>';
-            echo '<form>';
+            echo '<form action="user_list.php" method="POST">';
             echo '<img src="imgs/user.png" width="200">';
             echo '<br/>';
             echo '<label>' . $user_tmp['nom'] . '</label>';
@@ -118,6 +118,10 @@ session_start();
             echo '<br/>';
             echo '<label>' . $user_tmp['email'] . '</label>';
             echo '<br/>';
+            if($user_tmp['statut'] == 1)
+            {
+                echo '<label><button type="submit" name="statut" value="'.$user_tmp['statut'].'">Acceder aux utilisateurs</button></label></br>';
+            }
             echo '</form>';
             echo '</article>';
             echo '<article>
@@ -156,6 +160,10 @@ session_start();
                 afficher_user($user_tmp);
                 echo '<h1>Mes annonces</h1>';
                 $liste_annonce = $req2->fetchAll(PDO::FETCH_ASSOC);
+                if ($req2->rowCount() == 0)
+                 {
+                     echo 'Aucune annonce de deposé';
+                 }
                 foreach ($liste_annonce as $annonce) {
                     affiche_annonce($annonce);
                 }

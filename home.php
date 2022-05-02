@@ -142,6 +142,10 @@ session_start();
                 <option value="multimedia">Multimédia</option>
                 </select>
             </label>
+            <br>
+            <label>
+                Code Postal: <input type="text" name="code_postal">
+            </label>    
         </div>
         <label>
             <button type="submit">rechercher</button>
@@ -187,8 +191,13 @@ session_start();
                 $ordre = 'DESC';
             if ($_POST['type'] === 'all')
                 $type = '%';
-            $req = $pdo->prepare("SELECT * FROM annonce_p WHERE nom LIKE :nom_rechercher AND type LIKE :type ORDER BY $tri $ordre");
+            if (!isset($_POST['code_postal']))
+                $code_postal = '%';
+            $c_postal=$_POST['code_postal'];
+            $code_postal = $c_postal[0].$c_postal[1].'%';
+            $req = $pdo->prepare("SELECT * FROM annonce_p WHERE nom LIKE :nom_rechercher AND type LIKE :type AND c_postal LIKE :code_postal ORDER BY $tri $ordre");
             $nom_recherche = '%' . $_POST['nom'] . '%';
+            $req->bindParam(':code_postal',$code_postal);
             $req->bindParam(':type',$type);
             $req->bindParam(':nom_rechercher', $nom_recherche);
             $req->execute();

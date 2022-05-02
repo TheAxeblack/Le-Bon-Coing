@@ -44,7 +44,7 @@ function montrerFormulaire(identifiant) {
 }
 
 
-/*/!* Fonctionnalité de Sticky navbar (abandonnée en court de route)*!/
+/*/!* Fonctionnalité de Sticky navbar (écartée en court de route)*!/
 var navbar = document.getElementById("navbar");
 var sticky = navbar.offsetTop;
 

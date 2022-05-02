@@ -32,23 +32,24 @@
 
 \section{Présentation du projet}
 Dans le cadre de notre formation, nous avions a réaliser un projet dans l'unité d'enseignement de \textbf{Développement Web}.\\
-Le but de ce projet était de manipuler les quatres langages rencontré durant le cours dans la réalisation d'un site web à savoir \emph{HTML}, \emph{CSS}, \emph{JavaScript} et \emph{PHP}.\\
-Le choix du thème étant libre nous sommes donc parti sur un site de petites annonces du type \underline{Leboncoin} que nous avons nommé \underline{\textbf{Le Bon Coing}}.\\
-Nous avions un certains nombre de contraintes techniques à respecter durant la réalisation de ce projet. 
-\begin{itemize}
+Le but de ce projet était de manipuler les quatre langages étudiés durant le cours et la réalisation d'un site web à savoir \emph{HTML}, \emph{CSS}, \emph{JavaScript} et \emph{PHP}.\\
+Le choix du thème étant libre nous sommes donc parti sur un site de petites annonces du type \underline{Leboncoin} que nous avons nommé \underline{\textbf{Le Bon Coing}}. Le bon coing en clin d'\oe{}il au fruit dont nous avon repris la couleur pour notre charte graphique.\\
+Nous avions plusieurs contraintes techniques à respecter pour la réalisation de ce projet.\\
+Contraintes à respecter :~
+\begin{enumerate}
     \item création d'un site structuré et valide (balises HTML et après validation sur le site de \href{https://validator.w3.org}{W3C})
     \item utilisation d'une feuille de style CSS indépendante validée par \href{https://jigsaw.w3.org/css-validator/}{W3C}
     \item mise en place de quelques fonctionnalitées en JavaScript
     \item utilisation du PHP et des sessions
     \item gestion d'une base de données et utilisation de PDO
-    \item le site devra fonctionner sur webetu (plateforme d'hébergement de l'université)
-\end{itemize}
+    \item fonctionnemment sur webetu (plateforme d'hébergement de l'université)
+\end{enumerate}
 Afin de centralisé le travail de chacun un GitHub à été mis en place.
-Dans l'objectif \textbf{Le Bon Coing} est un marché en ligne permettant des personnes de tous types et de tous horizons d'entrer en contact afin de réaliser une ou plusieurs transactions.\\
-Ainsi sur \textbf{Le Bon Coing}, vous pourrez découvrir plusieurs types annonces. Allant de la voiture à rénover, à la dernière console de jeux à la mode en passant par des confitures faites avec amour.
+\textbf{Le Bon Coing} est un marché en ligne permettant à des personnes de tous types et de tous horizons d'entrer en contact afin de réaliser une ou plusieurs transactions.\\
+Ainsi sur \textbf{Le Bon Coing}, vous pourrez découvrir plusieurs types d'annonces. Allant de la voiture à rénover, à la dernière console de jeux à la mode en passant par des confitures faites avec amour.
 
 \section{Répartition des tâches}
-Lors de ce projet et après concertation entre nous, nous avons initialement réparti les tâches en fonction des affinitées de chacun avec les différents langages.
+Lors de ce projet et après concertation entre nous, nous avons initialement réparti les tâches de façon équitable et en fonction des affinitées de chacun avec les différents langages.
 \begin{table}[h]
     \begin{center}
         \begin{tabularx}{16.3cm}{|p{5cm}|p{5cm}|p{5cm}|X|}
@@ -58,7 +59,7 @@ Lors de ce projet et après concertation entre nous, nous avons initialement ré
             Conception de la Base de donnée & Réalisation du logo & Réalisation du wireframe \\
             Insertion des annonces & Insertion des utilisateurs & Réflexion sur l'ergonomie \\
             Vérification des données & Affichage des annonces & Développement des fonctionnalitées \\
-            Vérification des pages sur W3C & Gestion et suppression des annonces & Inscription/Connexion et Design \\
+            Vérification des pages sur W3C & Gestion et suppression des annonces & Inscription/Connexion et design \\
             \hline
             \multicolumn{3}{|c|}{Rédaction du rapport} \\
         \hline
@@ -67,41 +68,45 @@ Lors de ce projet et après concertation entre nous, nous avons initialement ré
     \end{center}
 \end{table}
 \\Au fur et à mesure du projet, la répartition des tâches n'a pas été respecté et nous avons du nous sortir de notre champ de prédilection.\\
-Ainsi, vers la fin du projet nous avons tous travailler sur l'insertion d'images au sein de la base de données.
+Ainsi, vers la fin du projet nous avons tous travailler sur l'insertion d'images au sein de la base de données afin de résoudre 
 \section{Structure du site}
 \subsection{Les pages}
-\textbf{Le Bon Coing} est composé de sept pages accessibles différentes et de quatre pages de script PHP. Pour l'ensemble du site, nous avons 4 fichiers .CSS associé aux pages .PHP
+\textbf{Le Bon Coing} est composé de sept pages accessibles différentes et de six pages de script PHP. Pour l'ensemble du site, nous avons 4 fichiers .CSS associé aux pages .PHP
 \begin{itemize}
     \item Les pages accessibles
     \begin{enumerate}
-        \item \emph{home.php} qui est la page d'accueil du site web. Elle contient une section répertoriant les cinq dernières annonces mises en lignes par les utilisateurs ainsi qu'un formulaire de recherche afin de trouver une annonce succeptible de plaire à l'utilisateur.
+        \item \emph{home.php} qui est la page d'accueil du site web. Elle permet d'accès à la suite du site web, elle contient une section répertoriant les cinq dernières annonces mises en lignes par les utilisateurs ainsi qu'un formulaire de recherche afin de trouver une annonce succeptible de répondre au besoin à l'utilisateur.
         \item \emph{connexion.php} permettant à un utilisateur de se connecter au site. Si l'utilisateur essayant de se connecter n'est pas enregistrer un lien permet de le renvoyer sur la page \emph{inscription.php}
         \item \emph{inscription.php} permettant comme son nom l'indique de s'inscrire sur le site. Chaque informations entrée sur cette page sera ensuite enregistrée dans la base de donnée du site.
         \item \emph{deposer-annonce.php} est sans doute l'une des pages les plus importantes avec \emph{gestion.php}. En effet, elle permet à l'utilisateur de déposer une annonce sur le site.\\ Cette dernière sera ensuite enregistrée dans la base de données.
         \item \emph{gestion.php} permet à un utilisateur inscrit et connecté au site de gérer les options de son compte mais également les annonces qu'il a mise en ligne.
         \item \emph{annonce.php} qui est la page type de l'affichage des annonces. Le navigateur va récupérer les informations de l'annonce en question dans la base de données afin de pouvoir les charger dans la page.
         \item \emph{source.html} qui contient les sources des images libres de droit utilisées
+        \item \emph{user\_list.php} qui affiche la liste des utilisateurs du site lorsque un administrateur le demande.
     \end{enumerate}
     \item Les pages de script PHP
     \begin{enumerate}
-        \item \emph{deconnexion.php} qui deconnecte l'utilisateur et supprime la session PHP créer lors de la connexion
+        \item \emph{deconnexion.php} qui deconnecte l'utilisateur et supprime la session PHP créee lors de la connexion
         \item \emph{supprimer.php} qui supprime l'annonce choisie
         \item \emph{modifier.php} qui modifie l'annonce sélectionnée
-        \item \emph{modifier-profil.php} qui modifie les informations du profil de l'utilisateur
+        \item \emph{modifier\_profil.php} qui modifie les informations du profil de l'utilisateur
+        \item \emph{supprimer\_user.php} qui supprime l'utilisateur choisi par l'administrateur
     \end{enumerate}
 \end{itemize}
 
 \subsection{Les fonctionnalitées mises en place}
 Afin de proposer de l'interaction à l'utilisateur, nous avons implémenté quelques fonctionnalitées JavaScript.\\
 A savoir, pour l'ensemble du site~:~un menu déroulant, un affichage de formulaire et un mode nuit. Ainsi que pour la page des annonces un carousel d'images.\\
-Une autre fonctionnalitée, la traduction du site a commencé à être développée, cependant du à un manque de temps, elle est incomplete.\\
-La fonctionnalitée de ``Sticky navbar'' a été abandonnée en cours de route car cette dernière entrainait des erreurs.
+Une autre fonctionnalité, la traduction du site a commencé à être développée, cependant dû à un manque de temps, elle est a compléter et a tester.\\
+La fonctionnalitée de ``Sticky navbar'' a été écartée en cours de route car cette dernière entrainait des pertubations.
+
+\newpage
 
 \subsection{La base de données}
 La base de données du site est une \emph{base de donnée SQlite}, elle est composée de deux tables.
 \begin{enumerate}
     \item La table \emph{annonce\_p}, il s'agit de la table liée aux annonces des différents utilisateurs.\\
-    Pour la modélisation d'une annonce nous avons décidé de la définir par
+    Pour la modélisation d'une annonce nous avons décidé de la définir par :
     \begin{itemize}
         \item \textbf{un identifiant} unique à chaque annonce
         \item \textbf{un identifiant d'utilisateur} qui est directement associé à l'utilisateur en question, il doit être unique.
@@ -113,13 +118,29 @@ La base de données du site est une \emph{base de donnée SQlite}, elle est comp
         \item \textbf{un prix}
         \item \textbf{un code postal} pour informer l'utilisateur de la localisation du bien présenté dans l'annonce.
     \end{itemize}
+
+    \begin{figure}[ht]
+        \centering
+        \includegraphics[scale=0.45]{annonce_p1.PNG}
+        \caption{Exemple de données présentent dans la table \emph{annonce\_p} partie 1}
+        \label{fig1}
+    \end{figure}
+
+    \begin{figure}[ht]
+        \centering
+        \includegraphics[scale=0.5]{annonce_p2.PNG}
+        \caption{Exemple de données présentent dans la table \emph{annonce\_p} partie 1}
+        \label{fig2}
+    \end{figure}
+
     \item La table \emph{user}, il s'agit de la table liée aux utilisateurs du site.\\
-    Les utilisateurs sont définis par 
+    Les utilisateurs sont définis par :
     \begin{itemize}
         \item \textbf{un identifiant} unique à chaque utilisateur
         \item \textbf{un genre} 
         \item \textbf{un prénom}
-        \item \textbf{un nom} 
+        \item \textbf{un nom}
+        \item \textbf{une date de naissance}
         \item \textbf{un pseudo}
         \item \textbf{un mot de passe} crypté en MD5 (Message Digest 5)
         \item \textbf{un email} afin de pouvoir envoyer un email
@@ -127,7 +148,23 @@ La base de données du site est une \emph{base de donnée SQlite}, elle est comp
     \end{itemize}
 \end{enumerate}
 
-\section{}
+\begin{figure}[ht]
+    \centering
+    \includegraphics[scale=0.5]{user.PNG}
+    \caption{Exemple de données présentent dans la table \emph{user}}
+    \label{fig3}
+\end{figure}
 
+\section{Le déroulement du projet}
+Contrairement à ce que nous aurions pu penser, le projet ne s'est pas dérouler sans encombre. Nous avons tous rencontré au moins une difficultée durant toute la durée du projet.\\
+Pour Lina, son problème était lié a l'insertion d'images dans la base de données afin de régler ce problème elle a repris son code de A à Z.\\
+Pour Mathis, il a rencontré un problème lors de la mise en page en CSS après avoir réaliser que l'utilisation de Boostrap ne serait pas comptabilisé. Il a donc décider de remplacer boostrap par du CSS pur et d'utiliser des flexbox.\\
+Il a également rentré un problème lors de l'implémentation de la ``Sticky navbar''.\\
+Enfin Soheil a eu un problème indépendant de sa volonté, en effet, un paquet PHP de son ordinateur s'était désinstallé.
 
+\section{Quelques remarques}
+\subsection*{Lina}
+\subsection*{Soheil}
+\subsection*{Mathis}
+Pour les prochaines années, essayer de banaliser une semaine afin de permettre aux étudiants de se concentrer entièrement sur le projet. 
 \end{document}
