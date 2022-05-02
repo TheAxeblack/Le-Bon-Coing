@@ -233,7 +233,7 @@ function afficherFormulaire($p)
                 $stmt = $pdo->prepare('INSERT INTO annonce_p (id_u,nom,type,date_post,image1,image2,image3,description,prix,c_postal) VALUES(:id_u, :nom, :type,CURRENT_TIMESTAMP , :fichier1, :fichier2, :fichier3, :description, :prix, :c_postal)');
 
                 $stmt->bindParam(':id_u', $id_u);
-                $stmt->bindParam(':nom', $nom);
+                $stmt->bindParam(':nom', $titre);
                 $stmt->bindParam(':c_postal', $c_postal);
                 $stmt->bindParam(':fichier1', $fichier1);
                 $stmt->bindParam(':fichier2', $fichier2);

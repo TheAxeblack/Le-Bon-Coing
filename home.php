@@ -2,6 +2,7 @@
 error_reporting(E_ALL);
 ini_set('display_errors', '1');
 session_start();
+
 ?>
 
 <!DOCTYPE html>
@@ -32,7 +33,6 @@ session_start();
             <a href="#latest">Dernières annonces</a>
             <?php
             if (isset($_SESSION['pseudo']) && isset($_SESSION['statut'])) {
-                echo '<a href="#recommend">Les plus consultées</a>';
                 echo "<a href=\"gestion.php\">Gérer mes annonces</a>";
                 echo "<a href=\"deconnexion.php\">Se déconnecter</a>";
             }
@@ -226,9 +226,7 @@ if (isset($_POST['ordre']) && isset($_POST['tri']) && isset($_POST['nom']) && is
 }
 
 if (isset($_SESSION['pseudo']) && isset($_SESSION['statut'])) {
-    echo '<section class="recommend" id="recommend">';
-    echo '<h2>Recommandé pour vous</h2>';
-    echo '</section >';
+
 }
 ?>
 <!-- Pied de page -->

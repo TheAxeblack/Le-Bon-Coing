@@ -21,7 +21,21 @@ function choisirLangue() {
 
 function changerMode() {
     var element = document.body;
+    var header = document.getElementById('header');
+    var articles = document.getElementsByTagName('ARTICLE');
+    var i;
+    var form = document.getElementsByName("research");
     element.classList.toggle("dark-mode");
+    if (element.classList.contains("dark-mode"))
+        header.style.backgroundImage = "url(imgs/coings_nuit.jpg)";
+    else
+        header.style.backgroundImage = "url(imgs/coings.jpg)";
+    if (articles.length > 0) {
+        for (i = 0; i < articles.length; i++) {
+            articles[i].classList.toggle("dark-mode-article");
+        }
+    }
+    form.classList.toggle("dark-mode-article");
 }
 
 function montrerFormulaire(identifiant) {

@@ -144,6 +144,10 @@ function affichage($image1, $image2, $image3, $nom_annonce, $date_post, $descrip
     $vendeur .= '</form>';
     $vendeur .= '</div>';
     echo $vendeur;
+    echo '<section class="recommend" id="recommend">';
+    echo '<h2>Recommandé pour vous</h2>';
+
+    echo '</section >';
 }
 
 if (isset($_POST['id_annonce'])) {

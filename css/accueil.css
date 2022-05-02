@@ -3,11 +3,10 @@
     width: 80%;
     margin: 2% auto;
     border: 2px solid rgb(222, 226, 230);
-    background: #fff;
     font-family: 'Karla', sans-serif;
 }
 
-.rechercher input[type = text] {
+.rechercher input[type=text] {
     width: 100%;
     /*padding: 12px 20px;*/
     margin: 8px auto;
@@ -23,7 +22,7 @@
 }
 
 
-.rechercher button[type = submit] {
+.rechercher button[type=submit], article > form button[type=submit] {
     background-color: #c2b845;
     color: white;
     padding: 14px 20px;
@@ -33,7 +32,7 @@
     width: 100%;
 }
 
-.rechercher button[type=submit]:hover {
+.rechercher button[type=submit]:hover, article > form button[type=submit]:hover {
     background-color: white;
     color: #c2b845;
     border: 1px solid #c2b845;
