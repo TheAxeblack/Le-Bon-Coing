@@ -21,67 +21,67 @@ function afficheFormulaire($p)
 
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width = device-width, initial-scale = 1">
-    <title>Connexion Le bon Coing</title>
-    <link rel="stylesheet" href="css/insc_conn.css"/>
+    <head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width = device-width, initial-scale = 1">
+	<title>Connexion Le bon Coing</title>
+	<link rel="stylesheet" href="css/insc_conn.css"/>
 
-    <!-- Pour importer les polices depuis Google Fonts -->
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
-        @import url('https://fonts.googleapis.com/css2?family=Karla:wght@500&display=swap');
-    </style>
-</head>
-<body>
-<a class="rollback" href="home.php"><img src="imgs/retour.png" alt="icone de retour arrière" width="40px"></a>
-<div id="container">
-    <?php
-    if (isset($_SESSION['pseudo']) || isset($_SESSION['statut'])) {
-        echo "<p>Erreur vous êtes déjà connecté !</p>";
-    } else {
-        if (isset($_POST['pseudo']) && isset($_POST['mdp'])) {
-            $ok = 1;
-            $pseudo = trim($_POST['pseudo']);
-            $mdp = trim($_POST['mdp']);
+	<!-- Pour importer les polices depuis Google Fonts -->
+	<style>
+         @import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
+         @import url('https://fonts.googleapis.com/css2?family=Karla:wght@500&display=swap');
+	</style>
+    </head>
+    <body>
+	<a class="rollback" href="home.php"><img src="imgs/retour.png" alt="icone de retour arrière" width="40"></a>
+	<div id="container">
+	    <?php
+	    if (isset($_SESSION['pseudo']) || isset($_SESSION['statut'])) {
+		echo "<p>Erreur vous êtes déjà connecté !</p>";
+	    } else {
+		if (isset($_POST['pseudo']) && isset($_POST['mdp'])) {
+		    $ok = 1;
+		    $pseudo = trim($_POST['pseudo']);
+		    $mdp = trim($_POST['mdp']);
 
-            include('includes/connex.inc.php');
-            $pdo = connexion('bdd.db');
+		    include('includes/connex.inc.php');
+		    $pdo = connexion('bdd.db');
 
-            try {
-                $verifpseudo = $pdo->prepare('SELECT * FROM user WHERE pseudo = :pseudo');
-                $verifpseudo->bindParam(':pseudo', $pseudo);
-                $verifpseudo->execute();
-                $res = $verifpseudo->fetchAll(PDO::FETCH_ASSOC);
-                if (count($res) > 0) {
-                    foreach ($res as $re) {
-                        if (strcmp($re['pseudo'], $_POST['pseudo']) == 0) {
-                            if (strcmp($re['mdp'], md5($mdp)) == 0) {
-                                $ok = 0;
-                                $_SESSION['pseudo'] = $pseudo;
-                                if (intval($re['statut']) == 0)
-                                    $_SESSION['statut'] = "utilisateur";
-                                else
-                                    $_SESSION['statut'] = "admin";
-                            }
-                            header('Location:home.php');
-                        }
-                    }
-                }
-                if ($ok == 1) {
-                    echo '<script type="javascript">';
-                    echo 'alert(erreur de pseudo ou de mdp !)';
-                    echo '</script>';
-                }
-            } catch (PDOException $exception) {
-                echo $exception->getMessage();
-                echo '<p>Problème avec la base</p>';
-            }
-        } else {
-            afficheFormulaire(null);
-        }
-    }
-    ?>
-</div>
-</body>
+		    try {
+			$verifpseudo = $pdo->prepare('SELECT * FROM user WHERE pseudo = :pseudo');
+			$verifpseudo->bindParam(':pseudo', $pseudo);
+			$verifpseudo->execute();
+			$res = $verifpseudo->fetchAll(PDO::FETCH_ASSOC);
+			if (count($res) > 0) {
+			    foreach ($res as $re) {
+				if (strcmp($re['pseudo'], $_POST['pseudo']) == 0) {
+				    if (strcmp($re['mdp'], md5($mdp)) == 0) {
+					$ok = 0;
+					$_SESSION['pseudo'] = $pseudo;
+					if (intval($re['statut']) == 0)
+					    $_SESSION['statut'] = "utilisateur";
+					else
+					    $_SESSION['statut'] = "admin";
+				    }
+				    header('Location:home.php');
+				}
+			    }
+			}
+			if ($ok == 1) {
+			    echo '<script type="javascript">';
+			    echo 'alert(erreur de pseudo ou de mdp !)';
+			    echo '</script>';
+			}
+		    } catch (PDOException $exception) {
+			echo $exception->getMessage();
+			echo '<p>Problème avec la base</p>';
+		    }
+		} else {
+		    afficheFormulaire(null);
+		}
+	    }
+	    ?>
+	</div>
+    </body>
 </html>

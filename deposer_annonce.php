@@ -10,30 +10,31 @@ function afficherFormulaire($p)
 {
     $champ = '<form class="depos_annonce" action="' . $_SERVER['PHP_SELF'] . '" method="post" enctype="multipart/form-data">';
 
-    $champ .= '<p><label>Titre de l\'annonce: <input type="text" name="nom" required="required"</label><br>';
+    $champ .= '<p><label>Titre de l\'annonce: <input type="text" name="nom" required="required"></label><br>';
 
     $champ .= '<label>Categorie :
                 <select name="type" required="required">
-                <option value="all">Tout</option>
+                <option value="">Tout</option>
                 <option value="electromenage">Electroménagé</option>
                 <option value="informatique">Informatique</option>
                 <option value="mobilier">Mobilier</option>
                 <option value="immobilier">Immobilier</option>
-                <option value="vacance">Vacance</option>
+                <option value="vacances">Vacances</option>
                 <option value="multimedia">Multimédia</option>
                 </select>
                 </label><br>';
 
     $champ .= '<label> Prix : <input type="text" name="prix" required="required"></label><br>';
-    $champ .= '<label> Code postal : <input type="text" name="c_postal" maxlength="5" required="required" ></label><br>';
+    $champ .= '<label> Code postal : <input type="text" name="c_postal" maxlength="5" required="required"></label><br>';
     $champ .= '<label> Description : </label><br>';
-    $champ .= '<textarea type="text" name="description" rows="10" cols="50" required="required" > </textarea>';
-    $champ .= '<p><input type="hidden" name="MAX_FILE_SIZE" value="1000000">';
-    $champ .= '<label>Ajouter une image : <input type="file" name="image1" accept="image/jpeg"/ required="required" /></label><br>';
-    $champ .= '<label>Ajouter une image : <input type="file" name="image2" accept="image/jpeg"/> </label><br>';
-    $champ .= '<label>Ajouter une image : <input type="file" name="image3" accept="image/jpeg"/> </label><br>';
-    $champ .= '<label><input type="submit" value="Ajouter annonce"</label>';
-    $champ .= '</p></form>';
+    $champ .= '<textarea name="description" rows="10" cols="50" required="required"></textarea>';
+    $champ .= '<p><input type="hidden" name="MAX_FILE_SIZE" value="2000000">';
+    $champ .= '<label>Ajouter une image : <input type="file" name="image1" accept="image/jpeg" required="required"></label><br>';
+    $champ .= '<label>Ajouter une image : <input type="file" name="image2" accept="image/jpeg"></label><br>';
+    $champ .= '<label>Ajouter une image : <input type="file" name="image3" accept="image/jpeg"></label><br>';
+    $champ .= '<label><input type="submit" value="Ajouter annonce"></label>';
+    $champ .= '</p>';
+    $champ .= '</form>';
     echo $champ;
 
 }
@@ -48,6 +49,7 @@ function afficherFormulaire($p)
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Déposer une annonce</title>
     <link rel="stylesheet" href="css/commun.css">
+    <link rel="stylesheet" href="css/accueil.css">
 
 
     <!-- Pour importer la police depuis Google Fonts -->
@@ -120,6 +122,7 @@ function afficherFormulaire($p)
         $message = NULL;
         $fichier2 = NULL;
         $fichier3 = NULL;
+	$erreur = 0;
 
         /* IMAGE 1 */
 
@@ -135,20 +138,21 @@ function afficherFormulaire($p)
 
                 if (file_exists($fichier1)) {
                     $message = "Erreur d'insertion du fichier 1, veuillez renommer l'image.";
+		    $erreur=1;
                 }
 
-                if (!file_exists($fichier1)) {
+                else{
                     $resultat1 = move_uploaded_file($_FILES['image1']['tmp_name'], $fichier1);
 
-
-                    if ($resultat1) {
-                        $message = "L'image $fichier1 a été ajouté.";
-                    } else {
+                    if (!$resultat1) {
                         $message = "Echec de l'ajout.";
+			$erreur = 1;
                     }
                 }
-            } else {
-                $message = "Erreur fichier 1, Veuillez réessayer.";
+            }
+	    if ($_FILES['image1']['error'] == 2) {
+                $message = "L'image est trop lourde.";
+		$erreur=1;
             }
         }
 
@@ -161,18 +165,19 @@ function afficherFormulaire($p)
                 $fichier2 = $path . basename($_FILES['image2']["name"]);
                 if (file_exists($fichier2)) {
                     $message = "Erreur d'insertion du fichier 2, veuillez renommer l'image.";
+		    $erreur=1;
                 }
-                if (!file_exists($fichier2)) {
+                else{
                     $resultat2 = move_uploaded_file($_FILES['image2']['tmp_name'], $fichier2);
-                    if ($resultat2) {
-                        $message = "L'image $fichier2 a été ajouté.";
-                    } else {
+                    if (!$resultat2) {
                         $message = "Echec de l'ajout.";
+			$erreur=1;
                     }
                 }
             }
             if ($_FILES['image2']['error'] == 2) {
                 $message = "L'image est trop lourde.";
+		$erreur=1;
             }
         }
 
@@ -186,18 +191,19 @@ function afficherFormulaire($p)
                 $fichier1 = $path . basename($_FILES['image3']["name"]);
                 if (file_exists($fichier3)) {
                     $message = "Erreur d'insertion du fichier 3, veuillez renommer l'image.";
+		    $erreur=1;
                 }
-                if (!file_exists($fichier3)) {
+                else{
                     $resultat3 = move_uploaded_file($_FILES['image1']['tmp_name'], $fichier3);
-                    if ($resultat3) {
-                        $message = "L'image $fichier3 a été ajouté avec suucès !";
-                    } else {
+                    if (!$resultat3) {
                         $message = "Echec de l'ajout.";
+			$erreur=1;
                     }
                 }
             }
             if ($_FILES['image3']['error'] == 2) {
                 $message = "L'image est trop lourde.";
+		$erreur=1;
 
             }
         }
@@ -206,7 +212,7 @@ function afficherFormulaire($p)
             echo $message;
         }
 
-        if (isset($_POST['nom']) && isset($_POST['c_postal']) && isset($_POST['description']) && isset($_POST['prix']) && isset($_POST['type'])) {
+        if (isset($_POST['nom']) && isset($_POST['c_postal']) && isset($_POST['description']) && isset($_POST['prix']) && isset($_POST['type']) && $erreur==0) {
             $pseudo = trim($_SESSION['pseudo']);
             $type = trim($_POST['type']);
             $titre = trim($_POST['nom']);
@@ -219,7 +225,6 @@ function afficherFormulaire($p)
 
             try {
 
-
                 $req = $pdo->prepare('SELECT *  FROM user WHERE pseudo LIKE :pseudo');
                 $req->bindParam(':pseudo', $pseudo);
                 $req->execute();
@@ -229,7 +234,7 @@ function afficherFormulaire($p)
                 $id_u = $info_req['id'];
 
 
-                $stmt = $pdo->prepare('INSERT INTO annonce_p (id_u,nom,type,date_post,image1,image2,image3,description,prix,c_postal) VALUES(:id_u, :nom, :type,CURRENT_TIMESTAMP , :fichier1, :fichier2, :fichier3, :description, :prix, :c_postal)');
+                $stmt = $pdo->prepare('INSERT INTO annonce_p (id_u,nom,type,date_post,image1,image2,image3,description,prix,c_postal) VALUES(:id_u, :nom, :type, DATE() , :fichier1, :fichier2, :fichier3, :description, :prix, :c_postal)');
 
                 $stmt->bindParam(':id_u', $id_u);
                 $stmt->bindParam(':nom', $titre);
@@ -248,6 +253,12 @@ function afficherFormulaire($p)
                     echo '<p>Ajout effectué</p>';
                 } else {
                     echo '<p>Erreur ajout</p>';
+		    if(file_exists($fichier1))
+			unlink($fichier1);
+		    if(file_exists($fichier2))
+			unlink($fichier2);
+		    if(file_exists($fichier3))
+			unlink($fichier3);
                 }
                 $req->closeCursor();
                 $stmt->closeCursor();
@@ -257,6 +268,12 @@ function afficherFormulaire($p)
             } catch (PDOException $e) {
                 echo 'Erreur PDO';
                 echo $e->getMessage();
+		if(file_exists($fichier1))
+		    unlink($fichier1);
+		if(file_exists($fichier2))
+		    unlink($fichier2);
+		if(file_exists($fichier3))
+		    unlink($fichier3);
             }
         } else {
             echo "<p>Remplissez le formulaire de l'annonce.</p>";

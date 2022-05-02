@@ -154,9 +154,9 @@ function affiche_annonce($annonce, $nom_u, $prenom_u)
 {
     echo '<article>';
     echo '<form method="POST" action="annonce.php">';
-    echo '<img src="' . $annonce['image1'] . '" width="200">';
+    echo '<img src="' . $annonce['image1'] . '" alt="Image de '. $annonce['nom'] . '" width="200">';
     echo '<br/>';
-    echo '<label>' . $annonce['nom'] . '</label>';
+    echo '<h3><label>' . $annonce['nom'] . '</label></h3>';
     echo '<br/>';
     echo '<label>' . $annonce['prix'] . ' €</label>';
     echo '<br/>';

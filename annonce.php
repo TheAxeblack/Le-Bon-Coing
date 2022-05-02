@@ -11,6 +11,7 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Le bon coing</title>
     <link rel="icon" href="imgs/favicon.ico">
+    <link rel="stylesheet" href="css/accueil.css">
     <link rel="stylesheet" href="css/commun.css">
     <link rel="stylesheet" href="css/annonce.css">
     <!-- Pour importer les polices depuis Google Fonts -->
@@ -77,15 +78,15 @@ function affichage($image1, $image2, $image3, $nom_annonce, $date_post, $descrip
     $annonce .= '<div class="slide fondu">';
     if ($image2 != null && $image3 != null) {
         $annonce .= '<div class="index">1/3</div>';
-        $annonce .= '<img class="slideimg" src=' . $image1 . '>';
+        $annonce .= '<img class="slideimg" src=' . $image1 . ' alt="Image de ' . $image1 . '">';
         $annonce .= '</div>';
         $annonce .= '<div class="slide fondu">';
         $annonce .= '<div class="index">2/3</div>';
-        $annonce .= '<img class="slideimg" src=' . $image2 . '>';
+        $annonce .= '<img class="slideimg" src=' . $image2 . ' alt="Image de ' . $image2 . '">';
         $annonce .= '</div>';
         $annonce .= '<div class="slide fondu">';
         $annonce .= '<div class="index">3/3</div>';
-        $annonce .= '<img class="slideimg" src=' . $image3 . '>';
+        $annonce .= '<img class="slideimg" src=' . $image3 . ' alt="Image de ' . $image3 . '">';
         $annonce .= '</div>';
         $annonce .= '<a class="precedent" onclick="changerSlide(-1)">&#10094;</a>';
         $annonce .= '<a class="suivant" onclick="changerSlide(1)">&#10095;</a>';
@@ -98,11 +99,11 @@ function affichage($image1, $image2, $image3, $nom_annonce, $date_post, $descrip
         $annonce .= '</div>';
     } else if ($image2 != null && $image3 == null) {
         $annonce .= '<div class="index">1/2</div>';
-        $annonce .= '<img class="slideimg" src=' . $image1 . '>';
+        $annonce .= '<img class="slideimg" src=' . $image1 . ' alt="Image de ' . $image1 . '">';
         $annonce .= '</div>';
         $annonce .= '<div class="slide fondu">';
         $annonce .= '<div class="index">2/2</div>';
-        $annonce .= '<img class="slideimg" src=' . $image2 . '>';
+        $annonce .= '<img class="slideimg" src=' . $image2 .' alt="Image de ' . $image2 . '">';
         $annonce .= '</div>';
         $annonce .= '<a class="precedent" onclick="changerSlide(-1)">&#10094;</a>';
         $annonce .= '<a class="suivant" onclick="changerSlide(1)">&#10095;</a>';
@@ -142,6 +143,8 @@ function affichage($image1, $image2, $image3, $nom_annonce, $date_post, $descrip
     $vendeur .= '<label><input type="submit" value="envoyer"></label>';
     $vendeur .= '</form>';
     $vendeur .= '</div>';
+    $vendeur .= '</div>';
+    
     echo $vendeur;
     echo '<section class="recommend" id="recommend">';
     echo '<h2>Recommandé pour vous</h2>';
@@ -182,7 +185,7 @@ if (isset($_POST['id_annonce'])) {
 
 
         //AFFICHAGE DE L'ANNONCE
-        echo '<a href="home.php"><img class="rollback" src="imgs/retour.png" alt="icone de retour arrière" width="40px"></a>';
+        echo '<a href="home.php"><img class="rollback" src="imgs/retour.png" alt="icone de retour arrière" width="40"></a>';
         affichage($image1, $image2, $image3, $nom_annonce, $date_post, $description, $prix, $nom_vendeur, $prenom_vendeur, $email_vendeur);
         //FERMETURE DES CURSEUR
         $req->closeCursor();
@@ -202,4 +205,4 @@ if (isset($_POST['id_annonce'])) {
 </body>
 </html>
 <!--Fin barre navigation-->
-<!---Annonce du vendeur--->
+<!--Annonce du vendeur-->

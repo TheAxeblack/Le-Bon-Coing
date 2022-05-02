@@ -23,7 +23,7 @@ function afficheFormulaire($p)
   <input type=\"email\" name=\"email\" placeholder=\"john.doe@mail.us\" required=\"required\">
   </label><br/>";
     $champ .= "<label>Date de naissance <input type=\"text\" name=\"date_n\" maxlength=\"10\" placeholder=\"01/01/1990\" required=\"required\"></label><br/>";
-    $champ .= "<label><input type=\"submit\" value=\"Let's go !\"</label>";
+    $champ .= "<label><input type=\"submit\" value=\"Let's go !\"></label>";
     $champ .= "</form>";
     $champ .= "</div>";
     echo $champ;
@@ -45,7 +45,7 @@ function afficheFormulaire($p)
     </style>
 </head>
 <body>
-<a class="rollback" href="connexion.php"><img src="imgs/retour.png" alt="icone de retour arrière" width="40px"></a>
+<a class="rollback" href="connexion.php"><img src="imgs/retour.png" alt="icone de retour arrière" width="40"></a>
 <?php
 if (isset($_SESSION['pseudo']) || isset($_SESSION['statut'])) {
     echo "<p>Vous ne pouvez pas vous inscrire si vous êtes connecté</p>";
