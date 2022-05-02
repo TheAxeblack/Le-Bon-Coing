@@ -12,6 +12,7 @@
 \usepackage{marvosym}
 \usepackage{dsfont}
 \usepackage{hyperref}
+\usepackage{tabularx}
 
 \pagestyle{headings}
 
@@ -47,24 +48,26 @@ Dans l'objectif \textbf{Le Bon Coing} est un marché en ligne permettant des per
 Ainsi sur \textbf{Le Bon Coing}, vous pourrez découvrir plusieurs types annonces. Allant de la voiture à rénover, à la dernière console de jeux à la mode en passant par des confitures faites avec amour.
 
 \section{Répartition des tâches}
-Lors de ce projet et après concertation entre nous, nous nous sommes réparti les tâches en fonction des affinitées de chacun avec les différents langages.
-
-\begin{center}
-    \begin{tabular}{|l|l|l|}
+Lors de ce projet et après concertation entre nous, nous avons initialement réparti les tâches en fonction des affinitées de chacun avec les différents langages.
+\begin{table}[h]
+    \begin{center}
+        \begin{tabularx}{16.3cm}{|p{5cm}|p{5cm}|p{5cm}|X|}
+            \hline
+            Lina & Soheil & Mathis \\
+            \hline
+            Conception de la Base de donnée & Réalisation du logo & Réalisation du wireframe \\
+            Insertion des annonces & Insertion des utilisateurs & Réflexion sur l'ergonomie \\
+            Vérification des données & Affichage des annonces & Développement des fonctionnalitées \\
+            Vérification des pages sur W3C & Gestion et suppression des annonces & Inscription/Connexion et Design \\
+            \hline
+            \multicolumn{3}{|c|}{Rédaction du rapport} \\
         \hline
-        Lina & Soheil & Mathis \\
-        \hline
-        Conception de la Base de donnée & Réalisation du logo & Réalisation du wireframe \\
-        Insertion des annonces & Insertion des utilisateurs & Réflexion sur l'ergonomie \\
-        Vérification des données & Affichage des annonces & Développement des fonctionnalitées \\
-        Vérification des pages sur W3C & Gestion et suppression des annonces & Inscription/Connexion et Design \\
-        \hline
-        \multicolumn{3}{|c|}{Membres de l'équipe} \\
-    \hline
-    \end{tabular}
-\end{center}
-
-
+        \end{tabularx}
+        \caption{Tableau de répartition des tâches initial}
+    \end{center}
+\end{table}
+\\Au fur et à mesure du projet, la répartition des tâches n'a pas été respecté et nous avons du nous sortir de notre champ de prédilection.\\
+Ainsi, vers la fin du projet nous avons tous travailler sur l'insertion d'images au sein de la base de données.
 \section{Structure du site}
 \subsection{Les pages}
 \textbf{Le Bon Coing} est composé de sept pages accessibles différentes et de quatre pages de script PHP. Pour l'ensemble du site, nous avons 4 fichiers .CSS associé aux pages .PHP
