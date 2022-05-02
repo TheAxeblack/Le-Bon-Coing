@@ -68,8 +68,6 @@ function afficherFormulaire($p)
             <img src="imgs/hamburger.png" alt="icone de menu" width="30" height="30">
         </button>
         <div class="dropdown-content" id="myDropdown">
-            <a href="#latest">Dernières annonces</a>
-            <a href="#recommend">Les plus consultées</a>
             <?php
             if (isset($_SESSION['pseudo']) && isset($_SESSION['statut'])) {
                 echo "<a href=\"gestion.php\">Gérer mes annonces</a>";
@@ -103,11 +101,6 @@ function afficherFormulaire($p)
     else
         echo "<a href=\"connexion.php\"><img src=\"imgs/user.png\" alt=\"icone de compte\" width=\"30\"></a>";
     ?>
-    <form>
-        <label>
-            <input class="search-barre" type="text" name="search" placeholder="Search..">
-        </label>
-    </form>
 </div>
 <!-- Fin de la barre de navigation -->
 

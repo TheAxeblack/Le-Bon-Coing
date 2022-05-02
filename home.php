@@ -63,11 +63,6 @@ session_start();
     else
         echo "<a href=\"connexion.php\"><img src=\"imgs/user.png\" alt=\"icone de compte\" width=\"30\"></a>";
     ?>
-    <form>
-        <label>
-            <input class="search-barre" type="text" name="search" placeholder="Search..">
-        </label>
-    </form>
 </div>
 <!-- Fin de la barre de navigation -->
 
@@ -240,7 +235,6 @@ session_start();
         <img src="imgs/coing_so.svg" alt="Logo du site" width="90">
         <p class="w7">2022 Le bon Coing Inc.</p>
         <ul>
-            <li><a href="#news">informations</a></li>
             <li><a href="sources.html">sources</a></li>
         </ul>
     </footer>
