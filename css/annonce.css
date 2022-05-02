@@ -1,0 +1,146 @@
+body {
+    font-family: 'Permanent Marker', cursive;
+}
+
+.slide {
+    display: none;
+}
+
+.carouselimgs {
+    max-width: 800px;
+    margin: auto;
+}
+
+.precedent, .suivant {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    color: #c2b845;
+    font-size: 30px;
+    background-color: rgba(0, 0, 0, 0);
+    transition: background-color 0.6s ease;
+}
+
+.precedent {
+    left: 15px;
+}
+
+.suivant {
+    right: 15px;
+}
+
+.precedent:hover, .suivant:hover {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.index {
+    color: #c2b845;
+    font-size: 13px;
+    padding: 15px;
+    position: relative;
+    top: 0;
+}
+
+.slideimg {
+    width: 100%;
+    object-fit: scale-down;
+    object-position: center;
+}
+
+.point-slider {
+    text-align: center;
+}
+
+.pt {
+    cursor: pointer;
+    height: 10px;
+    width: 10px;
+    margin: 0 2px;
+    background-color: #999999;
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.6s ease;
+}
+
+.active, .pt:hover {
+    background-color: #738438;
+}
+
+.fondu {
+    animation-name: fondu;
+    animation-duration: 1s;
+}
+
+/* Créer une animation du nom de fondu */
+@keyframes fondu {
+    from {
+        opacity: 0
+    }
+    to {
+        opacity: 1
+    }
+}
+
+
+.donnees, .vendeur {
+    padding: 14px 16px;
+}
+
+.donnees h1 {
+    margin: 0 auto;
+}
+
+.donnees b {
+    font-size: 25px;
+    color: #c2b845;
+    text-decoration-line: underline;
+}
+
+.description {
+    font-family: 'Karla', sans-serif;
+}
+
+#contact {
+    display: none;
+    width: 100%;
+    border: 1px solid #f1f1f1;
+    background: #fff;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24); /* rgba permet d'avoir la gestion de la transparence */
+}
+
+input[type=text], input[type=email], textarea {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    font-family: 'Karla', sans-serif;
+}
+
+textarea {
+    height: 150px;
+}
+
+#contact input[type=submit], #button_contact {
+    background-color: #c2b845;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+#contact input[type=submit]:hover, #button_contact:hover {
+    background-color: white;
+    color: #c2b845;
+    border: 1px solid #c2b845;
+}
