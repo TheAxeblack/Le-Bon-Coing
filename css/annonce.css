@@ -44,7 +44,7 @@ body {
     color: #c2b845;
     font-size: 13px;
     padding: 15px;
-    position: absolute;
+    position: relative;
     top: 0;
 }
 
@@ -94,7 +94,6 @@ body {
 }
 
 .donnees h1 {
-    width: 40%;
     margin: 0 auto;
 }
 

@@ -48,7 +48,6 @@ function afficherFormulaire($p)
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Déposer une annonce</title>
     <link rel="stylesheet" href="css/commun.css">
-    <link rel="stylesheet" href="css/accueil.css">
 
 
     <!-- Pour importer la police depuis Google Fonts -->

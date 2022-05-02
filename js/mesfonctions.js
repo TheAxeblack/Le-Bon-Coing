@@ -43,3 +43,17 @@ function montrerFormulaire(identifiant) {
     form.style.display = "block";
 }
 
+
+/*/!* Fonctionnalité de Sticky navbar (abandonnée en court de route)*!/
+var navbar = document.getElementById("navbar");
+var sticky = navbar.offsetTop;
+
+function fixerBarre() {
+    if (window.scrollY > sticky)
+        navbar.classList.add("sticky");
+    else
+        navbar.classList.remove("sticky");
+}
+
+window.addEventListener('scroll', fixerBarre);*/
+
