@@ -157,14 +157,21 @@ La base de données du site est une \emph{base de donnée SQlite}, elle est comp
 
 \section{Le déroulement du projet}
 Contrairement à ce que nous aurions pu penser, le projet ne s'est pas dérouler sans encombre. Nous avons tous rencontré au moins une difficultée durant toute la durée du projet.\\
-Pour Lina, son problème était lié a l'insertion d'images dans la base de données afin de régler ce problème elle a repris son code de A à Z.\\
+Pour Lina, son problème était lié à la récupération d'image pour l'insertion d'images dans la base de données. Elle avait tout d'abord crée deux formulaires ce qui ne fonctionnait pas \\
+donc elle en acrée un seul. Ensuite, le soucis venait des récupérations de données pour le "INSERT INTO" et des "isset" d'images. Lina voulait faire en sorte que\\
+l'utilisateur insère seulement 1 image s'il le souhaite ou seulement 2 images, cela a créer des erreurs lors du stockage des images dans le fichier "images" car cela inserait //
+les images dans le dossier même si le "INSERT INTO" ne fonctionnait pas. Afin de régler ce problème, elle a repris chaque instruction une par une pour bien comprendre\\
+ce que chaque ligne faisait. Cela lui a permis d'analyser et de déduire ce que les instructions étaient censé faire.\\
 Pour Mathis, il a rencontré un problème lors de la mise en page en CSS après avoir réaliser que l'utilisation de Boostrap ne serait pas comptabilisé. Il a donc décider de remplacer boostrap par du CSS pur et d'utiliser des flexbox.\\
 Il a également rentré un problème lors de l'implémentation de la ``Sticky navbar''.\\
-Enfin Soheil a eu un problème indépendant de sa volonté, en effet, un paquet PHP de son ordinateur s'était désinstallé.
+Enfin Soheil a eu un problème indépendant de sa volonté, en effet, un paquet PHP de son ordinateur s'était désinstallé entrainant un dysfonctionnement de la bdd.
 
 \section{Quelques remarques}
 \subsection*{Lina}
+Malgré ma présence à tous les TD et TP, j'ai rencontré pas mal de difficultées lors de l'utilisation de php. On aurait voulu ajouter d'autres fonctionnalitées mais nous avons //
+manquer de temps.
 \subsection*{Soheil}
+Aucun problème pour ma part, sauf un, un de mes paquets php c'est desinstallé tout seul ma bdd ne fonctionnait donc pas. J'aurai aussi voulu faire un système de notation d'utilisateur dans le style de blablacar.
 \subsection*{Mathis}
 Pour les prochaines années, essayer de banaliser une semaine afin de permettre aux étudiants de se concentrer entièrement sur le projet. 
 \end{document}
