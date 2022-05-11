@@ -30,4 +30,13 @@ Nous avions un certains nombre de contraintes à respecter durant la réalisatio
 * le site devra fonctionner sur webetu (plateforme d'hébergement de l'université)
 
 ## Résultat du projet
+Pour voir le résultat de notre projet il faut avoir un au préalable lancé un serveur PHP local  avec la commande 
+```
+php -S localhost:8000
+```
+Après quoi aller sur votre navigateur préféré et entrer l'adresse suivante
+```
+localhost:8000/create.php
+```
 
+Voilà vous savez tout !
