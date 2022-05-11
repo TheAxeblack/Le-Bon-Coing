@@ -4,6 +4,9 @@ Projet de l'Unité d'Enseignement (UE) de Développement Web de la deuxième ann
 Jean Monnet de Saint-Étienne. Il doit être réalisé en groupe de deux ou trois personnes et le choix du sujet est libre.
 
 Nous étions trois étudiants sur ce projet et mettions en application les notions apprises durant le cours.
+* Moi-même
+* [senisson](https://github.com/senisonn)
+* [bonsoirlina](https://github.com/bonsoirlina)
 
 ## Table des matières
 
