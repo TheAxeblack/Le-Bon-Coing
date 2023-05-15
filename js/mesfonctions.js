@@ -8,10 +8,8 @@ window.onclick = function (e) {
     if (!e.target.matches('.dropbtn')) {
         var myDropdown = document.getElementById("myDropdown");
         var myDropdown2 = document.getElementById("myDropdown2");
-        if (myDropdown.classList.contains('show'))
-            myDropdown.classList.remove('show');
-        if (myDropdown2.classList.contains('show'))
-            myDropdown2.classList.remove('show');
+        if (myDropdown.classList.contains('show')) myDropdown.classList.remove('show');
+        if (myDropdown2.classList.contains('show')) myDropdown2.classList.remove('show');
     }
 }
 
@@ -26,10 +24,7 @@ function changerMode() {
     var i;
     var form = document.getElementsByName("research");
     element.classList.toggle("dark-mode");
-    if (element.classList.contains("dark-mode"))
-        header.style.backgroundImage = "url(imgs/coings_nuit.jpg)";
-    else
-        header.style.backgroundImage = "url(imgs/coings.jpg)";
+    if (element.classList.contains("dark-mode")) header.style.backgroundImage = "url(imgs/coings_nuit.jpg)"; else header.style.backgroundImage = "url(imgs/coings.jpg)";
     if (articles.length > 0) {
         for (i = 0; i < articles.length; i++) {
             articles[i].classList.toggle("dark-mode-article");
