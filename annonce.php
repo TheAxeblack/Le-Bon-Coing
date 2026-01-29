@@ -22,49 +22,50 @@ session_start();
 </head>
 <body>
 <!-- Début de la barre de navigation -->
-    <div class="dropdown">
-        <button class="dropbtn" onclick="deroulerMenu('myDropdown')">
-            <img src="imgs/hamburger.png" alt="icone de menu" width="30" height="30">
-        </button>
-        <div class="dropdown-content" id="myDropdown">
-            <?php
-            if (isset($_SESSION['pseudo']) && isset($_SESSION['statut'])) {
-                echo "<a href=\"gestion.php\">Gérer mes annonces</a>";
-                echo "<a href=\"deconnexion.php\">Se déconnecter</a>";
-            }
-            ?>
-        </div>
-    </div>
-    <div class="dropdown">
-        <button class="dropbtn" onclick="deroulerMenu('myDropdown2')">
-            <img src="imgs/france.png" alt="icone du drapeau français" width="30">
-        </button>
-        <div class="dropdown-content" id="myDropdown2">
-            <img src="imgs/france.png" alt="icone du drapeau français" width="30" onclick="choisirLangue()">
-            <img src="imgs/uk.png" alt="icone du drapeau anglais" width="30" onclick="choisirLangue()">
-        </div>
-    </div>
-    <button class="nigthbtn" onclick="changerMode()">
-        <img id="mode" src="imgs/sun.png" alt="icone de soleil" width="30" height="30">
+<div class="dropdown">
+    <button class="dropbtn" onclick="deroulerMenu('myDropdown')">
+        <img src="imgs/hamburger.png" alt="icone de menu" width="30" height="30">
     </button>
-    <div class="nametag w7">
-        <a href="home.php">
-            <img src="imgs/coing_so.svg" alt="Logo du site" width="50">
-            <h1>Le bon Coing</h1>
-        </a>
+    <div class="dropdown-content" id="myDropdown">
+        <?php
+        if (isset($_SESSION['pseudo']) && isset($_SESSION['statut'])) {
+            echo "<a href=\"gestion.php\">Gérer mes annonces</a>";
+            echo "<a href=\"deconnexion.php\">Se déconnecter</a>";
+        }
+        ?>
     </div>
-    <a href="deposer_annonce.php"><img src="imgs/more.png" alt="icone ajout" width="30"> Déposer une annonce</a>
-    <?php
-    if (isset($_SESSION['pseudo']))
-        echo "<a href=\"gestion.php\"><img src=\"imgs/user.png\" alt=\"icone de compte\" width=\"30\"></a>";
-    else
-        echo "<a href=\"connexion.php\"><img src=\"imgs/user.png\" alt=\"icone de compte\" width=\"30\"></a>";
-    ?>
-    <form>
-        <label>
-            <input class="search-barre" type="text" name="search" placeholder="Search..">
-        </label>
-    </form>
+</div>
+<div class="dropdown">
+    <button class="dropbtn" onclick="deroulerMenu('myDropdown2')">
+        <img src="imgs/france.png" alt="icone du drapeau français" width="30">
+    </button>
+    <div class="dropdown-content" id="myDropdown2">
+        <img src="imgs/france.png" alt="icone du drapeau français" width="30" onclick="choisirLangue()">
+        <img src="imgs/uk.png" alt="icone du drapeau anglais" width="30" onclick="choisirLangue()">
+    </div>
+</div>
+<button class="nigthbtn" onclick="changerMode()">
+    <img id="mode" src="imgs/sun.png" alt="icone de soleil" width="30" height="30">
+</button>
+<div class="nametag w7">
+    <a href="home.php">
+        <img src="imgs/coing_so.svg" alt="Logo du site" width="50">
+        <h1>Le bon Coing</h1>
+    </a>
+</div>
+<a href="deposer_annonce.php"><img src="imgs/more.png" alt="icone ajout" width="30"> Déposer une annonce</a>
+<?php
+if (isset($_SESSION['pseudo'])) {
+    echo "<a href=\"gestion.php\"><img src=\"imgs/user.png\" alt=\"icone de compte\" width=\"30\"></a>";
+} else {
+    echo "<a href=\"connexion.php\"><img src=\"imgs/user.png\" alt=\"icone de compte\" width=\"30\"></a>";
+}
+?>
+<form>
+    <label>
+        <input class="search-barre" type="text" name="search" placeholder="Search..">
+    </label>
+</form>
 </div>
 <?php
 function affichage($image1, $image2, $image3, $nom_annonce, $date_post, $description, $prix, $nom_vendeur, $prenom_vendeur, $email_vendeur)
@@ -92,13 +93,13 @@ function affichage($image1, $image2, $image3, $nom_annonce, $date_post, $descrip
         $annonce .= '<span class="pt" onclick="slideActuel(2)"></span>';
         $annonce .= '<span class="pt" onclick="slideActuel(3)"></span>';
         $annonce .= '</div>';
-    } else if ($image2 != null && $image3 == null) {
+    } elseif ($image2 != null && $image3 == null) {
         $annonce .= '<div class="index">1/2</div>';
         $annonce .= '<img class="slideimg" src=' . $image1 . ' alt="Image de ' . $image1 . '">';
         $annonce .= '</div>';
         $annonce .= '<div class="slide fondu">';
         $annonce .= '<div class="index">2/2</div>';
-        $annonce .= '<img class="slideimg" src=' . $image2 .' alt="Image de ' . $image2 . '">';
+        $annonce .= '<img class="slideimg" src=' . $image2 . ' alt="Image de ' . $image2 . '">';
         $annonce .= '</div>';
         $annonce .= '<a class="precedent" onclick="changerSlide(-1)">&#10094;</a>';
         $annonce .= '<a class="suivant" onclick="changerSlide(1)">&#10095;</a>';
@@ -123,7 +124,7 @@ function affichage($image1, $image2, $image3, $nom_annonce, $date_post, $descrip
 }
 
 if (isset($_POST['id_annonce'])) {
-    include("includes/connex.inc.php");
+    include_once "includes/connex.inc.php";
     $pdo = connexion('bdd.db');
     try {
         //Recuperation dans la bdd des info de l'annonce
