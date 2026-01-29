@@ -63,8 +63,19 @@ session_start();
     else
         echo "<a href=\"connexion.php\"><img src=\"imgs/user.png\" alt=\"icone de compte\" width=\"30\"></a>";
     ?>
+    <form>
+        <label>
+            <input class="search-barre" type="text" name="search" placeholder="Search..">
+        </label>
+    </form>
 </div>
 <!-- Fin de la barre de navigation -->
+
+<?php
+if (isset($_SESSION['pseudo']) && isset($_SESSION['statut'])) {
+    echo "<p>Bonjour, " . $_SESSION['pseudo'] . " <a href=\"deconnexion.php\">Se déconnecter</a></p>";
+}
+?>
 
 <!-- Début section des annonces -->
 <div class="content">
@@ -139,7 +150,7 @@ session_start();
             <br>
             <label>
                 Code Postal: <input type="text" name="code_postal">
-            </label>    
+            </label>
         </div>
         <label>
             <button type="submit">rechercher</button>
@@ -147,6 +158,9 @@ session_start();
     </form>
     <!-- Fin du Formulaire de recherche -->
 
+<section class="recommend">
+    <h2>Recommandé pour vous</h2>
+</section>
 
     <!-- Fin section des annonces -->
     <div class="scroller">
@@ -235,6 +249,7 @@ session_start();
         <img src="imgs/coing_so.svg" alt="Logo du site" width="90">
         <p class="w7">2022 Le bon Coing Inc.</p>
         <ul>
+            <li><a href="#news">informations</a></li>
             <li><a href="sources.html">sources</a></li>
         </ul>
     </footer>

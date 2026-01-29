@@ -8,8 +8,13 @@ window.onclick = function (e) {
     if (!e.target.matches('.dropbtn')) {
         var myDropdown = document.getElementById("myDropdown");
         var myDropdown2 = document.getElementById("myDropdown2");
-        if (myDropdown.classList.contains('show')) myDropdown.classList.remove('show');
-        if (myDropdown2.classList.contains('show')) myDropdown2.classList.remove('show');
+        var myDropdown3 = document.getElementById("myDropdown3");
+        if (myDropdown.classList.contains('show'))
+            myDropdown.classList.remove('show');
+        if (myDropdown2.classList.contains('show'))
+            myDropdown2.classList.remove('show');
+        if (myDropdown3.classList.contains('show'))
+            myDropdown3.classList.remove(('show'));
     }
 }
 
@@ -38,6 +43,9 @@ function montrerFormulaire(identifiant) {
     form.style.display = "block";
 }
 
+window.onscroll = function () {
+    fixerBarre()
+};
 
 /*/!* Fonctionnalité de Sticky navbar (écartée en court de route)*!/
 var navbar = document.getElementById("navbar");
@@ -47,6 +55,9 @@ function fixerBarre() {
     if (window.scrollY > sticky)
         navbar.classList.add("sticky");
     else
+    if (window.pageYOffset >= sticky) {
+        navbar.classList.add("sticky")
+    } else {
         navbar.classList.remove("sticky");
 }
 

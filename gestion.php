@@ -64,6 +64,11 @@ session_start();
     else
         echo "<a href=\"connexion.php\"><img src=\"imgs/user.png\" alt=\"icone de compte\" width=\"30\"></a>";
     ?>
+    <form>
+        <label>
+            <input class="search-barre" type="text" name="search" placeholder="Search..">
+        </label>
+    </form>
 </div>
 <div class="content">
     <section>
@@ -105,7 +110,7 @@ session_start();
             echo '<article>';
             echo '<form action="user_list.php" method="POST">';
             echo '<img src="imgs/user.png" alt="logo de compte" width="200">';
-            echo '<br/>';
+            echo '<form>';
             echo '<h3><label>' . $user_tmp['nom'] . '</label></h3>';
             echo '<label>' . $user_tmp['prenom'] . '</label>';
             echo '<br/>';
@@ -118,7 +123,7 @@ session_start();
             echo '</article>';
             echo '<article>
             <form method="POST" action="modifier_profil.php" >
-            <h3><label>Tout les champs sont obligatoires !</label></h3>
+            <h3><label>Tous les champs sont obligatoires !</label></h3>
             <br>
             <label>Changer pseudo<br><input type="text" name="pseudo"></label>
             <br>
@@ -128,8 +133,8 @@ session_start();
             </label><br/>
             <br>
             <label><button type="submit" name="id_user" value="' . $user_tmp['id'] . '">Appliquer modification</button></label>
-            </form>
-            </article>';
+            </form>';
+            echo '</article>';
             echo '</div>';
         }
 
