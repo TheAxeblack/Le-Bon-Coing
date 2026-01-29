@@ -8,9 +8,9 @@ function afficheFormulaire($p)
     $champ = "<div id=\"container\">";
     $champ .= "<form action=\"" . $_SERVER['PHP_SELF'] . "\" method=\"post\">";
     $champ .= "<h1>Inscription</h1>";
-    $champ .= "<label>Vous êtes :<input type=\"radio\" name=\"genre\" required=\"required\">un homme</label>";
-    $champ .= "<label><input type=\"radio\" name=\"genre\" required=\"required\">une femme</label>";
-    $champ .= "<label><input type=\"radio\" name=\"genre\" required=\"required\">Non binaire</label><br/>";
+    $champ .= "<label>Vous êtes :<input type=\"radio\" name=\"genre\" required=\"required\" value=\"homme\">un homme</label>";
+    $champ .= "<label><input type=\"radio\" name=\"genre\" required=\"required\" value=\"femme\">une femme</label>";
+    $champ .= "<label><input type=\"radio\" name=\"genre\" required=\"required\" value=\"n-b\">Non binaire</label><br/>";
     $champ .= "<label>Vous vous appelez : <input type=\"text\" name=\"nom\" placeholder=\"Nom...\" required=\"required\"></label> ";
     $champ .= "<label><input type=\"text\" name=\"prenom\" placeholder=\"Prenom...\" required=\"required\"></label><br/>";
     $champ .= "<label>Vous souhaitez que les autres vous voient sous le nom de :
@@ -23,7 +23,7 @@ function afficheFormulaire($p)
   <input type=\"email\" name=\"email\" placeholder=\"john.doe@mail.us\" required=\"required\">
   </label><br/>";
     $champ .= "<label>Date de naissance <input type=\"text\" name=\"date_n\" maxlength=\"10\" placeholder=\"01/01/1990\" required=\"required\"></label><br/>";
-    $champ .= "<label><input type=\"submit\" value=\"Let's go !\"</label>";
+    $champ .= "<label><input type=\"submit\" value=\"Let's go !\"></label>";
     $champ .= "</form>";
     $champ .= "</div>";
     echo $champ;
@@ -45,6 +45,7 @@ function afficheFormulaire($p)
     </style>
 </head>
 <body>
+<a class="rollback" href="connexion.php"><img src="imgs/retour.png" alt="icone de retour arrière" width="40"></a>
 <?php
 if (isset($_SESSION['pseudo']) || isset($_SESSION['statut'])) {
     echo "<p>Vous ne pouvez pas vous inscrire si vous êtes connecté</p>";
@@ -95,7 +96,7 @@ if (isset($_SESSION['pseudo']) || isset($_SESSION['statut'])) {
                 if ($stmt->rowCount() == 1) {
                     echo "alert('Ajout effectué')";
                     echo "</script>";
-                    header('Location : connexion.php');
+                    header("Location:connexion.php");
                 } else {
                     echo "alert('Erreur lors de l'ajout veuillez réessayer')";
                     echo "</script>";

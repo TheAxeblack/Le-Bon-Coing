@@ -27,25 +27,26 @@ function afficheFormulaire($p)
     <title>Connexion Le bon Coing</title>
     <link rel="stylesheet" href="css/insc_conn.css" media="screen" type="text/css"/>
 
-    <!-- Pour importer les polices depuis Google Fonts -->
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
-        @import url('https://fonts.googleapis.com/css2?family=Karla:wght@500&display=swap');
-    </style>
-</head>
-<body>
-<div id="container">
-    <?php
-    if (isset($_SESSION['pseudo']) || isset($_SESSION['statut'])) {
-        echo "<p>Erreur vous êtes déjà connecté !</p>";
-    } else {
-        if (isset($_POST['pseudo']) && isset($_POST['mdp'])) {
-            $ok = 1;
-            $pseudo = trim($_POST['pseudo']);
-            $mdp = trim($_POST['mdp']);
+	<!-- Pour importer les polices depuis Google Fonts -->
+	<style>
+         @import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
+         @import url('https://fonts.googleapis.com/css2?family=Karla:wght@500&display=swap');
+	</style>
+    </head>
+    <body>
+	<a class="rollback" href="home.php"><img src="imgs/retour.png" alt="icone de retour arrière" width="40"></a>
+	<div id="container">
+	    <?php
+	    if (isset($_SESSION['pseudo']) || isset($_SESSION['statut'])) {
+		echo "<p>Erreur, vous êtes déjà connecté !</p>";
+	    } else {
+		if (isset($_POST['pseudo']) && isset($_POST['mdp'])) {
+		    $ok = 1;
+		    $pseudo = trim($_POST['pseudo']);
+		    $mdp = trim($_POST['mdp']);
 
-            include('includes/connex.inc.php');
-            $pdo = connexion('bdd.db');
+		    include('includes/connex.inc.php');
+		    $pdo = connexion('bdd.db');
 
             try {
                 $verifpseudo = $pdo->prepare('SELECT * FROM user WHERE pseudo = :pseudo');

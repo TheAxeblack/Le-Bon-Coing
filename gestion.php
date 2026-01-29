@@ -79,10 +79,9 @@ session_start();
             echo '<div>';
             echo '<article>';
             echo '<form method="POST" action="annonce.php">';
-            echo '<img src="' . $annonce['image1'] . '" width="200">';
+            echo '<img src="' . $annonce['image1'] . '" alt="Image de ' . $annonce['nom'] . '" width="200">';
             echo '<br/>';
-            echo '<label>' . $annonce['nom'] . '</label>';
-            echo '<br/>';
+            echo '<h3><label>' . $annonce['nom'] . '</label></h3>';
             echo '<label>' . $annonce['prix'] . ' €</label>';
             echo '<br/>';
             echo '<label><button type="submit" name="id_annonce" value="' . $annonce['id'] . '">Consulter</button></label>';
@@ -109,20 +108,22 @@ session_start();
         {
             echo '<div>';
             echo '<article>';
+            echo '<form action="user_list.php" method="POST">';
+            echo '<img src="imgs/user.png" alt="logo de compte" width="200">';
             echo '<form>';
-            echo '<img src="imgs/user.png" width="200">';
-            echo '<br/>';
-            echo '<label>' . $user_tmp['nom'] . '</label>';
-            echo '<br/>';
+            echo '<h3><label>' . $user_tmp['nom'] . '</label></h3>';
             echo '<label>' . $user_tmp['prenom'] . '</label>';
             echo '<br/>';
             echo '<label>' . $user_tmp['email'] . '</label>';
             echo '<br/>';
+            if ($user_tmp['statut'] == 1) {
+                echo '<label><button type="submit" name="statut" value="' . $user_tmp['statut'] . '">Acceder aux utilisateurs</button></label><br/>';
+            }
             echo '</form>';
             echo '</article>';
             echo '<article>
             <form method="POST" action="modifier_profil.php" >
-            <label>Tout les champs sont obligatoires !</label>
+            <h3><label>Tous les champs sont obligatoires !</label></h3>
             <br>
             <label>Changer pseudo<br><input type="text" name="pseudo"></label>
             <br>
@@ -132,8 +133,7 @@ session_start();
             </label><br/>
             <br>
             <label><button type="submit" name="id_user" value="' . $user_tmp['id'] . '">Appliquer modification</button></label>
-            </form>
-            </article>';
+            </form>';
             echo '</article>';
             echo '</div>';
         }
@@ -156,6 +156,9 @@ session_start();
                 afficher_user($user_tmp);
                 echo '<h1>Mes annonces</h1>';
                 $liste_annonce = $req2->fetchAll(PDO::FETCH_ASSOC);
+                if ($req2->rowCount() == 0) {
+                    echo 'Aucune annonce de deposé';
+                }
                 foreach ($liste_annonce as $annonce) {
                     affiche_annonce($annonce);
                 }
